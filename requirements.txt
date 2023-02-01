@@ -2,3 +2,4 @@ setuptools=58.0.0
 Sphinx==4.5.0
 jupyter-sphinx-theme==0.0.6
 myst-parser==0.16.1
+sphinxcontrib-images
