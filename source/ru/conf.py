@@ -28,7 +28,7 @@ copyright = '2022, ИСП РАН'
 author = 'ИСП РАН'
 
 # The short X.Y version
-version = docs_versions_menu.__version__
+version = '1.0.0'
 # The full version, including alpha/beta/rc tags
 release = version
 
