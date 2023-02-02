@@ -11,4 +11,8 @@
    :caption: Contents:
 
    about
+   requirements
+   undercloud
    full-deployment
+   updates
+   troubleshooting

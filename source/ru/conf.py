@@ -49,8 +49,8 @@ extensions = [
     'sphinx.ext.ifconfig',
     'sphinx.ext.viewcode',
     'sphinx.ext.githubpages',
-    'sphinxcontrib.images',
-    'myst_parser'
+    'myst_parser',
+    'docs_versions_menu'
 ]
 
 # Add any paths that contain templates here, relative to this directory.
