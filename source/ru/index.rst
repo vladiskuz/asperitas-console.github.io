@@ -12,5 +12,3 @@
 
    about
    full-deployment
-
-.. image:: _static/main-menu.png
