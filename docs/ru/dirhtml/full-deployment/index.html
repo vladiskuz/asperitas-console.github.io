@@ -112,7 +112,8 @@ Asperitas Console не предполагает быстрого старта и
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>asperitas<span class="w"> </span>--debug
 </pre></div>
 </div>
-<p><img alt="Главное меню" src="../_images/main-menu.png" /></p>
+<p>После выполнения команды появляется <strong>Главное окно</strong> asperitas консоли
+<img alt="Главное меню" src="../_images/main-menu.png" /></p>
 <section id="id2">
 <h2>Физические узлы<a class="headerlink" href="#id2" title="Ссылка на этот заголовок">¶</a></h2>
 <p>Перейдите во вкладку <em>Baremetal nodes</em>.
@@ -149,48 +150,191 @@ Asperitas Console не предполагает быстрого старта и
 <p>Перейдите во вкладку <em>Introspection</em> Главного меню.</p>
 <p><img alt="" src="../_images/introspection-list.png" /></p>
 <p>На экране отобразится список физических машин, добавленных в предыдущем пункте.</p>
+<p>Отметьте весь список машин и нажмите кнопку <em>Start</em>. Начнётся интроспекция физических узлов. Статус отображается в правой половине экрана.</p>
+<p>После успешного окончания интроспекции напротив поле <em>state</em> будет равно значению <em>finished</em>, а напротив имени узла появится галочка.</p>
+<p>Статус отображается только для одного узла. Чтобы посмотреть статус для другого узла, нажмите на имя узла.</p>
+<p>После успешной интроспекции можно посмотреть собранные данные дважды нажав мышкой на имя узла. Если мышки нет, то при помощи кнопок наведитесь на имя узла и нажмите <em>Enter</em></p>
+<p><img alt="" src="../_images/introspection-data.png" /></p>
 </section>
 <section id="id4">
 <h2>Порядок физических интерфейсов<a class="headerlink" href="#id4" title="Ссылка на этот заголовок">¶</a></h2>
+<p><em>! Опция доступна только после успешной интроспекции</em></p>
+<p>Перейдите во вкладку <em>Network interfaces order</em>.</p>
+<p><img alt="" src="../_images/nics-order.png" /></p>
+<p>На экране отобразится список узлов и их интерфейсов. Порядок интерфейсов важен, так как далее сетевые планы строятся только по номерами интерфейсов, а не их именам. Поэтому определите порядок так, чтобы интерфейсы всех узлов с одним порядковым номером были настроены одинаково на физических коммутаторах в вашей серверной.</p>
 </section>
 <section id="id5">
 <h2>Диск операционной системы<a class="headerlink" href="#id5" title="Ссылка на этот заголовок">¶</a></h2>
+<p><em>! Опция доступна только после успешной интроспекции</em></p>
+<p>Перейдите во вкладку <em>Server root disk</em>.</p>
+<p><img alt="" src="../_images/root-device.png" /></p>
+<p>Если у какого-либо физического узла несколько дисков, то необходимо указать правильный диск для установки операционной системы.
+Иначе система выберет физический диск случайным образом.</p>
 </section>
 <section id="id6">
 <h2>Физические порты<a class="headerlink" href="#id6" title="Ссылка на этот заголовок">¶</a></h2>
+<p>Перейдите во вкладку <em>Baremetal ports</em>.</p>
+<p><img alt="" src="../_images/baremetal-ports.png" /></p>
+<p>Здесь отображаются все физические порты известные системе для загрузки по PXE.
+Первоначально создаётся порт указанный при создании физической машины. Затем после интроспекции добавляется порт, по которому произошла загрузка по PXE,
+<strong>если этот порт не совпал с указанным вами при создании</strong>.</p>
+<p>Если это произошло, то необходимо оставить один порт в системе и удалить ненужный! Иначе при развёртывании порт для загрузки будет выбран случайным образом из этих двух.</p>
 </section>
 <section id="id7">
 <h2>Сети<a class="headerlink" href="#id7" title="Ссылка на этот заголовок">¶</a></h2>
+<p>Перейдите во вкладку <em>Networks</em>.</p>
+<p><img alt="" src="../_images/networks.png" /></p>
+<p>В системе Asperitas используется принцип разделения сетей на роли.
+Набор заранее заданных сетей, который обязан присутствовать в системе:</p>
+<ul class="simple">
+<li><p><em>Ctlplane</em> - сеть администрирования физических узлов в развёртываемом облаке.
+Это единственная сеть, по которой разрешён SSH доступ к физическим узлам облака.</p></li>
+<li><p><em>External</em> - сеть для доступа к публичному API развёртываемого облака.
+Сеть должна быть доступна для всех пользователей облака.</p></li>
+<li><p><em>InternalApi</em> - сеть для доступа к приватному API развёртываемого облака.
+Используется сервисами облака для общения друг с другом.
+Не должна быть доступна даже с узла развёртывания.</p></li>
+<li><p><em>Storage</em> - сеть для доступа сервисов облака к хранилищу: Ceph или Nfs.</p></li>
+</ul>
+<p>Набор заранее заданных опциональных сетей, их можно удалить из системы за ненадобностью:</p>
+<ul class="simple">
+<li><p><em>InternalCeph</em> - внутренняя сеть для узлов хранения Ceph.</p></li>
+<li><p><em>IronicProvisioning</em> - сеть для захвата физических узлов сервисом Ironic развёртываемого облака.
+Если сервис не используется, то сеть не нужна.</p></li>
+</ul>
+<p>Можно изменить параметры сети, нажав на сеть в списке сетей двумя кликами мыши или кнопной <em>Enter</em>.</p>
+<p><img alt="" src="../_images/network-edit.png" /></p>
+<p>Если необходима дополнительная сеть, то можно добавить новую, нажав кнопку <em>Add</em>.</p>
+<p>Если в поле <em>Exists</em> стоит галочка, то сеть уже создана в системе и её нельзя удалить из списка сетей.</p>
+<p>Сеть создаётся при развёртывании в дальнейшем и удаляется, если удаляется развёртывание.</p>
 </section>
 <section id="id8">
 <h2>Шаблоны развёртывания<a class="headerlink" href="#id8" title="Ссылка на этот заголовок">¶</a></h2>
+<p>Перейдите во вкладку <em>Deployment templates</em>.</p>
+<p><img alt="" src="../_images/templates.png" /></p>
+<p>При чистом старте - таблица будет пустая. Нажмите кнопку <em>Add</em>, чтобы добавить новое развёртывание.</p>
+<p>В появившемся окне вы можете выбрать один из заранее заданных типов развёртывания: <em>OpenStack</em> или <em>Ceph</em>, или выбрать <em>No</em>.</p>
+<p>Если OpenStack планируется развернуть <strong>без Ceph</strong>, то создайте единственное развёртывание типа <em>OpenStack</em>.</p>
+<p>Если OpenStack планируется развернуть <strong>с Ceph</strong>, то создайте сначала развёртывание <em>Ceph</em>, затем <em>OpenStack</em></p>
+<p><img alt="" src="../_images/templates-add-2.png" /></p>
+<p>Заполните имя развёртывания в поле <em>Name</em>. Имя будет использоваться как часть hostname физических узлов.</p>
+<p>В поле <em>Images Path</em> из выпадающего списке выберите образ операционной системы, используемой для развёртывания.
+Как правило для типа <em>Ceph</em> используются образы <em>images-ceph</em>, а для типа <em>OpenStack</em> используются образы <em>images-asperitas</em>.
+Если ваш путь к образам отличается от тех, что даются на выбор, то поставьте галочку в поле <em>set if custom image is used</em> и укажите путь к образам в поле ниже.</p>
+<p>На данном этапе при создании развёртывания создаются только шаблоны для настройки развёртываемого облака.
+Никаких изменений с физическими машинами не происходит.</p>
+<p>На главном экране asperitas консоли в секции <em>Deployments</em> появятся ваши созданные развёртывания для настройки.</p>
 </section>
 <section id="id9">
-<h2>Развёрнутые сервера<a class="headerlink" href="#id9" title="Ссылка на этот заголовок">¶</a></h2>
-</section>
-<section id="id10">
-<h2>Развёртывания<a class="headerlink" href="#id10" title="Ссылка на этот заголовок">¶</a></h2>
+<h2>Развёртывания<a class="headerlink" href="#id9" title="Ссылка на этот заголовок">¶</a></h2>
+<p>При деплое OpenStack с Ceph необходимо сначала развернуть Ceph!</p>
+<p>Выберите одно из развёртываний в секции <em>Deployments</em>.</p>
 <p><img alt="" src="../_images/stack-menu.png" /></p>
+<p>На экране отображается <strong>Меню развёртывания</strong>, в котором все настройки влияют только на выбранное развёртывание.</p>
+<section id="id10">
+<h3>Роли, Сервисы и Сети ролей<a class="headerlink" href="#id10" title="Ссылка на этот заголовок">¶</a></h3>
+<p>Перейдите во вкладку <em>Roles Services and Networks</em>.</p>
+<p><img alt="" src="../_images/roles-networks.png" /></p>
+<p>Сверху отображается сводная таблица настроек для каждой из ролей, участвующих в развёртывании.</p>
+<p>Ниже можно настроить каждую из ролей отдельно:</p>
+<ul class="simple">
+<li><p><em>Description</em> - описание, ни на что не влияет, кроме удобства использования;</p></li>
+<li><p><em>Count</em> - число узлов данной роли;</p></li>
+<li><p><em>Hostname</em> - hostname узлов данной роли;</p></li>
+</ul>
+<p>Ниже необходимо определить множество сетей для каждой роли. Сети соответствуют тем, что были созданы ранее.
+В секции <em>Set default network for each role</em> выберите сеть, чей IP-адрес шлюза которая будет использоваться как основной шлюз для сети на узле.</p>
+<p><img alt="" src="../_images/roles-networks-2.png" /></p>
+</section>
 <section id="id11">
-<h3>Роли, Сервисы и Сети ролей<a class="headerlink" href="#id11" title="Ссылка на этот заголовок">¶</a></h3>
+<h3>Сетевые планы<a class="headerlink" href="#id11" title="Ссылка на этот заголовок">¶</a></h3>
+<p>Перейдите во вкладку <em>Network plans</em>.</p>
+<p><img alt="" src="../_images/network-plans.png" /></p>
+<p>Определите IP-адреса NTP и DNS серверов. Несколько адресов можно указать через запятую.</p>
+<p>На данном этапе необходимо быть максимально <strong>внимательным!</strong></p>
+<p>Сетевые планы фиксируют число используемых интерфейсов, настройки адресов или DHCP для каждого из интерфейсов, VLAN’ы и на каких интерфейсах настраиваются VLAN’ы.
+Необходимо предварительно определить схему настройки сети для всех узлов одной роли, используя знания о количестве интерфейсов на каждом узле одной роли.</p>
+<p>Схема сети определяется через условные обозначения интерфейсов как <em>nic1</em>, <em>nic2</em> и т.д.
+Порядок интерфейсов для каждого из узлов задавался ранее в разделе <em>Network interfaces order</em>.</p>
+<p>Если сетей для роли больше чем число используемых интерфейсов, зафиксированное для данной роли, то использование VLAN неизбежно.
+В этом случае для настройки VLAN в развёртываниях типа Ceph используются VLAN ядра Linux, в развёртываниях типа OpenStack используется OVS бридж.</p>
+<p>После определения сетевого плана - выйдете из консоли и зайдите в папку шаблонов вашего развёртывания.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>/etc/asperitas/templates/&lt;deployment-name&gt;-heat-templates/
+</pre></div>
+</div>
+<p>Исследуйте заранее спроектированные планы, которые лежат в папках <em>ispras-extra/network/config/</em> и <em>network/config</em>.
+Указанные в шаблонах планы являются настройками инструмента <a class="reference external" href="https://docs.openstack.org/os-net-config/">os-net-config</a>.
+Для детального понимания используйте <a class="reference external" href="https://docs.openstack.org/os-net-config/latest/config.html">документацию инструмента</a></p>
+<p>Выберите один из заданных сетевых планов или создайте новый в папке</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>/etc/asperitas/templates/&lt;deployment-name&gt;-heat-templates/ispras-extra/network/config
+</pre></div>
+</div>
+<p>Звтем вернитесь в asperitas консоль в окно <em>Network plans</em> и выберете для каждой роли свой сетефой план.</p>
+<p>Виртуальные IP-адреса используются в OpenStack для балансировки нагрузки на узлы управления в облаке.
+Если развёртывание типа Ceph, то оставьте все галочки пустыми в секции с виртуальными адресами.
+Если развёртывание типа OpenStack, то поставьте галочки для сетей <em>External</em>, <em>InternalApi</em> и опционально для других сетей.</p>
 </section>
 <section id="id12">
-<h3>Сетевые планы<a class="headerlink" href="#id12" title="Ссылка на этот заголовок">¶</a></h3>
-</section>
-<section id="id13">
-<h3>Пароли<a class="headerlink" href="#id13" title="Ссылка на этот заголовок">¶</a></h3>
+<h3>Пароли<a class="headerlink" href="#id12" title="Ссылка на этот заголовок">¶</a></h3>
+<p>Перейдите во вкладку <em>Passwords</em>.</p>
+<p><img alt="" src="../_images/passwords.png" /></p>
+<p>Это окно имеет смысл только для развёртываний типа OpenStack. При развёртывании Ceph этот этап можно пропустить.</p>
+<p>Здесь обратите внимание на поля:</p>
+<ul class="simple">
+<li><p><em>AdminPassword</em> - это пароль для пользователя <em>admin</em> в развёртываемом облаке</p></li>
+<li><p><em>CephClientKey</em>, <em>CephClusterFSID</em> - значения обязательные для связи сервисов OpenStack с Ceph.</p></li>
+</ul>
+<p>Остальные пароли можно сгенерить случайным образом.</p>
 </section>
 <section id="ip">
 <h3>Фиксированные IP-адреса<a class="headerlink" href="#ip" title="Ссылка на этот заголовок">¶</a></h3>
+<p>Перейдите во вкладку <em>Fixed IPs</em>.</p>
+<p><img alt="" src="../_images/fixed-ips.png" /></p>
+<p>IP-адреса можно зафиксировать для развёртываемых серверов. Также актуально фиксировать виртуальные IP-адреса для API развёртываемого обалка.</p>
+<p>Этот этап опционален.</p>
+</section>
+<section id="id13">
+<h3>Настройки сервисов облака<a class="headerlink" href="#id13" title="Ссылка на этот заголовок">¶</a></h3>
+<p>Перейдите во вкладку <em>Service settings</em>.</p>
+<p><img alt="" src="../_images/service-settings.png" /></p>
+<p>Необходимо внимательно пройти по всем пунктам в этом окне, указать только используемые опции.
+Те опции, что используются, необходимо обязательно настроить внутри своими параметрами!</p>
+<ul class="simple">
+<li><p><em>CephAnsibleExternal</em> - обязателен при использовании Ceph, необходимо настроить все параметры внутри и <a class="reference external" href="https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/16.2/html/integrating_an_overcloud_with_an_existing_red_hat_ceph_storage_cluster/assembly-preparing-overcloud-nodes_existing-ceph#proc-configuring-the-existing-ceph-storage-cluster_preparing-overcloud-nodes">подготовить</a> Ceph;</p></li>
+<li><p><em>SwiftExternal</em> - использовать Ceph Rgw как бекенд для сервиса <a class="reference external" href="https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/16.2/html/storage_guide/assembly_configuring-the-object-storage-service_osp-storage-guide">Swift</a></p></li>
+<li><p><em>CinderCephBackend</em> - использовать Ceph как бекенд для сервиса <a class="reference external" href="https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/16.2/html/storage_guide/assembly-configuring-the-block-storage-service_osp-storage-guide">Cinder</a></p></li>
+<li><p><em>CinderIscsiBackend</em> - использовать Iscsi как бекенд для сервиса <a class="reference external" href="https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/16.2/html/storage_guide/assembly-configuring-the-block-storage-service_osp-storage-guide">Cinder</a></p></li>
+<li><p><em>CinderNfsBackend</em> - использовать Nfs как бекенд для сервиса <a class="reference external" href="https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/16.2/html/storage_guide/assembly-configuring-the-block-storage-service_osp-storage-guide">Cinder</a></p></li>
+<li><p><em>CustomDomain</em> - назначить имя домена для API развёртываемого облака</p></li>
+<li><p><em>IronicOvercloud</em>, <em>IronicInspector</em> - добавить в развёртываемое облако сервис <a class="reference external" href="https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/16.2/html-single/bare_metal_provisioning/">Ironic</a></p></li>
+<li><p><em>KeysoneDomainSpecificLdapBackend</em>, <em>HorizonDomains</em> - использовать готовый LDAP сервер для сервиса <a class="reference external" href="https://docs.openstack.org/keystone/latest/admin/configuration.html#integrate-identity-with-ldap">Keysone</a>.
+Для этого вам также понадобится использовать несколько доменов для авторизации в сервисе Horizon.</p></li>
+<li><p><em>NovaNfsBackend</em> - использовать Nfs сервер как бекенд для сервиса <a class="reference external" href="https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/16.1/html/configuring_the_compute_service_for_instance_creation/assembly_configuring-compute-service-storage_compute-performance">Nova</a></p></li>
+<li><p><em>GlanceNfsBackend</em> - использовать Nfs сервер как бекенд для сервиса <a class="reference external" href="https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/16.2/html/advanced_overcloud_customization/assembly_configuring-the-image-import-method-and-shared-staging-area">Glance</a></p></li>
+<li><p><em>GlanceCephBackend</em> - использовать Ceph сервер как бекенд для сервиса <a class="reference external" href="https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/16.0/html/overcloud_parameters/image-storage-glance-parameters">Glance</a></p></li>
+<li><p><em>ComputeInstanceHA</em>, <em>PacemakerEnabled</em> - обязательны для развёртывания типа OpenStack с 3-мя и более контроллерами;</p></li>
+<li><p><em>Bonding</em> - указывается, если использовать агрегацию интерфейсов при развёртывании.
+В развёртываниях типа Ceph значение параметра <em>BondInterfaceOvsOptions</em> должно быть равно <em>mode=active-backup</em>, типа OpenStack - <em>bond_mode=active-backup</em>.
+Так как в Ceph используется агрегация ядра Linux, в OpenStack - агрегация Ovs.</p></li>
+</ul>
+<p>При определении бекендов сервисов необходимо учитывать, что для Glance и Nova может быть выбран только один. Для сервиса Cinder может использоваться несколько разных бекендов.</p>
 </section>
 <section id="id14">
-<h3>Настройки сервисов облака<a class="headerlink" href="#id14" title="Ссылка на этот заголовок">¶</a></h3>
-</section>
-<section id="id15">
-<h3>Развёртывание<a class="headerlink" href="#id15" title="Ссылка на этот заголовок">¶</a></h3>
-</section>
-<section id="id16">
-<h3>Развёрнутые сервера<a class="headerlink" href="#id16" title="Ссылка на этот заголовок">¶</a></h3>
+<h3>Развёртывание<a class="headerlink" href="#id14" title="Ссылка на этот заголовок">¶</a></h3>
+<p>Перейдите во вкладку <em>Deployment</em>.</p>
+<p><img alt="" src="../_images/deployment.png" /></p>
+<p>Сверху отображается статус развёртывания. Развёртывание состоит из нескольких стадий:</p>
+<ul class="simple">
+<li><p><em><strong>Create/Update Plan Deployment (Install OS)</strong></em>, или <em>Создание стека</em> (термин OpenStack Heat) - при этом фиксируются и сохраняются все ваши настройки.
+А также захватываются узлы из списка физических узлов и на них накатывается операционная система.</p></li>
+<li><p><em><strong>Run Cloud Service Deployment</strong></em>, или Распространение настроек на узлы, настройка сети и развёртывание сервисов на узлах</p></li>
+</ul>
+<p>Также в этом окне отображаются дополнительные действия</p>
+<ul class="simple">
+<li><p><em>Update Known Hosts</em> - добавление всех созданных серверов в список известных хостов.</p></li>
+<li><p><em>Save generated /etc/hosts</em> - сохранить сгенерённый при деплое /etc/hosts в /etc/asperitas/hosts-<deployment-name>. Это необходимо так как при запуске разных развёртываний /etc/hosts перезаписываются.</p></li>
+</ul>
+<p>Также можно использовать <em>Debug</em> режим, при котором команда для запуска развёртывания не выполняется, а сохраняется в <em>/etc/asperitas/deploy.sh</em>.</p>
 </section>
 </section>
 </section>

@@ -97,6 +97,23 @@
       
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
 <h1>Устранение неполадок<a class="headerlink" href="#id1" title="Ссылка на этот заголовок">¶</a></h1>
+<section id="enroll">
+<h2>Физический узел в статусе <em>enroll</em><a class="headerlink" href="#enroll" title="Ссылка на этот заголовок">¶</a></h2>
+<p>Если после добавления физического узла его статус изменился на <em>enroll</em>, то возможны следующие варианты:</p>
+<ul class="simple">
+<li><p>Указанный IP-адрес недоступен с узла развёртывания. Проверьте доступность адреса с узла развёртывания: надо выйти из asperitas консоли и попробовать команду</p></li>
+</ul>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ping<span class="w"> </span>-c<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">2</span>.2.2.3
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Логин/пароль от BMC неверные</p></li>
+</ul>
+<p>Чтобы изменить параметры узла, можно удалить узел и создать его заново или изменить параметры текущего узла.
+Для этого выберите узел в списке физических узлов и нажмите <em>Enter</em> или дважды кликните мышкой:</p>
+<p><img alt="" src="../_images/baremetal-node-edit.png" /></p>
+<p>Измените необходимые параметры, а также <strong>снова введите пароль</strong>. Нажмите кнопку <em>Save</em> и ожидайте изменение статуса на manageable.</p>
+</section>
 </section>
 
 
