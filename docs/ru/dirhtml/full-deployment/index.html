@@ -116,27 +116,39 @@ Asperitas Console не предполагает быстрого старта и
 <section id="id2">
 <h2>Физические узлы<a class="headerlink" href="#id2" title="Ссылка на этот заголовок">¶</a></h2>
 <p>Перейдите во вкладку <em>Baremetal nodes</em>.
-Нажмите кнопку <em>Add</em>, чтобы добавить новый узел.</p>
+Нажмите кнопку <em>Add</em>, чтобы добавить новый физический узел для добавления в развёртываемое облако.</p>
 <p><img alt="" src="../_images/baremetal-node-add.png" /></p>
 <p>Красным цветом выделены поля обязательные для заполнения.</p>
 <ul class="simple">
 <li><p><em>Name</em> -  имя физического узла. Используется лишь для удобства, не влияет на hostname узла;</p></li>
 <li><p><em>BMC type</em> - тип BMC, поддерживаемые значения: <em>IPMI</em>, <em>iDRAC</em>;</p></li>
-<li><p><em>BMC address</em> -</p></li>
-<li><p><em>BMC login</em></p></li>
-<li><p><em>BMC password</em></p></li>
-<li><p><em>Profile</em></p></li>
-<li><p><em>UEFI boot mode</em></p></li>
-<li><p><em>PXE port mac_address</em></p></li>
-<li><p><em>Disk capacity</em></p></li>
-<li><p><em>Cpu number</em></p></li>
-<li><p><em>Architecture</em></p></li>
-<li><p><em>Memory capacity</em></p></li>
+<li><p><em>BMC address</em> - IP-адрес BMC, пример: <em>2.3.4.5</em> ;</p></li>
+<li><p><em>BMC login</em> - логин для управления физическим узлом через BMC;</p></li>
+<li><p><em>BMC password</em> - пароль для управления физическим узлом через BMC;</p></li>
+<li><p><em>Profile</em> - роль физического узла в развёртываемом облаке;</p></li>
+<li><p><em>UEFI boot mode</em> - установите галочку, если узел загружается в режиме UEFI;</p></li>
+<li><p><em>PXE port mac_address</em> - мак адрес физического порта узла, через который происходит загрузке по PXE.</p></li>
 </ul>
-<p>При добавлении узла</p>
+<p>Поля необязательные для заполнения (используются, если интроспекция узла нежелательна):</p>
+<ul class="simple">
+<li><p><em>Disk capacity</em> - размер физического диска для установки операционной системы;</p></li>
+<li><p><em>Cpu number</em> - число процессорных ядер узла;</p></li>
+<li><p><em>Architecture</em> - архитектура процессора (поддерживается только x86_64);</p></li>
+<li><p><em>Memory capacity</em> - размер оперативной памяти узла.</p></li>
+</ul>
+<p>Нажмите кнопку <em>Save</em>. Физический узел добавится в список физических узлов.
+При добавлении физического узла узел не включается и вводится в развёртываемое облако.</p>
+<p>Дождитесь изменения статуса узла на <em>manageable/available</em>.
+Если узел остаётся в статусе enroll, перейдите в раздел «Исправление проблем».</p>
+<p>Статус <em>manageable</em> позволяет включать и выключать узел из системы на узле развёртывания.
+Статус <em>available</em> позволяет ввести машину в развёртываемое облако.
+Система автоматически переводит узел в состояние <em>available</em>, если известны параметры <em>Disk capacity</em>, <em>Cpu number</em>, <em>Architecure</em> и <em>Memory capacity</em>.</p>
 </section>
 <section id="id3">
 <h2>Интроспекция<a class="headerlink" href="#id3" title="Ссылка на этот заголовок">¶</a></h2>
+<p>Перейдите во вкладку <em>Introspection</em> Главного меню.</p>
+<p><img alt="" src="../_images/introspection-list.png" /></p>
+<p>На экране отобразится список физических машин, добавленных в предыдущем пункте.</p>
 </section>
 <section id="id4">
 <h2>Порядок физических интерфейсов<a class="headerlink" href="#id4" title="Ссылка на этот заголовок">¶</a></h2>
