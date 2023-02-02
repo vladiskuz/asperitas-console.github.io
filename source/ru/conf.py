@@ -19,6 +19,7 @@
 
 # -- Project information -----------------------------------------------------
 from jupyter_sphinx_theme import *
+import docs_versions_menu
 
 init_theme()
 
@@ -27,9 +28,9 @@ copyright = '2022, ИСП РАН'
 author = 'ИСП РАН'
 
 # The short X.Y version
-version = ''
+version = docs_versions_menu.__version__
 # The full version, including alpha/beta/rc tags
-release = '1.0.0'
+release = version
 
 
 # -- General configuration ---------------------------------------------------
