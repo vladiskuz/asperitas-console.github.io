@@ -13,14 +13,14 @@ asperitas
 asperitas --debug
 ~~~
 
-![Главное меню](../images/main-menu.png)
+![Главное меню](../../images/main-menu.png)
 
 ## Физические узлы 
 
 Перейдите во вкладку _Baremetal nodes_. 
 Нажмите кнопку _Add_, чтобы добавить новый узел.
 
-![](../images/baremetal-node-add.png)
+![](../../images/baremetal-node-add.png)
 
 Красным цветом выделены поля обязательные для заполнения.
 
@@ -55,7 +55,7 @@ asperitas --debug
 
 ## Развёртывания
 
-![](../images/stack-menu.png)
+![](../../images/stack-menu.png)
 
 ### Роли, Сервисы и Сети ролей 
 
