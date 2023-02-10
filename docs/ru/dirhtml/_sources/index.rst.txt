@@ -14,5 +14,6 @@
    requirements
    undercloud
    full-deployment
+   deployment
    updates
    troubleshooting
