@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Развёртывание облака &#8212; документация Asperitas 1.0.0</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/basic.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/my-styles.css" />
+    <link rel="stylesheet" href="../_static/bootswatch-3.3.4/yeti/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/translations.js"></script>
+    <script src="../_static/js/jquery-1.11.0.min.js"></script>
+    <script src="../_static/js/jquery-fix.js"></script>
+    <script src="../_static/bootstrap-3.3.4/js/bootstrap.min.js"></script>
+    <script src="../_static/bootstrap-sphinx.js"></script>
+    <link rel="author" title="Об этих документах" href="../about/" />
+    <link rel="index" title="Алфавитный указатель" href="../genindex/" />
+    <link rel="search" title="Поиск" href="../search/" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head><body>
+
+<div id="navbar" class="navbar navbar-inverse navbar-default navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="../">
+        Asperitas</a>
+      <span class="navbar-text navbar-version pull-left"><b>1.0.0</b></span>
+    </div>
+
+      <div class="collapse navbar-collapse nav-collapse">
+        <ul class="nav navbar-nav">
+          
+          
+          
+          
+        </ul>
+
+        
+          
+<form class="navbar-form navbar-right" action="../search/" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+        
+        
+          
+            <ul class='nav navbar-nav navbar-right'>
+                
+            </ul>
+          
+        
+      </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+      <div class="col-md-3">
+        <div id="sidebar" class="bs-sidenav" role="complementary"><p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../about/">Введение</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../requirements/">Требования к оборудованию и ПО при использовании дистрибутива Asperitas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../undercloud/">Установка узла развёртывания</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../full-deployment/">Подготовка к развёртыванию с нуля</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../updates/">Сопровождение облака на базе дистрибутива Asperitas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../troubleshooting/">Устранение неполадок</a></li>
+</ul>
+
+        </div>
+      </div>
+    <div class="col-md-9 content">
+      
+  <section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1>Развёртывание облака<a class="headerlink" href="#id1" title="Ссылка на этот заголовок">¶</a></h1>
+<p>Зайдите в asperitas-console</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>asperitas
+</pre></div>
+</div>
+<p>Перейдите в <em>Меню развёртывания</em>, затем во вкладку <em>Deployment</em>.</p>
+<p><img alt="" src="../_images/deployment.png" /></p>
+<p>Сверху отображается статус развёртывания. Развёртывание состоит из нескольких стадий:</p>
+<ul class="simple">
+<li><p><em><strong>Create/Update Plan Deployment (Install OS)</strong></em>, или <em>Создание стека</em> (термин OpenStack Heat) - при этом фиксируются и сохраняются все ваши настройки.
+А также захватываются узлы из списка физических узлов и на них накатывается операционная система.</p></li>
+<li><p><em><strong>Run Cloud Service Deployment</strong></em>, или Распространение настроек на узлы, настройка сети и развёртывание сервисов на узлах</p></li>
+</ul>
+<p>Также в этом окне отображаются дополнительные действия</p>
+<ul class="simple">
+<li><p><em>Update Known Hosts</em> - добавление всех созданных серверов в список известных хостов.</p></li>
+<li><p><em>Save generated /etc/hosts</em> - сохранить сгенерённый при деплое /etc/hosts в /etc/asperitas/hosts-<deployment-name>. Это необходимо так как при запуске разных развёртываний /etc/hosts перезаписываются.</p></li>
+</ul>
+<p>Также можно использовать <em>Debug</em> режим, при котором команда для запуска развёртывания не выполняется, а сохраняется в <em>/etc/asperitas/deploy.sh</em>.</p>
+<p>На этапе <em>Create/Update Plan Deployment (Install OS)</em> создаются в системе узла развёртывания сервера, которые соответствуют добавленным вами физическим узлам.
+Они имеют другие названия, как правило это <em>&lt;stack_name&gt;-&lt;role_name&gt;-<number></em>.
+Для каждого физического узла может быть создан только один сервер.</p>
+<p>После создания сервера статус физического узла меняется с <em>available</em> на <em>active</em> в списке физических серверов.
+Посмотреть список серверов можно из <em>Главного меню</em> или <em>Меню развёртывания</em> в окне <strong>Deployed Servers</strong> или <strong>Servers list</strong> соответственно.</p>
+<p><img alt="" src="../_images/all-servers.png" />
+<img alt="" src="../_images/stack-servers.png" /></p>
+<section id="id2">
+<h2>Нулевое развёртывание<a class="headerlink" href="#id2" title="Ссылка на этот заголовок">¶</a></h2>
+<p><strong>Нулевое развёртывание</strong> означает, что <em>Stack status</em> для данного развёртывания отображает пустые значения для всех параметров.</p>
+<p>В этом случае необходимо запустить по порядку все <em>Deployment actions</em> на экране по порядку, дождавшись окончания предыдудщего.
+То есть вы запускаете <em>Create/Update Plan Deployment (Install OS)</em>, дожидаетесь успешного окончания развёртывания и переходите к следующему <em>Update Known Hosts</em>.</p>
+<p>В случае любых проблем и ошибок на каждом этапе необходимо исправить ошибки и запустить развёртывание заново.
+Ни один из этапов не может быть пропущен!</p>
+</section>
+<section id="id3">
+<h2>Обновление параметров развёртывания<a class="headerlink" href="#id3" title="Ссылка на этот заголовок">¶</a></h2>
+<p>Этот пункт вам подходит, если вы изменили:</p>
+<ul class="simple">
+<li><p>порядок интерфейсов для узла, участвующего в этом развёртывании</p></li>
+<li><p>диск операционной системы для узла, участвующего в этом развёртывании</p></li>
+<li><p>параметры сети</p></li>
+<li><p>параметры сети для роли</p></li>
+<li><p>состав сервисов для роли</p></li>
+<li><p>сетевой план для роли</p></li>
+<li><p>пароли для сервисов</p></li>
+<li><p>фиксированные IP-адреса</p></li>
+<li><p>настройки опций для сервисов</p></li>
+</ul>
+<p>В этом случае необходимо сначала обновить изменённые параметры в системе узла развёртывания.</p>
+<p>Для этого пройдите первый этап <em>Create/Update Plan Deployment (Install OS)</em>, затем перейдите к этапу <em>Run Cloud Service Deployment</em> и выполните его.</p>
+<p>Удалять уже развёрнутые сети таким образом нельзя!</p>
+</section>
+<section id="id4">
+<h2>Добавление узлов в облако<a class="headerlink" href="#id4" title="Ссылка на этот заголовок">¶</a></h2>
+<p>Для добавления новых узлов необходимо пройти пункты из <em>Подготовка развёртывания с нуля</em>, касающиеся физических машин:</p>
+<ul class="simple">
+<li><p>Физические узлы</p></li>
+<li><p>Интроспекция</p></li>
+<li><p>Порядок физических интерфейсов</p></li>
+<li><p>Диск операционной системы</p></li>
+<li><p>Физические порты</p></li>
+</ul>
+<p>Затем в <em>Меню развёртывания</em> в окне <em>Role Services and Networks</em> увеличьте число узлов одной из ролей и перейти к стадии развёртывания.</p>
+<p>На стадии развёртывания сначала добавьте новый сервер, выполнив <em>Create/Update Plan Deployment (Install OS)</em>.</p>
+<p>При успешном добавлении сервера, выполните <em>Update Known Hosts</em>.</p>
+<p>Далее выберите <em>Run Cloud Service Deployment</em> и поставьте галочки в дополнительных параметрах снизу в полях: <em>undercloud</em>, <em><stack-name>-controller-0</em> и новые добавленные сервера. Затем нажмите <em>Start</em>.
+Таким образом добавление узла будет происходить быстрее.</p>
+</section>
+<section id="id5">
+<h2>Удаление развёрнутых узлов из облака<a class="headerlink" href="#id5" title="Ссылка на этот заголовок">¶</a></h2>
+<p>При уменьшении количества узлов облака имеются ограничения: удалить можно только узлы с наибольшим индексом.
+Индекс узла соответствует суффиксу имени узла.
+Например: <em>asperitas-controller**-0**</em>, или <em>asperitas-novacomputeiha**-7**</em>, индекс выделен).</p>
+<p>Для этого досточно в разделе <em>Role Services and Networks</em> уменьшить количество узлов до необходимого.
+Затем в разделе <em>Deployment</em> запустить действие <em>Create/Update Plan Deployment (Install OS)</em> и <em>Update Known Hosts</em>.</p>
+</section>
+<section id="id6">
+<h2>Замена развёрнутых узлов в облаке<a class="headerlink" href="#id6" title="Ссылка на этот заголовок">¶</a></h2>
+<p>Для замены узла необходимо сначала добавить новый физический узел и настроить его согласно инструкции из <em>Добавление узлов в облако</em>.</p>
+<p>Затем зайдите в окно <em>Servers list</em> в <em>Меню развёртывания</em> и выберете сервер для удаление.</p>
+<p>Важно! Удалить сервер именно из списка в <em>Меню развёртывания</em>, а <strong>не</strong> в <em>Главном меню</em>.</p>
+<p>Затем освободившийся физический узел можно удалить из списка <em>Baremetal nodes</em> в <em>Главном меню</em>.</p>
+<p>Дальнейшие действия соответствуют пункту <em>Добавление узлов в облако</em>.</p>
+</section>
+</section>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2022, ИСП РАН.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

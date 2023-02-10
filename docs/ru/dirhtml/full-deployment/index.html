@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Полное развёртывание с нуля &#8212; документация Asperitas 1.0.0</title>
+    <title>Подготовка к развёртыванию с нуля &#8212; документация Asperitas 1.0.0</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/basic.css" />
     <link rel="stylesheet" type="text/css" href="../_static/my-styles.css" />
@@ -91,7 +91,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../about/">Введение</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../requirements/">Требования к оборудованию и ПО при использовании дистрибутива Asperitas</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../undercloud/">Установка узла развёртывания</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Полное развёртывание с нуля</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Подготовка к развёртыванию с нуля</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../updates/">Сопровождение облака на базе дистрибутива Asperitas</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../troubleshooting/">Устранение неполадок</a></li>
 </ul>
@@ -101,7 +101,7 @@
     <div class="col-md-9 content">
       
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1>Полное развёртывание с нуля<a class="headerlink" href="#id1" title="Ссылка на этот заголовок">¶</a></h1>
+<h1>Подготовка к развёртыванию с нуля<a class="headerlink" href="#id1" title="Ссылка на этот заголовок">¶</a></h1>
 <p>При первоначальном развёртывании строго советуется пройти каждый пункт!
 Asperitas Console не предполагает быстрого старта или прототипного развёртывания!</p>
 <p>Для запуска консоли введите команду в консоли узла развёртывания</p>
@@ -236,6 +236,13 @@ Asperitas Console не предполагает быстрого старта и
 <p>Перейдите во вкладку <em>Roles Services and Networks</em>.</p>
 <p><img alt="" src="../_images/roles-networks.png" /></p>
 <p>Сверху отображается сводная таблица настроек для каждой из ролей, участвующих в развёртывании.</p>
+<p>Развёртывание типа <em>OpenStack</em> требует обязательные роли:</p>
+<ul class="simple">
+<li><p><strong>Controller</strong> - узлы контроллеры</p></li>
+<li><p><strong>ComputeInstanceHA</strong> - узлы виртуализации</p></li>
+</ul>
+<p>Развёртывание типа <em>Ceph</em> требует только роль <strong>Bare</strong>, в которой нет сервисов.
+Так как само развёртывание Ceph системы происходит за пределами консоли при помощи инструмента <strong>ceph-ansible</strong>.</p>
 <p>Ниже можно настроить каждую из ролей отдельно:</p>
 <ul class="simple">
 <li><p><em>Description</em> - описание, ни на что не влияет, кроме удобства использования;</p></li>
@@ -270,9 +277,9 @@ Asperitas Console не предполагает быстрого старта и
 </pre></div>
 </div>
 <p>Звтем вернитесь в asperitas консоль в окно <em>Network plans</em> и выберете для каждой роли свой сетефой план.</p>
-<p>Виртуальные IP-адреса используются в OpenStack для балансировки нагрузки на узлы управления в облаке.
-Если развёртывание типа Ceph, то оставьте все галочки пустыми в секции с виртуальными адресами.
-Если развёртывание типа OpenStack, то поставьте галочки для сетей <em>External</em>, <em>InternalApi</em> и опционально для других сетей.</p>
+<p>Виртуальные IP-адреса используются в <em>OpenStack</em> для балансировки нагрузки на узлы управления в облаке.
+Если развёртывание типа <strong>Ceph</strong>, то оставьте все галочки пустыми в секции с виртуальными адресами.
+Если развёртывание типа <strong>OpenStack</strong>, то поставьте галочки для сетей <em>External</em>, <em>InternalApi</em> и опционально для других сетей.</p>
 </section>
 <section id="id12">
 <h3>Пароли<a class="headerlink" href="#id12" title="Ссылка на этот заголовок">¶</a></h3>
@@ -299,6 +306,8 @@ Asperitas Console не предполагает быстрого старта и
 <p><img alt="" src="../_images/service-settings.png" /></p>
 <p>Необходимо внимательно пройти по всем пунктам в этом окне, указать только используемые опции.
 Те опции, что используются, необходимо обязательно настроить внутри своими параметрами!</p>
+<p>Все опции, кроме Bonding, имеют смысл только при развёртывании типа <em>OpenStack</em>!
+Если вы на этапе развёртывания типа <em>Ceph</em>, прочтите ниже описание <em>Bonding</em> и используйте его в случае необходимости. Остальные галочки оставьте пустыми.</p>
 <ul class="simple">
 <li><p><em>CephAnsibleExternal</em> - обязателен при использовании Ceph, необходимо настроить все параметры внутри и <a class="reference external" href="https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/16.2/html/integrating_an_overcloud_with_an_existing_red_hat_ceph_storage_cluster/assembly-preparing-overcloud-nodes_existing-ceph#proc-configuring-the-existing-ceph-storage-cluster_preparing-overcloud-nodes">подготовить</a> Ceph;</p></li>
 <li><p><em>SwiftExternal</em> - использовать Ceph Rgw как бекенд для сервиса <a class="reference external" href="https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/16.2/html/storage_guide/assembly_configuring-the-object-storage-service_osp-storage-guide">Swift</a></p></li>
@@ -318,23 +327,6 @@ Asperitas Console не предполагает быстрого старта и
 Так как в Ceph используется агрегация ядра Linux, в OpenStack - агрегация Ovs.</p></li>
 </ul>
 <p>При определении бекендов сервисов необходимо учитывать, что для Glance и Nova может быть выбран только один. Для сервиса Cinder может использоваться несколько разных бекендов.</p>
-</section>
-<section id="id14">
-<h3>Развёртывание<a class="headerlink" href="#id14" title="Ссылка на этот заголовок">¶</a></h3>
-<p>Перейдите во вкладку <em>Deployment</em>.</p>
-<p><img alt="" src="../_images/deployment.png" /></p>
-<p>Сверху отображается статус развёртывания. Развёртывание состоит из нескольких стадий:</p>
-<ul class="simple">
-<li><p><em><strong>Create/Update Plan Deployment (Install OS)</strong></em>, или <em>Создание стека</em> (термин OpenStack Heat) - при этом фиксируются и сохраняются все ваши настройки.
-А также захватываются узлы из списка физических узлов и на них накатывается операционная система.</p></li>
-<li><p><em><strong>Run Cloud Service Deployment</strong></em>, или Распространение настроек на узлы, настройка сети и развёртывание сервисов на узлах</p></li>
-</ul>
-<p>Также в этом окне отображаются дополнительные действия</p>
-<ul class="simple">
-<li><p><em>Update Known Hosts</em> - добавление всех созданных серверов в список известных хостов.</p></li>
-<li><p><em>Save generated /etc/hosts</em> - сохранить сгенерённый при деплое /etc/hosts в /etc/asperitas/hosts-<deployment-name>. Это необходимо так как при запуске разных развёртываний /etc/hosts перезаписываются.</p></li>
-</ul>
-<p>Также можно использовать <em>Debug</em> режим, при котором команда для запуска развёртывания не выполняется, а сохраняется в <em>/etc/asperitas/deploy.sh</em>.</p>
 </section>
 </section>
 </section>

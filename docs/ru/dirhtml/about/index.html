@@ -91,7 +91,7 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Введение</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../requirements/">Требования к оборудованию и ПО при использовании дистрибутива Asperitas</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../undercloud/">Установка узла развёртывания</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../full-deployment/">Полное развёртывание с нуля</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../full-deployment/">Подготовка к развёртыванию с нуля</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../updates/">Сопровождение облака на базе дистрибутива Asperitas</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../troubleshooting/">Устранение неполадок</a></li>
 </ul>
@@ -121,6 +121,27 @@
 <li><p><em>Ctrl+A (add/start)</em> - добавить сущность (сеть, узел и т.д)/запустить выполнение сценария</p></li>
 <li><p><em>Ctrl+D (delete/stop)</em> - удалить сущность/остановить выполнение сценария</p></li>
 </ul>
+</section>
+<section id="id3">
+<h3>Основные термины  и компоненты<a class="headerlink" href="#id3" title="Ссылка на этот заголовок">¶</a></h3>
+<p><strong>Облачный дистрибутив Asperitas</strong> распространяется в виде диска, содержащего множество программных пакетов, используемых для установки облачной платформы, сценарии для систем оркестрации, а также пакеты и сценарии развертывания <a class="reference external" href="https://michman.ispras.ru/ru/">Michman</a> – инструмента оркестрации сервисов. Набор пакетов для установки программ является полным и не требует подключения к сети Интернет.</p>
+<p>Дистрибутив построен на базе проекта <a class="reference external" href="https://docs.openstack.org/project-deploy-guide/tripleo-docs/latest/">TripleO</a>, который позволяет автоматизировать процесс развертывания облачной платформы на базе <a class="reference external" href="https://docs.openstack.org/ussuri/">OpenStack Ussuri</a>.</p>
+<p>Программный комплекс на базе дистрибутива состоит из следующих компонентов:</p>
+<ul class="simple">
+<li><p><strong>Сервер/узел развертывания</strong>: устанавливается на сервер, выполняющий роль развертывания и сопровождения всех остальных компонентов. Развертывается ровно на одном сервере с электронного носителя с дистрибутивом;</p></li>
+<li><p><strong>Сервер/узел контроллер</strong>: является частью развёртываемого <strong>облака</strong>, содержит все сервисы управления облаком;</p></li>
+<li><p><strong>Сервер/узел виртуализации</strong>: является частью развёртываемого <strong>облака</strong>, выполняет функции исполнения ВМ;</p></li>
+<li><p><strong>Сервер/узел хранения данных</strong>: опциональный сервер для внешнего хранения данных ВМ, выполняет функции распределенной отказоустойчивой СХД. При установке из дистрибутива на базе <a class="reference external" href="https://docs.ceph.com/en/quincy/">Ceph</a> требует для установки не менее четырех серверов, однако может не использоваться при наличии альтернативной СХД.</p></li>
+</ul>
+<p>Для работы с asperitas-console необходим заранее подготовленный <strong>узел развёртывания</strong> из дистрибутива Asperitas.
+Для подготовки узла перейдите к пункту <em>«Установка узла развёртывания»</em>.</p>
+<p>Все дальнейшие команды указываются с узла развёртывания, если не обговорено иначе.</p>
+<p>Подготовка полноценного комплекса состоит из следующих этапов:</p>
+<ol class="arabic simple">
+<li><p>Установка узла развёртывания.</p></li>
+<li><p>Подготовка и установка системы хранения данных на базе Ceph.</p></li>
+<li><p>Подготовка и развёртывание облака на базе OpenStack.</p></li>
+</ol>
 </section>
 </section>
 </section>
