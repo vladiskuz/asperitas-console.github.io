@@ -90,3 +90,59 @@ sudo pcs resouce refresh <failed-host>
 
 Запустите повторно puppet на узле, на котором puppet упал изначально. Если puppet выполнит работу без ошибок, то продолжите работу Ansible далее без повторного выполнения задачи Ansible.
 
+## Не найден хост 
+
+### После обновления развёртывания 
+
+1. Переведите nova-scheduler в режим debug. Для этого поменяйте параметр _debug=False_ в _True_ в файле _/var/lib/config-data/puppet-generated/nova/etc/nova/nova.conf_. Затем перезапустите nova-scheduler
+~~~shell
+sudo systemctl restart tripleo_nova_scheduler
+~~~
+2. Попробуйте создать виртуальную машину и проверьте в логах ошибку 
+~~~shell
+less /var/log/containers/nova/nova-scheduler.log
+~~~
+Если ошибка выглядит следующим образом, 
+~~~
+Filter AllHostsFilter returned 0 host(s)
+~~~
+то зайдите на любой контроллер (только один!) и выполните
+~~~shell 
+sudo podman exec -ti -u root nova_compute nova-manage placement heal_allocations
+sudo podman exec -ti -u root nova_compute nova-manage placement sync_aggregates
+~~~
+
+## Число используемых ресурсов на гипервизорах обнулилось 
+
+Такое может произойти, если вы попытались поменять основной домен для имен хостов. В таком случае вы увидете следующее.
+
+Например, вы поменяли хостнейм с _localdomain_ на _novalocal_, тогда 
+~~~shell 
+openstack server list --all-projects --host asperitas-novacomputeiha-12.localdomain -f value | wc -l
+20
+
+openstack hypervisor show asperitas-novacomputeiha-12.novalocal -c service_host -c running_vms
+
++--------------+-----------------------------------------+
+| Field        | Value                                   |
++--------------+-----------------------------------------+
+| running_vms  | 0                                       |
+| service_host | asperitas-novacomputeiha-12.localdomain |
++--------------+-----------------------------------------+
+~~~
+
+Причина проблемы в том, что у виртуалок запущенных на хосте _asperitas-novacomputeiha-12.localdomain_ есть параметр гипервизора, который остался в значении _asperitas-novacomputeiha-12.localdomain_. 
+
+Чтобы решить проблему, необходимо на любом из контроллеров зайти в базу данных Mariadb и поменять значение для виртуалки 
+~~~shell
+sudo podman ps | grep galera 
+
+ab09fec32c4b  undercloud.ctlplane:13787/image/docker/images/ispras/minos/openstack-mariadb:pcmklatest                 /bin/bash /usr/lo...  9 days ago    Up 8 days ago                                       galera-bundle-podman-0
+
+sudo podman exec -ti -u root galera-bundle-podman-0 mysql
+> use nova_api
+> select display_name from instances where node='asperitas-novacomputeiha-12.localdomain' and deleted_at is null;
+> begin;
+> update instances set node='asperitas-novacomputeiha-12.novalocal' where node='asperitas-novacomputeiha-12.localdomain' and deleted_at is null;
+> commit ;
+~~~
