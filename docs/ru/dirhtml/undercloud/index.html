@@ -103,6 +103,119 @@
       
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
 <h1>Установка узла развёртывания<a class="headerlink" href="#id1" title="Ссылка на этот заголовок">¶</a></h1>
+<p>Дистрибутив распространяется на переносимом цифровом носителе, на котором располагается файл undercloud.iso или установщик для образа узла развёртывания.</p>
+<ul class="simple">
+<li><p>При установке узла на физический узел - вставьте флешку с установщиком в компьютер и загрузитесь в неё с физического узла.</p></li>
+<li><p>При установке на физический узел через BMC по сети Интернет - примонтируйте файл <em>undercloud.iso</em> через виртуальную консоль BMC и загрузитесь в Virtual CD узла.</p></li>
+<li><p>При установке узла развёртывания в виртуальной машине следуйте инструкциям ниже</p></li>
+</ul>
+<section id="centos-7-8">
+<h2>Установка в виртуальной машине (Centos 7,8)<a class="headerlink" href="#centos-7-8" title="Ссылка на этот заголовок">¶</a></h2>
+<p>Установите необходимые пакеты на узел</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>bridge-utils
+sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>qemu-kvm<span class="w"> </span>qemu-img<span class="w"> </span>virt-manager<span class="w"> </span>virt-viewer<span class="w"> </span>python3-libvirt<span class="w"> </span>libvirt<span class="w"> </span>libvirt-client<span class="w"> </span>libguestfs<span class="w"> </span>libguestfs-tools<span class="w"> </span>virt-install<span class="w"> </span>libgcrypt<span class="w"> </span>libxcrypt
+</pre></div>
+</div>
+<p>Для виртуальной машины узла развёртывания необходимо создать два бриджа и указать их при создании виртуальной машины KVM.
+Внутри ВМ они будут светиться как два интерфейса: один используется для внутренней сети настройки облачной платформы, а второй используется для доступа к узлу развёртывания.</p>
+<p>Создать мост для интерфейса, на котором планируется запустить KVM VM при помощи <em>network-scripts</em></p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>nano<span class="w"> </span>/etc/sysconfig/network-scripts/ifcfg-eno1
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">DEVICE</span><span class="o">=</span><span class="n">eno1</span>
+<span class="n">ONBOOT</span><span class="o">=</span><span class="n">yes</span>
+<span class="n">HOTPLUG</span><span class="o">=</span><span class="n">no</span>
+<span class="n">NM_CONTROLLED</span><span class="o">=</span><span class="n">no</span>
+<span class="n">MTU</span><span class="o">=</span><span class="mi">1500</span>
+<span class="n">BOOTPROTO</span><span class="o">=</span><span class="n">none</span>
+<span class="n">BRIDGE</span><span class="o">=</span><span class="n">br</span><span class="o">-</span><span class="n">eno1</span>
+<span class="n">TYPE</span><span class="o">=</span><span class="n">Ethernet</span>
+</pre></div>
+</div>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>nano<span class="w"> </span>/etc/sysconfig/network-scripts/ifcfg-br-eno1
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">DEVICE</span><span class="o">=</span><span class="n">br</span><span class="o">-</span><span class="n">eno1</span>
+<span class="n">ONBOOT</span><span class="o">=</span><span class="n">yes</span>
+<span class="n">TYPE</span><span class="o">=</span><span class="n">Bridge</span>
+<span class="n">DELAY</span><span class="o">=</span><span class="mi">0</span>
+<span class="n">BOOTPROTO</span><span class="o">=</span><span class="n">static</span>
+<span class="n">IPADDR</span><span class="o">=</span><span class="mf">192.168.24.64</span>
+<span class="n">NETMASK</span><span class="o">=</span><span class="mf">255.255.255.0</span>
+<span class="n">NM_CONTROLLED</span><span class="o">=</span><span class="n">no</span>
+<span class="n">DEFROUTE</span><span class="o">=</span><span class="n">no</span>
+</pre></div>
+</div>
+<p>Или создайте мост при помощи Linux утилиты <em>ip</em></p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ip<span class="w"> </span>link<span class="w"> </span>add<span class="w"> </span>link<span class="w"> </span>eno1<span class="w"> </span>name<span class="w"> </span>eno1.100<span class="w"> </span><span class="nb">type</span><span class="w"> </span>vlan<span class="w"> </span>id<span class="w"> </span><span class="m">100</span>
+ip<span class="w"> </span>link<span class="w"> </span><span class="nb">set</span><span class="w"> </span>eno1.100<span class="w"> </span>up
+ip<span class="w"> </span>link<span class="w"> </span>add<span class="w"> </span>br100<span class="w"> </span><span class="nb">type</span><span class="w"> </span>bridge<span class="w"> </span>
+ip<span class="w"> </span>link<span class="w"> </span><span class="nb">set</span><span class="w"> </span>eno1.100<span class="w"> </span>master<span class="w"> </span>br100
+ip<span class="w"> </span>link<span class="w"> </span><span class="nb">set</span><span class="w"> </span>br100<span class="w"> </span>up
+</pre></div>
+</div>
+<p>Для проверки настроек можно использовать</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>brctl<span class="w"> </span>show
+</pre></div>
+</div>
+<p>Для запуска ВМ выполните</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>virt-install<span class="w"> </span>--virt-type<span class="o">=</span>kvm<span class="w"> </span>--name<span class="w"> </span>undercloud-base<span class="w"> </span>--ram<span class="w"> </span><span class="m">32768</span><span class="w"> </span>--vcpus<span class="o">=</span><span class="m">16</span><span class="w"> </span>--os-variant<span class="o">=</span>centos8<span class="w"> </span>--cdrom<span class="o">=</span>/var/lib/libvirt/boot/undercloud.iso<span class="w"> </span>--network<span class="o">=</span><span class="nv">bridge</span><span class="o">=</span>br-eno1<span class="w"> </span>--network<span class="o">=</span><span class="nv">bridge</span><span class="o">=</span>br-eno2<span class="w"> </span>--disk<span class="w"> </span><span class="nv">path</span><span class="o">=</span>/var/lib/libvirt/images/undercloud-base.qcow2,size<span class="o">=</span><span class="m">150</span>,format<span class="o">=</span>qcow2
+</pre></div>
+</div>
+<p>KVM создаст виртуальные интерфейсы vnet0 и vnet1 в составе бриджей, если бридж падает, то интерфейсы из него исчезают. Чтобы добавить снова их в бридж можно выполнить</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ip<span class="w"> </span>link<span class="w"> </span><span class="nb">set</span><span class="w"> </span>vnet1<span class="w"> </span>master<span class="w"> </span>br-eno2
+</pre></div>
+</div>
+</section>
+<section id="id2">
+<h2>Процесс установки<a class="headerlink" href="#id2" title="Ссылка на этот заголовок">¶</a></h2>
+<p>После загрузки с диска установки вы увидите на экране сервера выбор диска для установки операционной системы AsperitOS.</p>
+<p><img alt="" src="../_images/undercloud-1.png" />
+<img alt="" src="../_images/undercloud-2.png" /></p>
+<p>Дождитесь загрузки и проверки <em>undercloud.raw</em>.</p>
+<p>Затем выберите интерфейс для сети администрирования физических узлов.
+Интерфейс не должен использоваться для доступа к узлу разёртывания!</p>
+<p>На картинке вы видете два интерфейса.
+Предварительно на них был запущен автоматически DHCP клиент.
+Первый интерфейс используется как сеть администрирования, поэтому в сети не было DHCP сервера.
+Второй интерфейс используется для доступа к узлу развёртывания. В этой сети есть DHCP сервер, который выдал адрес узлу развёртывания.</p>
+<p><img alt="" src="../_images/undercloud-3.png" /></p>
+<p>Затем введите CIDR для сети администрирования. Важно! После установки сеть будет поменять очень сложно. Поэтому заранее продумайте сети вашей системы!</p>
+<p><img alt="" src="../_images/undercloud-4.png" /></p>
+<p>Введите локальный (основной) IP-адрес узла развёртывания.
+Узел развёртывания имеет 3(!) адреса так как сам является отдельной облачной средой на базе OpenStack.
+3 адреса необходимы для 3 точек доступа к облачным сервисам узла развёртывания: публичной, внутренней точки доступа и точки администратора.
+Локальный IP-адреса считается как внутрення точка доступа в системе.</p>
+<p><img alt="" src="../_images/undercloud-5.png" /></p>
+<p>Введите IP-адрес шлюза для сети администрирования. По умолчанию - это локальный IP-адрес узла развёртывания.
+Но можно указать и другой адрес для вашей сети администрирования.</p>
+<p><img alt="" src="../_images/undercloud-6.png" /></p>
+<p>В сети администрирования узел развёртывания запускает DHCP сервер для раздачи адресов физическим узлам облака.
+Это обязательно, поэтому в этой сети не может быть внешнего другого DHCP сервера во избежание проблем.
+Введите начало и конец множества IP-адресов, которые будут назначены вашим физическим машинам.
+Учтите, что в этой сети заранее заняты 4 адреса для узла развёртывания: 3 указываются вручную, 1 выбирается случайным образом (как правило .5 адрес).
+А также дальше необходимо будет указать ещё одно множество для адресов интроспектирования физических узлов.</p>
+<p><img alt="" src="../_images/undercloud-7.png" />
+<img alt="" src="../_images/undercloud-8.png" /></p>
+<p>В сети администрирования узел развёртывания запускает ещё один DHCP сервер, который используется для интроспекции физических узлов.
+Множество указанных вами IP-адресов влияет только на количество одновременно интроспектируемых узлов.
+Эти адреса назначаются узлам временно и не сохраняются в дальнейшем.</p>
+<p><img alt="" src="../_images/undercloud-9.png" />
+<img alt="" src="../_images/undercloud-10.png" /></p>
+<p>Введите публичный IP-адрес для узла развёртывания. Используется для доступа к API облачных сервисов на узле развёртывания.</p>
+<p><img alt="" src="../_images/undercloud-11.png" /></p>
+<p>Введите IP-адрес для точки доступа администратора на узле развёртывания.</p>
+<p><img alt="" src="../_images/undercloud-12.png" /></p>
+<p>Введите DNS сервер(а) для узла развёртывания. Если несколько, то перечислите их через запятую.</p>
+<p><img alt="" src="../_images/undercloud-13.png" /></p>
+<p>Введите NTP сервер(а) для узла развёртывания. Если несколько, то перечислите их через запятую.</p>
+<p><img alt="" src="../_images/undercloud-14.png" /></p>
+<p>Дождитесь загрузки контейнеров в локальный реестр контейнеров на узле развёртывания.</p>
+<p><img alt="" src="../_images/undercloud-15.png" /></p>
+<p>Дождитесь установки облачной системы на базе OpenStack на узел развёртывания.</p>
+<p><img alt="" src="../_images/undercloud-16.png" /></p>
+<p>Ваш узел развёртывания готов!</p>
+</section>
 </section>
 
 

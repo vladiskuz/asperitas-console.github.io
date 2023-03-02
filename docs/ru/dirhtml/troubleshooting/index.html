@@ -115,6 +115,28 @@
 <p><img alt="" src="../_images/baremetal-node-edit.png" /></p>
 <p>Измените необходимые параметры, а также <strong>снова введите пароль</strong>. Нажмите кнопку <em>Save</em> и ожидайте изменение статуса на manageable.</p>
 </section>
+<section id="id2">
+<h2>Ошибка настройка сети<a class="headerlink" href="#id2" title="Ссылка на этот заголовок">¶</a></h2>
+<p>Если при развёртывании облака вы видете ошибку,</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="s2">&quot;failed_when_result&quot;</span><span class="p">:</span> <span class="n">true</span>
+<span class="p">}</span>
+<span class="mi">2023</span><span class="o">-</span><span class="mi">03</span><span class="o">-</span><span class="mi">02</span> <span class="mi">17</span><span class="p">:</span><span class="mi">02</span><span class="p">:</span><span class="mf">49.089226</span> <span class="o">|</span> <span class="mi">08002710</span><span class="o">-</span><span class="n">c16f</span><span class="o">-</span><span class="mi">44</span><span class="n">d5</span><span class="o">-</span><span class="mi">9117</span><span class="o">-</span><span class="mi">00000000029</span><span class="n">d</span> <span class="o">|</span>     <span class="n">TIMING</span> <span class="o">|</span> <span class="n">NetworkConfig</span> <span class="n">stdout</span> <span class="o">|</span> <span class="n">monitoring</span><span class="o">-</span><span class="n">ceph</span><span class="o">-</span><span class="mi">0</span> <span class="o">|</span> <span class="mi">0</span><span class="p">:</span><span class="mi">05</span><span class="p">:</span><span class="mf">58.946554</span> <span class="o">|</span> <span class="mf">0.06</span><span class="n">s</span>
+</pre></div>
+</div>
+<p>зайдите на упавший хост по ssh и выполните</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>cat<span class="w"> </span>/etc/os-net-config/config.json
+</pre></div>
+</div>
+<p>В выводе будет сгенерённый для вашего узла сетевой план.
+Проверьте, что план соответствует ожидаемым настройкам .
+Если план не соответствует, то перейдите к настройке сетевого плана снова и запустите обновление развёртывания.</p>
+<p>Если план соответствует ожидаемому, то выполните</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>os-net-config<span class="w"> </span>-c<span class="w"> </span>/etc/os-net-config/config.json<span class="w"> </span>--verbose
+</pre></div>
+</div>
+<p>И посмотрите на вывод команды и ошибки, которые команда выведет.
+Дальнейшая работа с проблемой зависит от ошибок в выводе команды.</p>
+</section>
 <section id="wait-for-puppet-host-configuration-to-finish">
 <h2>Wait for puppet host configuration to finish<a class="headerlink" href="#wait-for-puppet-host-configuration-to-finish" title="Ссылка на этот заголовок">¶</a></h2>
 <p>Если при развёртывании сервисов Ansible падает на задаче <em>Wait for puppet host configuration to finish</em>, то сначала необходимо определить узел, на котором произошла ошибка</p>
@@ -185,10 +207,10 @@
 <p>Запустите повторно puppet на узле, на котором puppet упал изначально. Если puppet выполнит работу без ошибок, то продолжите работу Ansible далее без повторного выполнения задачи Ansible.</p>
 </section>
 </section>
-<section id="id2">
-<h2>Не найден хост<a class="headerlink" href="#id2" title="Ссылка на этот заголовок">¶</a></h2>
 <section id="id3">
-<h3>После обновления развёртывания<a class="headerlink" href="#id3" title="Ссылка на этот заголовок">¶</a></h3>
+<h2>Не найден хост<a class="headerlink" href="#id3" title="Ссылка на этот заголовок">¶</a></h2>
+<section id="id4">
+<h3>После обновления развёртывания<a class="headerlink" href="#id4" title="Ссылка на этот заголовок">¶</a></h3>
 <ol class="arabic simple">
 <li><p>Переведите nova-scheduler в режим debug. Для этого поменяйте параметр <em>debug=False</em> в <em>True</em> в файле <em>/var/lib/config-data/puppet-generated/nova/etc/nova/nova.conf</em>. Затем перезапустите nova-scheduler</p></li>
 </ol>
@@ -212,8 +234,8 @@ sudo<span class="w"> </span>podman<span class="w"> </span><span class="nb">exec<
 </div>
 </section>
 </section>
-<section id="id4">
-<h2>Число используемых ресурсов на гипервизорах обнулилось<a class="headerlink" href="#id4" title="Ссылка на этот заголовок">¶</a></h2>
+<section id="id5">
+<h2>Число используемых ресурсов на гипервизорах обнулилось<a class="headerlink" href="#id5" title="Ссылка на этот заголовок">¶</a></h2>
 <p>Такое может произойти, если вы попытались поменять основной домен для имен хостов. В таком случае вы увидете следующее.</p>
 <p>Например, вы поменяли хостнейм с <em>localdomain</em> на <em>novalocal</em>, тогда</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>openstack<span class="w"> </span>server<span class="w"> </span>list<span class="w"> </span>--all-projects<span class="w"> </span>--host<span class="w"> </span>asperitas-novacomputeiha-12.localdomain<span class="w"> </span>-f<span class="w"> </span>value<span class="w"> </span><span class="p">|</span><span class="w"> </span>wc<span class="w"> </span>-l
