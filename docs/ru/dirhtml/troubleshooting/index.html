@@ -84,7 +84,7 @@
         <div id="sidebar" class="bs-sidenav" role="complementary"><p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../about/">Введение</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../requirements/">Требования к оборудованию и ПО при использовании дистрибутива Asperitas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../requirements/">Требования к оборудованию и ПО</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../undercloud/">Установка узла развёртывания</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../full-deployment/">Подготовка к развёртыванию с нуля</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../deployment/">Развёртывание облака</a></li>
@@ -136,6 +136,26 @@
 </div>
 <p>И посмотрите на вывод команды и ошибки, которые команда выведет.
 Дальнейшая работа с проблемой зависит от ошибок в выводе команды.</p>
+</section>
+<section id="no-valid-json">
+<h2>No valid JSON при создании развёртывания<a class="headerlink" href="#no-valid-json" title="Ссылка на этот заголовок">¶</a></h2>
+<p>Ошибка при создавнии развёртывания</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="ne">ValueError</span><span class="p">:</span> <span class="n">Value</span> <span class="n">must</span> <span class="n">be</span> <span class="n">valid</span> <span class="n">JSON</span><span class="p">:</span> <span class="n">Expecting</span> <span class="n">value</span><span class="p">:</span> <span class="n">line</span> <span class="mi">1</span> <span class="n">column</span> <span class="mi">1</span> <span class="p">(</span><span class="n">char</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>На узле развёртывания выполните</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>podman<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-ti<span class="w"> </span>-u<span class="w"> </span>root<span class="w"> </span>heat_engine<span class="w"> </span>vi<span class="w"> </span>/usr/lib/python3.6/site-packages/heat/engine/parameters.py
+</pre></div>
+</div>
+<p>Найдите класс <em>JsonParam</em> и исправьте функцию <em>parse</em>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">message</span> <span class="o">=</span> <span class="n">_</span><span class="p">(</span><span class="s1">&#39;Value </span><span class="si">%s</span><span class="s1"> must be valid JSON: </span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">)</span> <span class="o">%</span> <span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">err</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Затем перезапустите контейнер</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>tripleo_heat_engine
+</pre></div>
+</div>
+<p>И запустите создание заново</p>
 </section>
 <section id="wait-for-puppet-host-configuration-to-finish">
 <h2>Wait for puppet host configuration to finish<a class="headerlink" href="#wait-for-puppet-host-configuration-to-finish" title="Ссылка на этот заголовок">¶</a></h2>

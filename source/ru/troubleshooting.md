@@ -40,6 +40,29 @@ sudo os-net-config -c /etc/os-net-config/config.json --verbose
 И посмотрите на вывод команды и ошибки, которые команда выведет. 
 Дальнейшая работа с проблемой зависит от ошибок в выводе команды.
 
+## No valid JSON при создании развёртывания 
+
+Ошибка при создавнии развёртывания 
+~~~
+ValueError: Value must be valid JSON: Expecting value: line 1 column 1 (char 0)
+~~~
+
+На узле развёртывания выполните 
+~~~shell
+sudo podman exec -ti -u root heat_engine vi /usr/lib/python3.6/site-packages/heat/engine/parameters.py
+~~~
+
+Найдите класс _JsonParam_ и исправьте функцию _parse_:
+~~~
+message = _('Value %s must be valid JSON: %s') % (value, err)
+~~~
+
+Затем перезапустите контейнер 
+~~~shell
+sudo systemctl restart tripleo_heat_engine
+~~~
+И запустите создание заново
+
 ## Wait for puppet host configuration to finish
 
 Если при развёртывании сервисов Ansible падает на задаче _Wait for puppet host configuration to finish_, то сначала необходимо определить узел, на котором произошла ошибка 
