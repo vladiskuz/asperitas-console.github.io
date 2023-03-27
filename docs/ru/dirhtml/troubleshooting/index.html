@@ -115,6 +115,26 @@
 <p><img alt="" src="../_images/baremetal-node-edit.png" /></p>
 <p>Измените необходимые параметры, а также <strong>снова введите пароль</strong>. Нажмите кнопку <em>Save</em> и ожидайте изменение статуса на manageable.</p>
 </section>
+<section id="no-valid-json">
+<h2>No valid JSON при создании развёртывания<a class="headerlink" href="#no-valid-json" title="Ссылка на этот заголовок">¶</a></h2>
+<p>Ошибка при создавнии развёртывания</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="ne">ValueError</span><span class="p">:</span> <span class="n">Value</span> <span class="n">must</span> <span class="n">be</span> <span class="n">valid</span> <span class="n">JSON</span><span class="p">:</span> <span class="n">Expecting</span> <span class="n">value</span><span class="p">:</span> <span class="n">line</span> <span class="mi">1</span> <span class="n">column</span> <span class="mi">1</span> <span class="p">(</span><span class="n">char</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>На узле развёртывания выполните</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>podman<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-ti<span class="w"> </span>-u<span class="w"> </span>root<span class="w"> </span>heat_engine<span class="w"> </span>vi<span class="w"> </span>/usr/lib/python3.6/site-packages/heat/engine/parameters.py
+</pre></div>
+</div>
+<p>Найдите класс <em>JsonParam</em> и исправьте функцию <em>parse</em>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">message</span> <span class="o">=</span> <span class="n">_</span><span class="p">(</span><span class="s1">&#39;Value </span><span class="si">%s</span><span class="s1"> must be valid JSON: </span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">)</span> <span class="o">%</span> <span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">err</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Затем перезапустите контейнер</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>tripleo_heat_engine
+</pre></div>
+</div>
+<p>И запустите создание заново</p>
+</section>
 <section id="id2">
 <h2>Ошибка настройка сети<a class="headerlink" href="#id2" title="Ссылка на этот заголовок">¶</a></h2>
 <p>Если при развёртывании облака вы видете ошибку,</p>
@@ -136,26 +156,33 @@
 </div>
 <p>И посмотрите на вывод команды и ошибки, которые команда выведет.
 Дальнейшая работа с проблемой зависит от ошибок в выводе команды.</p>
+<p>После исправления всех ошибок, с узла развёртывания выполните</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>screen<span class="w"> </span>-x<span class="w"> </span>&lt;deploy_name&gt;
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">INTERACTIVE</span> <span class="n">MODE</span>
+<span class="n">Enter</span> <span class="n">command</span><span class="p">:</span> <span class="n">c</span>
+</pre></div>
+</div>
+<p>Развёртывание продолжится дальше</p>
 </section>
-<section id="no-valid-json">
-<h2>No valid JSON при создании развёртывания<a class="headerlink" href="#no-valid-json" title="Ссылка на этот заголовок">¶</a></h2>
-<p>Ошибка при создавнии развёртывания</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="ne">ValueError</span><span class="p">:</span> <span class="n">Value</span> <span class="n">must</span> <span class="n">be</span> <span class="n">valid</span> <span class="n">JSON</span><span class="p">:</span> <span class="n">Expecting</span> <span class="n">value</span><span class="p">:</span> <span class="n">line</span> <span class="mi">1</span> <span class="n">column</span> <span class="mi">1</span> <span class="p">(</span><span class="n">char</span> <span class="mi">0</span><span class="p">)</span>
+<section id="ceph">
+<h2>Неправильные права на директорию при развёртывании с использованием Ceph<a class="headerlink" href="#ceph" title="Ссылка на этот заголовок">¶</a></h2>
+<p>Ошибка выглядит следующим образом</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">2023</span><span class="o">-</span><span class="mi">03</span><span class="o">-</span><span class="mi">27</span> <span class="mi">20</span><span class="p">:</span><span class="mi">34</span><span class="p">:</span><span class="mf">52.505694</span> <span class="o">|</span> <span class="mi">52540064</span><span class="o">-</span><span class="mi">5093</span><span class="o">-</span><span class="mi">800</span><span class="n">d</span><span class="o">-</span><span class="mi">24</span><span class="n">d6</span><span class="o">-</span><span class="mi">00000001</span><span class="n">f15c</span> <span class="o">|</span>       <span class="n">TASK</span> <span class="o">|</span> <span class="n">symbolic</span> <span class="n">link</span> <span class="n">to</span> <span class="n">tripleo</span> <span class="n">inventory</span> <span class="kn">from</span> <span class="nn">ceph</span><span class="o">-</span><span class="n">ansible</span> <span class="n">work</span> <span class="n">directory</span>
+<span class="mi">2023</span><span class="o">-</span><span class="mi">03</span><span class="o">-</span><span class="mi">27</span> <span class="mi">20</span><span class="p">:</span><span class="mi">34</span><span class="p">:</span><span class="mf">52.764361</span> <span class="o">|</span> <span class="mi">52540064</span><span class="o">-</span><span class="mi">5093</span><span class="o">-</span><span class="mi">800</span><span class="n">d</span><span class="o">-</span><span class="mi">24</span><span class="n">d6</span><span class="o">-</span><span class="mi">00000001</span><span class="n">f15c</span> <span class="o">|</span>    <span class="n">IGNORED</span> <span class="o">|</span> <span class="n">symbolic</span> <span class="n">link</span> <span class="n">to</span> <span class="n">tripleo</span> <span class="n">inventory</span> <span class="kn">from</span> <span class="nn">ceph</span><span class="o">-</span><span class="n">ansible</span> <span class="n">work</span> <span class="n">directory</span> <span class="o">|</span> <span class="n">undercloud</span> <span class="o">|</span> <span class="n">error</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;changed&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span> <span class="s2">&quot;msg&quot;</span><span class="p">:</span> <span class="s2">&quot;Error while linking: [Errno 13] Permission denied: b&#39;/home/stack/config-download/asperitas/tripleo-ansible-inventory.yaml&#39; -&gt; b&#39;/home/stack/config-download/asperitas/ceph-ansible/inventory.yml&#39;&quot;</span><span class="p">,</span> <span class="s2">&quot;path&quot;</span><span class="p">:</span> <span class="s2">&quot;/home/stack/config-download/asperitas/ceph-ansible/inventory.yml&quot;</span><span class="p">}</span>
+<span class="mi">2023</span><span class="o">-</span><span class="mi">03</span><span class="o">-</span><span class="mi">27</span> <span class="mi">20</span><span class="p">:</span><span class="mi">34</span><span class="p">:</span><span class="mf">52.765518</span> <span class="o">|</span> <span class="mi">52540064</span><span class="o">-</span><span class="mi">5093</span><span class="o">-</span><span class="mi">800</span><span class="n">d</span><span class="o">-</span><span class="mi">24</span><span class="n">d6</span><span class="o">-</span><span class="mi">00000001</span><span class="n">f15c</span> <span class="o">|</span>     <span class="n">TIMING</span> <span class="o">|</span> <span class="n">tripleo_ceph_work_dir</span> <span class="p">:</span> <span class="n">symbolic</span> <span class="n">link</span> <span class="n">to</span> <span class="n">tripleo</span> <span class="n">inventory</span> <span class="kn">from</span> <span class="nn">ceph</span><span class="o">-</span><span class="n">ansible</span> <span class="n">work</span> <span class="n">directory</span> <span class="o">|</span> <span class="n">undercloud</span> <span class="o">|</span> <span class="mi">3</span> <span class="n">days</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span><span class="mi">22</span><span class="p">:</span><span class="mf">28.851303</span> <span class="o">|</span> <span class="mf">0.26</span><span class="n">s</span>
 </pre></div>
 </div>
-<p>На узле развёртывания выполните</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>podman<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-ti<span class="w"> </span>-u<span class="w"> </span>root<span class="w"> </span>heat_engine<span class="w"> </span>vi<span class="w"> </span>/usr/lib/python3.6/site-packages/heat/engine/parameters.py
+<p>С узла развёртывания выполните</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>chown<span class="w"> </span>-R<span class="w"> </span>stack:stack<span class="w"> </span>config-download/config-download-latest/ceph-ansible
+screen<span class="w"> </span>-x<span class="w"> </span>&lt;deploy_name&gt;
 </pre></div>
 </div>
-<p>Найдите класс <em>JsonParam</em> и исправьте функцию <em>parse</em>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">message</span> <span class="o">=</span> <span class="n">_</span><span class="p">(</span><span class="s1">&#39;Value </span><span class="si">%s</span><span class="s1"> must be valid JSON: </span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">)</span> <span class="o">%</span> <span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">err</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">INTERACTIVE</span> <span class="n">MODE</span>
+<span class="n">Enter</span> <span class="n">command</span><span class="p">:</span> <span class="n">re</span>
 </pre></div>
 </div>
-<p>Затем перезапустите контейнер</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>tripleo_heat_engine
-</pre></div>
-</div>
-<p>И запустите создание заново</p>
 </section>
 <section id="wait-for-puppet-host-configuration-to-finish">
 <h2>Wait for puppet host configuration to finish<a class="headerlink" href="#wait-for-puppet-host-configuration-to-finish" title="Ссылка на этот заголовок">¶</a></h2>

@@ -16,6 +16,29 @@ ping -c 1 2.2.2.3
 
 Измените необходимые параметры, а также **снова введите пароль**. Нажмите кнопку _Save_ и ожидайте изменение статуса на manageable.
 
+## No valid JSON при создании развёртывания 
+
+Ошибка при создавнии развёртывания 
+~~~
+ValueError: Value must be valid JSON: Expecting value: line 1 column 1 (char 0)
+~~~
+
+На узле развёртывания выполните 
+~~~shell
+sudo podman exec -ti -u root heat_engine vi /usr/lib/python3.6/site-packages/heat/engine/parameters.py
+~~~
+
+Найдите класс _JsonParam_ и исправьте функцию _parse_:
+~~~
+message = _('Value %s must be valid JSON: %s') % (value, err)
+~~~
+
+Затем перезапустите контейнер 
+~~~shell
+sudo systemctl restart tripleo_heat_engine
+~~~
+И запустите создание заново
+
 ## Ошибка настройка сети 
 
 Если при развёртывании облака вы видете ошибку,
@@ -40,28 +63,36 @@ sudo os-net-config -c /etc/os-net-config/config.json --verbose
 И посмотрите на вывод команды и ошибки, которые команда выведет. 
 Дальнейшая работа с проблемой зависит от ошибок в выводе команды.
 
-## No valid JSON при создании развёртывания 
-
-Ошибка при создавнии развёртывания 
-~~~
-ValueError: Value must be valid JSON: Expecting value: line 1 column 1 (char 0)
-~~~
-
-На узле развёртывания выполните 
+После исправления всех ошибок, с узла развёртывания выполните 
 ~~~shell
-sudo podman exec -ti -u root heat_engine vi /usr/lib/python3.6/site-packages/heat/engine/parameters.py
+screen -x <deploy_name>
+~~~
+~~~
+INTERACTIVE MODE
+Enter command: c
 ~~~
 
-Найдите класс _JsonParam_ и исправьте функцию _parse_:
+Развёртывание продолжится дальше 
+
+## Неправильные права на директорию при развёртывании с использованием Ceph
+
+Ошибка выглядит следующим образом 
 ~~~
-message = _('Value %s must be valid JSON: %s') % (value, err)
+2023-03-27 20:34:52.505694 | 52540064-5093-800d-24d6-00000001f15c |       TASK | symbolic link to tripleo inventory from ceph-ansible work directory
+2023-03-27 20:34:52.764361 | 52540064-5093-800d-24d6-00000001f15c |    IGNORED | symbolic link to tripleo inventory from ceph-ansible work directory | undercloud | error={"changed": false, "msg": "Error while linking: [Errno 13] Permission denied: b'/home/stack/config-download/asperitas/tripleo-ansible-inventory.yaml' -> b'/home/stack/config-download/asperitas/ceph-ansible/inventory.yml'", "path": "/home/stack/config-download/asperitas/ceph-ansible/inventory.yml"}
+2023-03-27 20:34:52.765518 | 52540064-5093-800d-24d6-00000001f15c |     TIMING | tripleo_ceph_work_dir : symbolic link to tripleo inventory from ceph-ansible work directory | undercloud | 3 days, 3:22:28.851303 | 0.26s
 ~~~
 
-Затем перезапустите контейнер 
+С узла развёртывания выполните 
 ~~~shell
-sudo systemctl restart tripleo_heat_engine
+sudo chown -R stack:stack config-download/config-download-latest/ceph-ansible
+screen -x <deploy_name>
 ~~~
-И запустите создание заново
+~~~
+INTERACTIVE MODE
+Enter command: re
+~~~
+
 
 ## Wait for puppet host configuration to finish
 
