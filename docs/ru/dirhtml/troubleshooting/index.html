@@ -166,6 +166,31 @@
 </div>
 <p>Развёртывание продолжится дальше</p>
 </section>
+<section id="puppet-cache-read-only">
+<h2>Puppet cache read-only файловая система<a class="headerlink" href="#puppet-cache-read-only" title="Ссылка на этот заголовок">¶</a></h2>
+<p>Если при развёртывании падают контейнеры вида container-puppet-<service>.
+То необходимо проверить логи контейнера после старта</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>less<span class="w"> </span>/var/log/containers/stdouts/container-puppet-&lt;service&gt;.log
+</pre></div>
+</div>
+<p>Если видны ошибки вида</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">boost</span><span class="p">::</span><span class="n">filesystem</span><span class="p">::</span><span class="n">remove</span><span class="p">:</span> <span class="n">Read</span><span class="o">-</span><span class="n">only</span> <span class="n">file</span> <span class="n">system</span><span class="p">:</span> <span class="s2">&quot;/opt/puppetlabs/facter/cache/cached_facts/kernel&quot;</span>
+</pre></div>
+</div>
+<p>то проблема скорее всего в том, что развёртывание было начато некоторое время назад и кеш успел измениться.
+Необходимо пересоздать один из упавших контейнеров container-puppet-<service> с разрешением на запись для container-volume=/var/lib/container-puppet/</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>podman<span class="w"> </span>ps<span class="w"> </span>-a<span class="w"> </span>
+<span class="c1">#использовать вывод для пересоздания контейнера</span>
+sudo<span class="w"> </span>podman<span class="w"> </span>inspect<span class="w"> </span>container-puppet-&lt;service&gt;<span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span>.<span class="o">[</span><span class="m">0</span><span class="o">]</span>.Config.CreateCommand
+sudo<span class="w"> </span>podman<span class="w"> </span>rm<span class="w"> </span>container-puppet-&lt;service&gt;<span class="w"> </span>
+sudo<span class="w"> </span>podman<span class="w"> </span>container<span class="w"> </span>run<span class="w"> </span>&lt;...&gt;<span class="w"> </span>--volume<span class="w"> </span>/var/lib/container-puppet/puppetlabs:/opt/puppetlabs:rw<span class="w"> </span>&lt;...&gt;
+</pre></div>
+</div>
+<p>Остальные упавшие контейнеры вида container-puppet-<service> можно просто перезапустить</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>podman<span class="w"> </span>restart<span class="w"> </span>container-puppet-&lt;service&gt;
+</pre></div>
+</div>
+</section>
 <section id="ceph">
 <h2>Неправильные права на директорию при развёртывании с использованием Ceph<a class="headerlink" href="#ceph" title="Ссылка на этот заголовок">¶</a></h2>
 <p>Ошибка выглядит следующим образом</p>

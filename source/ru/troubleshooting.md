@@ -74,6 +74,34 @@ Enter command: c
 
 Развёртывание продолжится дальше 
 
+## Puppet cache read-only файловая система
+
+Если при развёртывании падают контейнеры вида container-puppet-<service>. 
+То необходимо проверить логи контейнера после старта 
+~~~shell
+sudo less /var/log/containers/stdouts/container-puppet-<service>.log
+~~~
+
+Если видны ошибки вида 
+~~~
+boost::filesystem::remove: Read-only file system: "/opt/puppetlabs/facter/cache/cached_facts/kernel"
+~~~
+то проблема скорее всего в том, что развёртывание было начато некоторое время назад и кеш успел измениться.
+Необходимо пересоздать один из упавших контейнеров container-puppet-<service> с разрешением на запись для container-volume=/var/lib/container-puppet/
+
+~~~shell
+sudo podman ps -a 
+#использовать вывод для пересоздания контейнера
+sudo podman inspect container-puppet-<service> | | jq .[0].Config.CreateCommand
+sudo podman rm container-puppet-<service> 
+sudo podman container run <...> --volume /var/lib/container-puppet/puppetlabs:/opt/puppetlabs:rw <...>
+~~~
+
+Остальные упавшие контейнеры вида container-puppet-<service> можно просто перезапустить 
+~~~shell
+sudo podman restart container-puppet-<service>
+~~~
+
 ## Неправильные права на директорию при развёртывании с использованием Ceph
 
 Ошибка выглядит следующим образом 
