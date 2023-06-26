@@ -136,7 +136,16 @@
 <p>И запустите создание заново</p>
 </section>
 <section id="id2">
-<h2>Ошибка настройка сети<a class="headerlink" href="#id2" title="Ссылка на этот заголовок">¶</a></h2>
+<h2>Параметр не определён или определён неправильно в шаблоне<a class="headerlink" href="#id2" title="Ссылка на этот заголовок">¶</a></h2>
+<p>Если при создании стека не хватает какого-то параметра, но при этом, стек уже начал создаваться.
+Или если результат не соответствует указанному в параметре. То можно использовать следующие команды для дебага</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>openstack<span class="w"> </span>stack<span class="w"> </span>environment<span class="w"> </span>show<span class="w"> </span>asperitas
+openstack<span class="w"> </span>stack<span class="w"> </span>template<span class="w"> </span>show<span class="w"> </span>asperitas
+</pre></div>
+</div>
+</section>
+<section id="id3">
+<h2>Ошибка настройка сети<a class="headerlink" href="#id3" title="Ссылка на этот заголовок">¶</a></h2>
 <p>Если при развёртывании облака вы видете ошибку,</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="s2">&quot;failed_when_result&quot;</span><span class="p">:</span> <span class="n">true</span>
 <span class="p">}</span>
@@ -220,7 +229,8 @@ screen<span class="w"> </span>-x<span class="w"> </span>&lt;deploy_name&gt;
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>puppet<span class="w"> </span>apply<span class="w"> </span>--modulepath<span class="o">=</span>/etc/puppet/modules:/opt/stack/puppet-modules:/usr/share/openstack-puppet/modules<span class="w"> </span>--detailed-exitcodes<span class="w"> </span>--summarize<span class="w"> </span>--color<span class="o">=</span><span class="nb">true</span><span class="w"> </span>--verbose<span class="w"> </span>/var/lib/tripleo-config/puppet_step_config.pp<span class="w"> </span>
 </pre></div>
 </div>
-<p>Дальнейший поиск проблемы зависит от вывода команды. Вывод команды может быть долгим, поэтому дождитесь, пожалуйста, пока команда не завершится.</p>
+<p>Дальнейший поиск проблемы зависит от вывода команды.<br />
+Если вывод команды долгий или недостаточно информативный, то добавьте флаг <code class="docutils literal notranslate"><span class="pre">--debug</span></code></p>
 <section id="pacemaker">
 <h3>Pacemaker<a class="headerlink" href="#pacemaker" title="Ссылка на этот заголовок">¶</a></h3>
 <p>Ошибка выглядит следующим образом:</p>
@@ -279,10 +289,10 @@ screen<span class="w"> </span>-x<span class="w"> </span>&lt;deploy_name&gt;
 <p>Запустите повторно puppet на узле, на котором puppet упал изначально. Если puppet выполнит работу без ошибок, то продолжите работу Ansible далее без повторного выполнения задачи Ansible.</p>
 </section>
 </section>
-<section id="id3">
-<h2>Не найден хост<a class="headerlink" href="#id3" title="Ссылка на этот заголовок">¶</a></h2>
 <section id="id4">
-<h3>После обновления развёртывания<a class="headerlink" href="#id4" title="Ссылка на этот заголовок">¶</a></h3>
+<h2>Не найден хост<a class="headerlink" href="#id4" title="Ссылка на этот заголовок">¶</a></h2>
+<section id="id5">
+<h3>После обновления развёртывания<a class="headerlink" href="#id5" title="Ссылка на этот заголовок">¶</a></h3>
 <ol class="arabic simple">
 <li><p>Переведите nova-scheduler в режим debug. Для этого поменяйте параметр <em>debug=False</em> в <em>True</em> в файле <em>/var/lib/config-data/puppet-generated/nova/etc/nova/nova.conf</em>. Затем перезапустите nova-scheduler</p></li>
 </ol>
@@ -306,8 +316,8 @@ sudo<span class="w"> </span>podman<span class="w"> </span><span class="nb">exec<
 </div>
 </section>
 </section>
-<section id="id5">
-<h2>Число используемых ресурсов на гипервизорах обнулилось<a class="headerlink" href="#id5" title="Ссылка на этот заголовок">¶</a></h2>
+<section id="id6">
+<h2>Число используемых ресурсов на гипервизорах обнулилось<a class="headerlink" href="#id6" title="Ссылка на этот заголовок">¶</a></h2>
 <p>Такое может произойти, если вы попытались поменять основной домен для имен хостов. В таком случае вы увидете следующее.</p>
 <p>Например, вы поменяли хостнейм с <em>localdomain</em> на <em>novalocal</em>, тогда</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>openstack<span class="w"> </span>server<span class="w"> </span>list<span class="w"> </span>--all-projects<span class="w"> </span>--host<span class="w"> </span>asperitas-novacomputeiha-12.localdomain<span class="w"> </span>-f<span class="w"> </span>value<span class="w"> </span><span class="p">|</span><span class="w"> </span>wc<span class="w"> </span>-l
@@ -335,6 +345,19 @@ sudo<span class="w"> </span>podman<span class="w"> </span><span class="nb">exec<
 &gt;<span class="w"> </span>begin<span class="p">;</span>
 &gt;<span class="w"> </span>update<span class="w"> </span>instances<span class="w"> </span><span class="nb">set</span><span class="w"> </span><span class="nv">node</span><span class="o">=</span><span class="s1">&#39;asperitas-novacomputeiha-12.novalocal&#39;</span><span class="w"> </span>where<span class="w"> </span><span class="nv">node</span><span class="o">=</span><span class="s1">&#39;asperitas-novacomputeiha-12.localdomain&#39;</span><span class="w"> </span>and<span class="w"> </span>deleted_at<span class="w"> </span>is<span class="w"> </span>null<span class="p">;</span>
 &gt;<span class="w"> </span>commit<span class="w"> </span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="cinder">
+<h2>Бекенд для cinder недоступен<a class="headerlink" href="#cinder" title="Ссылка на этот заголовок">¶</a></h2>
+<p>Если  бекенд находится в статусе down при выполнении команды</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>openstack<span class="w"> </span>volume<span class="w"> </span>service<span class="w"> </span>list<span class="w"> </span>
+</pre></div>
+</div>
+<p>Сначала проверить доступность бекенда с узлов, пароли, МТУ сети. Затем</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>openstack<span class="w"> </span>volume<span class="w"> </span>service<span class="w"> </span><span class="nb">set</span><span class="w"> </span>--disable<span class="w"> </span>hostgroup@tripleo_ceph_reliable<span class="w"> </span>cinder-volume<span class="w"> </span>-vv
+pcs<span class="w"> </span>resource<span class="w"> </span>restart<span class="w"> </span>openstack-cinder-volume
+openstack<span class="w"> </span>volume<span class="w"> </span>service<span class="w"> </span><span class="nb">set</span><span class="w"> </span>--enable<span class="w"> </span>hostgroup@tripleo_ceph_reliable<span class="w"> </span>cinder-volume<span class="w"> </span>-vv
 </pre></div>
 </div>
 </section>

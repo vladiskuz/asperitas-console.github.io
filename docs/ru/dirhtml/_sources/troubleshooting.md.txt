@@ -39,6 +39,16 @@ sudo systemctl restart tripleo_heat_engine
 ~~~
 И запустите создание заново
 
+## Параметр не определён или определён неправильно в шаблоне
+
+Если при создании стека не хватает какого-то параметра, но при этом, стек уже начал создаваться. 
+Или если результат не соответствует указанному в параметре. То можно использовать следующие команды для дебага 
+
+~~~shell
+openstack stack environment show asperitas
+openstack stack template show asperitas
+~~~
+
 ## Ошибка настройка сети 
 
 Если при развёртывании облака вы видете ошибку,
@@ -136,7 +146,8 @@ YYYY-MM-DD HH:MM:SS | 00000000-0000-0000-0000-000000000000 | WAITING | Wait for 
 sudo puppet apply --modulepath=/etc/puppet/modules:/opt/stack/puppet-modules:/usr/share/openstack-puppet/modules --detailed-exitcodes --summarize --color=true --verbose /var/lib/tripleo-config/puppet_step_config.pp 
 ~~~
 
-Дальнейший поиск проблемы зависит от вывода команды. Вывод команды может быть долгим, поэтому дождитесь, пожалуйста, пока команда не завершится. 
+Дальнейший поиск проблемы зависит от вывода команды.  
+Если вывод команды долгий или недостаточно информативный, то добавьте флаг `--debug`
 
 ### Pacemaker
 
@@ -251,4 +262,19 @@ sudo podman exec -ti -u root galera-bundle-podman-0 mysql
 > begin;
 > update instances set node='asperitas-novacomputeiha-12.novalocal' where node='asperitas-novacomputeiha-12.localdomain' and deleted_at is null;
 > commit ;
+~~~
+
+## Бекенд для cinder недоступен 
+
+Если  бекенд находится в статусе down при выполнении команды 
+~~~shell
+openstack volume service list 
+~~~
+
+Сначала проверить доступность бекенда с узлов, пароли, МТУ сети. Затем 
+
+~~~shell
+openstack volume service set --disable hostgroup@tripleo_ceph_reliable cinder-volume -vv
+pcs resource restart openstack-cinder-volume
+openstack volume service set --enable hostgroup@tripleo_ceph_reliable cinder-volume -vv
 ~~~
