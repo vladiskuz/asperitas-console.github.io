@@ -114,7 +114,8 @@
 <ul class="simple">
 <li><p><em><strong>Create/Update Plan Deployment (Install OS)</strong></em>, или <em>Создание стека</em> (термин OpenStack Heat) - при этом фиксируются и сохраняются все ваши настройки.
 А также захватываются узлы из списка физических узлов и на них накатывается операционная система.</p></li>
-<li><p><em><strong>Run Cloud Service Deployment</strong></em>, или Распространение настроек на узлы, настройка сети и развёртывание сервисов на узлах</p></li>
+<li><p><em><strong>Run Cloud Service Deployment</strong></em>, или <em>Распространение настроек на узлы</em>, настройка сети и развёртывание сервисов на узлах.
+На этой стадии можно выбрать не полное, а <a class="reference external" href="#%D1%87%D0%B0%D1%81%D1%82%D0%B8%D1%87%D0%BD%D0%BE%D0%B5-%D1%80%D0%B0%D0%B7%D0%B2%D1%91%D1%80%D1%82%D1%8B%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5">Частичное развёртывание</a>.</p></li>
 </ul>
 <p>Также в этом окне отображаются дополнительные действия</p>
 <ul class="simple">
@@ -175,17 +176,22 @@
 <h2>Удаление развёрнутых узлов из облака<a class="headerlink" href="#id5" title="Ссылка на этот заголовок">¶</a></h2>
 <p>При уменьшении количества узлов облака имеются ограничения: удалить можно только узлы с наибольшим индексом.
 Индекс узла соответствует суффиксу имени узла.
-Например: <em>asperitas-controller**-0**</em>, или <em>asperitas-novacomputeiha**-7**</em>, индекс выделен).</p>
+Например: <em>asperitas-controller**-0**</em>, или <em>asperitas-novacomputeiha**-7**</em>, индекс выделен.</p>
 <p>Для этого досточно в разделе <em>Role Services and Networks</em> уменьшить количество узлов до необходимого.
 Затем в разделе <em>Deployment</em> запустить действие <em>Create/Update Plan Deployment (Install OS)</em> и <em>Update Known Hosts</em>.</p>
 </section>
 <section id="id6">
 <h2>Замена развёрнутых узлов в облаке<a class="headerlink" href="#id6" title="Ссылка на этот заголовок">¶</a></h2>
 <p>Для замены узла необходимо сначала добавить новый физический узел и настроить его согласно инструкции из <em>Добавление узлов в облако</em>.</p>
-<p>Затем зайдите в окно <em>Servers list</em> в <em>Меню развёртывания</em> и выберете сервер для удаление.</p>
+<p>Затем зайдите в окно <em>Servers list</em> в <em>Меню развёртывания</em> и выберете сервер для удаления.</p>
 <p>Важно! Удалить сервер именно из списка в <em>Меню развёртывания</em>, а <strong>не</strong> в <em>Главном меню</em>.</p>
 <p>Затем освободившийся физический узел можно удалить из списка <em>Baremetal nodes</em> в <em>Главном меню</em>.</p>
 <p>Дальнейшие действия соответствуют пункту <em>Добавление узлов в облако</em>.</p>
+</section>
+<section id="id7">
+<h2>Частичное развёртывание<a class="headerlink" href="#id7" title="Ссылка на этот заголовок">¶</a></h2>
+<p>На стадии <strong>Run Cloud Service Deployment</strong> обновляется окно выбора c опциями <em>Limit to</em>:</p>
+<p><img alt="" src="../_images/update-host-choice.png" /></p>
 </section>
 </section>
 
