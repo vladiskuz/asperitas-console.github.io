@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Сопровождение облака на базе дистрибутива Asperitas &#8212; документация Asperitas 1.0.0</title>
+    <title>Сопровождение развёртывания на базе дистрибутива Asperitas &#8212; документация Asperitas 1.0.0</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/basic.css" />
     <link rel="stylesheet" type="text/css" href="../_static/my-styles.css" />
@@ -23,7 +23,7 @@
     <link rel="author" title="Об этих документах" href="../about/" />
     <link rel="index" title="Алфавитный указатель" href="../genindex/" />
     <link rel="search" title="Поиск" href="../search/" />
-    <link rel="next" title="Устранение неполадок" href="../troubleshooting/" />
+    <link rel="next" title="Сопровождение облака и управление ресурсами" href="../management/" />
     <link rel="prev" title="Развёртывание облака" href="../deployment/" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
@@ -73,7 +73,7 @@
     </a>
   </li>
   <li>
-    <a href="../troubleshooting/" title="Next Chapter: Устранение неполадок"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Устранение неполадок &raquo;</span>
+    <a href="../management/" title="Next Chapter: Сопровождение облака и управление ресурсами"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Сопровождение облака и ... &raquo;</span>
     </a>
   </li>
             </ul>
@@ -93,7 +93,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../undercloud/">Установка узла развёртывания</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../full-deployment/">Подготовка к развёртыванию с нуля</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../deployment/">Развёртывание облака</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Сопровождение облака на базе дистрибутива Asperitas</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Сопровождение развёртывания на базе дистрибутива Asperitas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../management/">Сопровождение облака и управление ресурсами</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../troubleshooting/">Устранение неполадок</a></li>
 </ul>
 
@@ -102,7 +103,7 @@
     <div class="col-md-9 content">
       
   <section class="tex2jax_ignore mathjax_ignore" id="asperitas">
-<h1>Сопровождение облака на базе дистрибутива Asperitas<a class="headerlink" href="#asperitas" title="Ссылка на этот заголовок">¶</a></h1>
+<h1>Сопровождение развёртывания на базе дистрибутива Asperitas<a class="headerlink" href="#asperitas" title="Ссылка на этот заголовок">¶</a></h1>
 <section id="id1">
 <h2>Развёрнутые сервера (общий список)<a class="headerlink" href="#id1" title="Ссылка на этот заголовок">¶</a></h2>
 <p>Перейдите во вкладку <em>Deployed servers</em>.</p>
@@ -113,6 +114,21 @@
 <p>Перейдите во вкладку <em>Servers list</em>.</p>
 <p><img alt="" src="../_images/stack-servers.png" /></p>
 </section>
+</section>
+<section id="id3">
+<h2>Обновление системы узла развёртывания<a class="headerlink" href="#id3" title="Ссылка на этот заголовок">¶</a></h2>
+<p>При обнаружении уязвимостей или выходе малых обновлений компонентов системы необходимо обновить пакеты,
+а также контейнеры системы, которые отвечают основным компонентам системы.</p>
+<p>В первую очередь необходимо обновить систему</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>dnf<span class="w"> </span>update<span class="w"> </span>
+</pre></div>
+</div>
+<p>Далее обновите список образов контейнеров для установки:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>cat<span class="w"> </span>container_images<span class="w"> </span><span class="p">|</span><span class="w"> </span>xargs<span class="w"> </span>-I<span class="w"> </span><span class="o">{}</span><span class="w"> </span>sudo<span class="w"> </span>skopeo<span class="w"> </span>copy<span class="w"> </span>--src-tls-verify<span class="o">=</span><span class="nb">false</span><span class="w"> </span>--dest-tls-verify<span class="o">=</span><span class="nb">false</span><span class="w"> </span><span class="se">\</span>
+docker://source-images-server/asperitos/<span class="o">{}</span>:latest<span class="w"> </span><span class="se">\</span>
+docker://localhost:13787/asperitos/<span class="o">{}</span>:latest
+</pre></div>
+</div>
 </section>
 </section>
 

@@ -278,3 +278,24 @@ openstack volume service set --disable hostgroup@tripleo_ceph_reliable cinder-vo
 pcs resource restart openstack-cinder-volume
 openstack volume service set --enable hostgroup@tripleo_ceph_reliable cinder-volume -vv
 ~~~
+
+## Вычислительный узел не добавлен в nova_cell 
+
+Если на вычислительном узле в логах /var/log/containers/nova/nova-compute.log ошибка выглядит следующим образом:
+
+~~~
+ERROR nova.cmd.common [req-4431a4a0-6789-466f-9ed1-b518a05b5771 - - - - -] No db access allo
+wed in nova-compute:   File "/usr/bin/nova-compute", line 10, in <module>
+~~~
+
+То скорее всего вычислительный узел был развёрнут без undercloud узла в консоли - нужно развернуть с ним вместе.
+
+## Ошибка миграции Host key verification failed 
+
+Быстрый метод решения проблемы 
+~~~shell
+sudo su
+echo 'StrictHostKeyChecking no' >> /var/lib/config-data/puppet-generated/nova_libvirt/var/lib/nova/.ssh/config
+systemctl restart tripleo_nova_compute
+~~~
+

@@ -23,7 +23,7 @@
     <link rel="author" title="Об этих документах" href="../about/" />
     <link rel="index" title="Алфавитный указатель" href="../genindex/" />
     <link rel="search" title="Поиск" href="../search/" />
-    <link rel="prev" title="Сопровождение облака на базе дистрибутива Asperitas" href="../updates/" />
+    <link rel="prev" title="Сопровождение облака и управление ресурсами" href="../management/" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
@@ -68,7 +68,7 @@
             <ul class='nav navbar-nav navbar-right'>
                 
   <li>
-    <a href="../updates/" title="Previous Chapter: Сопровождение облака на базе дистрибутива Asperitas"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Сопровождение облака на...</span>
+    <a href="../management/" title="Previous Chapter: Сопровождение облака и управление ресурсами"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Сопровождение облака и ...</span>
     </a>
   </li>
             </ul>
@@ -88,7 +88,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../undercloud/">Установка узла развёртывания</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../full-deployment/">Подготовка к развёртыванию с нуля</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../deployment/">Развёртывание облака</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../updates/">Сопровождение облака на базе дистрибутива Asperitas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../updates/">Сопровождение развёртывания на базе дистрибутива Asperitas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../management/">Сопровождение облака и управление ресурсами</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Устранение неполадок</a></li>
 </ul>
 
@@ -358,6 +359,24 @@ sudo<span class="w"> </span>podman<span class="w"> </span><span class="nb">exec<
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>openstack<span class="w"> </span>volume<span class="w"> </span>service<span class="w"> </span><span class="nb">set</span><span class="w"> </span>--disable<span class="w"> </span>hostgroup@tripleo_ceph_reliable<span class="w"> </span>cinder-volume<span class="w"> </span>-vv
 pcs<span class="w"> </span>resource<span class="w"> </span>restart<span class="w"> </span>openstack-cinder-volume
 openstack<span class="w"> </span>volume<span class="w"> </span>service<span class="w"> </span><span class="nb">set</span><span class="w"> </span>--enable<span class="w"> </span>hostgroup@tripleo_ceph_reliable<span class="w"> </span>cinder-volume<span class="w"> </span>-vv
+</pre></div>
+</div>
+</section>
+<section id="nova-cell">
+<h2>Вычислительный узел не добавлен в nova_cell<a class="headerlink" href="#nova-cell" title="Ссылка на этот заголовок">¶</a></h2>
+<p>Если на вычислительном узле в логах /var/log/containers/nova/nova-compute.log ошибка выглядит следующим образом:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ERROR</span> <span class="n">nova</span><span class="o">.</span><span class="n">cmd</span><span class="o">.</span><span class="n">common</span> <span class="p">[</span><span class="n">req</span><span class="o">-</span><span class="mi">4431</span><span class="n">a4a0</span><span class="o">-</span><span class="mi">6789</span><span class="o">-</span><span class="mi">466</span><span class="n">f</span><span class="o">-</span><span class="mi">9</span><span class="n">ed1</span><span class="o">-</span><span class="n">b518a05b5771</span> <span class="o">-</span> <span class="o">-</span> <span class="o">-</span> <span class="o">-</span> <span class="o">-</span><span class="p">]</span> <span class="n">No</span> <span class="n">db</span> <span class="n">access</span> <span class="n">allo</span>
+<span class="n">wed</span> <span class="ow">in</span> <span class="n">nova</span><span class="o">-</span><span class="n">compute</span><span class="p">:</span>   <span class="n">File</span> <span class="s2">&quot;/usr/bin/nova-compute&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">10</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>То скорее всего вычислительный узел был развёрнут без undercloud узла в консоли - нужно развернуть с ним вместе.</p>
+</section>
+<section id="host-key-verification-failed">
+<h2>Ошибка миграции Host key verification failed<a class="headerlink" href="#host-key-verification-failed" title="Ссылка на этот заголовок">¶</a></h2>
+<p>Быстрый метод решения проблемы</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>su
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;StrictHostKeyChecking no&#39;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>/var/lib/config-data/puppet-generated/nova_libvirt/var/lib/nova/.ssh/config
+systemctl<span class="w"> </span>restart<span class="w"> </span>tripleo_nova_compute
 </pre></div>
 </div>
 </section>

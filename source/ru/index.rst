@@ -16,4 +16,5 @@
    full-deployment
    deployment
    updates
+   management
    troubleshooting
