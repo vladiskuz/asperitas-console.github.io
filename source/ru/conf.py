@@ -18,9 +18,13 @@
 
 
 # -- Project information -----------------------------------------------------
-from jupyter_sphinx_theme import *
+# from jupyter_sphinx_theme import *
 
-init_theme()
+# init_theme()
+
+import pydata_sphinx_theme
+html_theme = 'pydata_sphinx_theme'
+html_theme_path = pydata_sphinx_theme.get_html_theme_path()
 
 project = 'Asperitas'
 copyright = '2022, ИСП РАН'
