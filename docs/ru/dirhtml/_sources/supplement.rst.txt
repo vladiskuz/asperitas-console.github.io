@@ -11,3 +11,4 @@
    :caption: Contents:
 
    hot-keys
+   undercloud-vm
