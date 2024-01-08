@@ -14,7 +14,6 @@
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
     <script src="../_static/translations.js"></script>
-    <link rel="author" title="Об этих документах" href="#" />
     <link rel="index" title="Алфавитный указатель" href="../genindex/" />
     <link rel="search" title="Поиск" href="../search/" />
     <link rel="next" title="Требования к оборудованию и ПО" href="../requirements/" />
@@ -66,6 +65,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../updates/">Сопровождение развёртывания на базе дистрибутива Asperitas</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../management/">Сопровождение облака и управление ресурсами</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../troubleshooting/">Устранение неполадок</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../supplement/">Приложение</a></li>
 </ul>
 </ul>
 </li>
@@ -80,11 +80,7 @@
       role="menu"
       aria-labelledby="dLabelLocalToc"><ul>
 <li><a class="reference internal" href="#">Введение</a><ul>
-<li><a class="reference internal" href="#asperitas-console">Asperitas Console</a><ul>
-<li><a class="reference internal" href="#id2">Горячие клавиши</a></li>
-<li><a class="reference internal" href="#id3">Основные термины и компоненты</a></li>
-</ul>
-</li>
+<li><a class="reference internal" href="#id2">Основные термины и компоненты</a></li>
 </ul>
 </li>
 </ul>
@@ -110,7 +106,7 @@
             
               <li class="hidden-sm">
 <div id="sourcelink">
-  <a href="../_sources/about.md.txt"
+  <a href="../_sources/1-about.md.txt"
      rel="nofollow">Source</a>
 </div></li>
             
@@ -136,28 +132,10 @@
       
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
 <h1>Введение<a class="headerlink" href="#id1" title="Ссылка на этот заголовок">¶</a></h1>
-<section id="asperitas-console">
-<h2>Asperitas Console<a class="headerlink" href="#asperitas-console" title="Ссылка на этот заголовок">¶</a></h2>
-<p><strong>Текстовый интерфейс пользователя для развёртывания дистрибутива Asperitas</strong></p>
-<p><strong>Asperitas Console</strong> - это инструмент для упрощения развёртывания облачной среды на базе Asperitas - дистрибутива OpenStack</p>
-<p><strong>Облачная среда</strong> - это сложная система, состоящая из множества компонентов, поэтому при каждом действии важно понимать, какой точно будет результат.</p>
+<p><strong>Asperitas</strong> - это дистрибутив для развёртывания облачной среды на базе OpenStack.</p>
 <section id="id2">
-<h3>Горячие клавиши<a class="headerlink" href="#id2" title="Ссылка на этот заголовок">¶</a></h3>
-<p>Следующий список сочетаний клавиш работает в любой момент, в каком окне вы бы ни находились</p>
-<ul class="simple">
-<li><p><em>Ctrl+X (quit)</em> - выход из программы</p></li>
-<li><p><em>Ctrl+C (cancel)</em> - выход из окна на уровень выше</p></li>
-<li><p><em>Ctrl+R (refresh)</em> - обновить содержимое текущего окна</p></li>
-</ul>
-<p>Следующий список сочетаний клавиш актуален только в тех окнах, где эти клавиши отображаются в окне</p>
-<ul class="simple">
-<li><p><em>Ctrl+U (update)</em> - сохранить изменения</p></li>
-<li><p><em>Ctrl+A (add/start)</em> - добавить сущность (сеть, узел и т.д)/запустить выполнение сценария</p></li>
-<li><p><em>Ctrl+D (delete/stop)</em> - удалить сущность/остановить выполнение сценария</p></li>
-</ul>
-</section>
-<section id="id3">
-<h3>Основные термины и компоненты<a class="headerlink" href="#id3" title="Ссылка на этот заголовок">¶</a></h3>
+<h2>Основные термины и компоненты<a class="headerlink" href="#id2" title="Ссылка на этот заголовок">¶</a></h2>
+<p><strong>Облачная среда</strong> - это сложная система, состоящая из множества компонентов, поэтому при каждом действии важно понимать, какой точно будет результат.</p>
 <p><strong>Облачный дистрибутив Asperitas</strong> распространяется в виде диска, содержащего множество программных пакетов, используемых для установки облачной платформы, сценарии для систем оркестрации, а также пакеты и сценарии развертывания <a class="reference external" href="https://michman.ispras.ru/ru/">Michman</a> – инструмента оркестрации сервисов. Набор пакетов для установки программ является полным и не требует подключения к сети Интернет.</p>
 <p>Дистрибутив построен на базе проекта <a class="reference external" href="https://docs.openstack.org/project-deploy-guide/tripleo-docs/latest/">TripleO</a>, который позволяет автоматизировать процесс развертывания облачной платформы на базе <a class="reference external" href="https://docs.openstack.org/ussuri/">OpenStack Ussuri</a>.</p>
 <p>Программный комплекс на базе дистрибутива состоит из следующих компонентов:</p>
@@ -169,14 +147,14 @@
 </ul>
 <p>Для работы с asperitas-console необходим заранее подготовленный <strong>узел развёртывания</strong> из дистрибутива Asperitas.
 Для подготовки узла перейдите к пункту <em>«Установка узла развёртывания»</em>.</p>
-<p>Все дальнейшие команды указываются с узла развёртывания, если не обговорено иначе.</p>
 <p>Подготовка полноценного комплекса состоит из следующих этапов:</p>
 <ol class="arabic simple">
 <li><p>Установка узла развёртывания.</p></li>
 <li><p>Подготовка и установка системы хранения данных на базе Ceph.</p></li>
 <li><p>Подготовка и развёртывание облака на базе OpenStack.</p></li>
 </ol>
-</section>
+<p><strong>Asperitas Console</strong> - текстовый интерфейс пользователя для развёртывания дистрибутива Asperitas.
+Это инструмент для упрощения развёртывания облачной среды на базе Asperitas - дистрибутива OpenStack</p>
 </section>
 </section>
 

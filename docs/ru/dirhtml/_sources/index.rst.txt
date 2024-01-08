@@ -10,7 +10,7 @@
    :maxdepth: 3
    :caption: Contents:
 
-   about
+   1-about
    requirements
    undercloud
    full-deployment
@@ -18,3 +18,4 @@
    updates
    management
    troubleshooting
+   supplement
