@@ -12,3 +12,4 @@
 
    hot-keys
    undercloud-vm
+   undercloud

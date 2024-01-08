@@ -12,7 +12,7 @@
 
    about
    requirements
-   undercloud
+   install-undercloud
    full-deployment
    deployment
    updates

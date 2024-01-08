@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Установка узла развёртывания &#8212; документация Asperitas 1.0.0</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/bootstrap-sphinx.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/my-styles.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/translations.js"></script>
+    <link rel="author" title="Об этих документах" href="../about/" />
+    <link rel="index" title="Алфавитный указатель" href="../genindex/" />
+    <link rel="search" title="Поиск" href="../search/" />
+    <link rel="next" title="Подготовка к развёртыванию с нуля" href="../full-deployment/" />
+    <link rel="prev" title="Требования к оборудованию и ПО" href="../requirements/" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="../_static/js/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+<script type="text/javascript" src="../_static/bootstrap-3.4.1/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+
+  </head><body>
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../">
+          Asperitas</a>
+        <span class="navbar-text navbar-version pull-left"><b>1.0.0</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../"> <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../about/">Введение</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../requirements/">Требования к оборудованию и ПО</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Установка узла развёртывания</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../full-deployment/">Подготовка к развёртыванию с нуля</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment/">Развёртывание облака</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../updates/">Сопровождение развёртывания на базе дистрибутива Asperitas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../management/">Сопровождение облака и управление ресурсами</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../troubleshooting/">Устранение неполадок</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../supplement/">Приложение</a></li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">Установка узла развёртывания</a><ul>
+<li><a class="reference internal" href="#id2">Подготовка к установке</a></li>
+<li><a class="reference internal" href="#id3">Процесс установки</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+  <li>
+    <a href="../requirements/" title="Previous Chapter: Требования к оборудованию и ПО"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Требования к ...</span>
+    </a>
+  </li>
+  <li>
+    <a href="../full-deployment/" title="Next Chapter: Подготовка к развёртыванию с нуля"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Подготовка к ... &raquo;</span>
+    </a>
+  </li>
+              
+            
+            
+            
+            
+              <li class="hidden-sm">
+<div id="sourcelink">
+  <a href="../_sources/install-undercloud.md.txt"
+     rel="nofollow">Source</a>
+</div></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../search/" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="body col-md-12 content" role="main">
+      
+  <section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1>Установка узла развёртывания<a class="headerlink" href="#id1" title="Ссылка на этот заголовок">¶</a></h1>
+<p>Перед установкой узла развёртывания обязательно проверьте, что вы удовлетворяете требованиям в разделе <em>Требования к оборудованию и ПО</em>.</p>
+<p>Дистрибутив распространяется на переносимом цифровом носителе, на котором располагается файл undercloud.iso или установщик для образа узла развёртывания.</p>
+<ul class="simple">
+<li><p>При установке узла на физический узел - вставьте флешку с установщиком в компьютер и загрузитесь в неё с физического узла.</p></li>
+<li><p>При установке на физический узел через BMC по сети Интернет - примонтируйте файл <em>undercloud.iso</em> через виртуальную консоль BMC и загрузитесь в Virtual CD узла.</p></li>
+<li><p>При установке узла развёртывания в виртуальной машине следуйте инструкциям из <a class="reference internal" href="../undercloud-vm/"><span class="doc std std-doc">приложения</span></a></p></li>
+</ul>
+<p>Далее узел развёртывания иногда может упоминаться как <strong>Undercloud</strong> - это аналогичное название на английском языке.</p>
+<section id="id2">
+<h2>Подготовка к установке<a class="headerlink" href="#id2" title="Ссылка на этот заголовок">¶</a></h2>
+<p>Перед установкой узла развёртывания необходимо заранее продумать следующие пункты.</p>
+<p><strong>Сетевая топология</strong>. Узел развёртывания обязан иметь два интерфейса - один для доступа к узлу по ssh разработчиками
+и один для основной <strong>сети развёртывания/ctlplane</strong>.  Для сети развёртывания необходимо знать следующее:</p>
+<ul class="simple">
+<li><p><strong>CIDR сети</strong> - по умолчанию 192.168.24.0/24</p></li>
+<li><p><strong>3 IP-адреса</strong> из этой сети для узла развёртывания - по умолчанию 192.168.24.1-.3</p></li>
+<li><p>Два пула адресов из этой сети для двух различных DHCP серверов, которые будут подняты на узле развёртывания. Это означает следующее</p>
+<ul>
+<li><p>В этой сети не должно существовать <strong>DHCP серверов</strong></p></li>
+<li><p>Первый пулл адресов <strong>Ctlplane DHCP</strong> должен содержать столько IP-адресов, сколько будет возможный максимум всех физических узлов, используемых в развёртывании, и ещё два. То есть если в системе предполагает 3 контроллера, 50 узлов виртуализации и 50 узлов хранения данных - то в пулле должно быть не менее 105 IP-адресов.</p></li>
+<li><p>Второй пулл адресов <strong>Introspection DHCP</strong> должен содержать столько IP-адресов, сколько будет возможный максимум одновременно интроспектируемых узлов - это может быть небольшое число и как правило 10 адресов достаточно.</p></li>
+<li><p>Второй пулл адресов <strong>Introspection DHCP</strong> не должен пересекаться с первым пуллом</p></li>
+</ul>
+</li>
+</ul>
+<p>Дополнительные условия для узла развёртывания - с узла развёртывания должны быть доступны используемые в развёртывании <strong>DNS сервера</strong>, <strong>NTP сервера</strong> и <strong>BMC адреса</strong> для всех физических узлов.
+Также это значит, что заранее должны быть продуманы DNS и NTP сервера организации.</p>
+</section>
+<section id="id3">
+<h2>Процесс установки<a class="headerlink" href="#id3" title="Ссылка на этот заголовок">¶</a></h2>
+<p>После загрузки с диска установки вы увидите на экране сервера выбор диска для установки операционной системы AsperitOS.</p>
+<p><img alt="" src="../_images/undercloud-1.png" />
+<img alt="" src="../_images/undercloud-2.png" /></p>
+<p>Дождитесь загрузки и проверки <em>undercloud.raw</em>.</p>
+<p>Затем выберите интерфейс для сети администрирования физических узлов.
+Интерфейс не должен использоваться для доступа к узлу разёртывания!</p>
+<p>На картинке вы видете два интерфейса.
+Предварительно на них был запущен автоматически DHCP клиент.
+Первый интерфейс используется как сеть администрирования, поэтому в сети не было DHCP сервера.
+Второй интерфейс используется для доступа к узлу развёртывания. В этой сети есть DHCP сервер, который выдал адрес узлу развёртывания.</p>
+<p><img alt="" src="../_images/undercloud-3.png" /></p>
+<p>Затем введите CIDR для сети администрирования. Важно! После установки сеть будет поменять очень сложно. Поэтому заранее продумайте сети вашей системы!</p>
+<p><img alt="" src="../_images/undercloud-4.png" /></p>
+<p>Введите локальный (основной) IP-адрес узла развёртывания.
+Узел развёртывания имеет 3(!) адреса так как сам является отдельной облачной средой на базе OpenStack.
+3 адреса необходимы для 3 точек доступа к облачным сервисам узла развёртывания: публичной, внутренней точки доступа и точки администратора.
+Локальный IP-адреса считается как внутрення точка доступа в системе.</p>
+<p><img alt="" src="../_images/undercloud-5.png" /></p>
+<p>Введите IP-адрес шлюза для сети администрирования. По умолчанию - это локальный IP-адрес узла развёртывания.
+Но можно указать и другой адрес для вашей сети администрирования.</p>
+<p><img alt="" src="../_images/undercloud-6.png" /></p>
+<p>В сети администрирования узел развёртывания запускает DHCP сервер для раздачи адресов физическим узлам облака.
+Это обязательно, поэтому в этой сети не может быть внешнего другого DHCP сервера во избежание проблем.
+Введите начало и конец множества IP-адресов, которые будут назначены вашим физическим машинам.
+Учтите, что в этой сети заранее заняты 4 адреса для узла развёртывания: 3 указываются вручную, 1 выбирается случайным образом (как правило .5 адрес).
+А также дальше необходимо будет указать ещё одно множество для адресов интроспектирования физических узлов.</p>
+<p><img alt="" src="../_images/undercloud-7.png" />
+<img alt="" src="../_images/undercloud-8.png" /></p>
+<p>В сети администрирования узел развёртывания запускает ещё один DHCP сервер, который используется для интроспекции физических узлов.
+Множество указанных вами IP-адресов влияет только на количество одновременно интроспектируемых узлов.
+Эти адреса назначаются узлам временно и не сохраняются в дальнейшем.</p>
+<p><img alt="" src="../_images/undercloud-9.png" />
+<img alt="" src="../_images/undercloud-10.png" /></p>
+<p>Введите публичный IP-адрес для узла развёртывания. Используется для доступа к API облачных сервисов на узле развёртывания.</p>
+<p><img alt="" src="../_images/undercloud-11.png" /></p>
+<p>Введите IP-адрес для точки доступа администратора на узле развёртывания.</p>
+<p><img alt="" src="../_images/undercloud-12.png" /></p>
+<p>Введите DNS сервер(а) для узла развёртывания. Если несколько, то перечислите их через запятую.</p>
+<p><img alt="" src="../_images/undercloud-13.png" /></p>
+<p>Введите NTP сервер(а) для узла развёртывания. Если несколько, то перечислите их через запятую.</p>
+<p><img alt="" src="../_images/undercloud-14.png" /></p>
+<p>Дождитесь установки облачной системы на базе OpenStack на узел развёртывания.</p>
+<p><img alt="" src="../_images/undercloud-16.png" /></p>
+<p>Ваш узел развёртывания готов!</p>
+</section>
+</section>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2022, ИСП РАН.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>
