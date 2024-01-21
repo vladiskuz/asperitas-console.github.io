@@ -13,7 +13,8 @@
    about
    requirements
    install-undercloud
-   full-deployment
+   full-deployment-init
+   full-deployment-stack
    deployment
    updates
    management
