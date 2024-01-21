@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Описание узла развёртывания &#8212; документация Asperitas 1.0.0</title>
+    <title>Описание узла развёртывания - TripleO &#8212; документация Asperitas 1.0.0</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/bootstrap-sphinx.css" />
     <link rel="stylesheet" type="text/css" href="../_static/my-styles.css" />
@@ -17,6 +17,7 @@
     <link rel="author" title="Об этих документах" href="../about/" />
     <link rel="index" title="Алфавитный указатель" href="../genindex/" />
     <link rel="search" title="Поиск" href="../search/" />
+    <link rel="next" title="Сети узла развёртывания" href="../undercloud-network/" />
     <link rel="prev" title="Установка узла развёртывания в виртуальной машине (Centos 7,8)" href="../undercloud-vm/" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
@@ -79,11 +80,7 @@
   <ul class="dropdown-menu localtoc"
       role="menu"
       aria-labelledby="dLabelLocalToc"><ul>
-<li><a class="reference internal" href="#">Описание узла развёртывания</a><ul>
-<li><a class="reference internal" href="#tripleo">TripleO</a></li>
-<li><a class="reference internal" href="#id2">Сеть</a></li>
-</ul>
-</li>
+<li><a class="reference internal" href="#">Описание узла развёртывания - TripleO</a></li>
 </ul>
 </ul>
 </li>
@@ -96,6 +93,10 @@
     <a href="../undercloud-vm/" title="Previous Chapter: Установка узла развёртывания в виртуальной машине (Centos 7,8)"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Установка узл...</span>
     </a>
   </li>
+  <li>
+    <a href="../undercloud-network/" title="Next Chapter: Сети узла развёртывания"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Сети узла раз... &raquo;</span>
+    </a>
+  </li>
               
             
             
@@ -103,7 +104,7 @@
             
               <li class="hidden-sm">
 <div id="sourcelink">
-  <a href="../_sources/undercloud.md.txt"
+  <a href="../_sources/undercloud-tripleo.md.txt"
      rel="nofollow">Source</a>
 </div></li>
             
@@ -127,16 +128,14 @@
   <div class="row">
     <div class="body col-md-12 content" role="main">
       
-  <section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1>Описание узла развёртывания<a class="headerlink" href="#id1" title="Ссылка на этот заголовок">¶</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="tripleo">
+<h1>Описание узла развёртывания - TripleO<a class="headerlink" href="#tripleo" title="Ссылка на этот заголовок">¶</a></h1>
 <p>Основной пользователь, от имени которого выполняется управление всеми системами узла развёртывания - <strong>stack</strong>.
 Подключитесь к узлу развёртывания по SSH.
 Далее все команды и действия будут указываться с узла развёртывания от имени пользователя <strong>stack</strong></p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ssh<span class="w"> </span>stack@<span class="nv">$ip</span>
 </pre></div>
 </div>
-<section id="tripleo">
-<h2>TripleO<a class="headerlink" href="#tripleo" title="Ссылка на этот заголовок">¶</a></h2>
 <p>При успешной установке узла развёртывания на нём будет развёрнут полноценный <strong>однонодовый OpenStack</strong>.
 В том числе будут установлены дополнительные пакеты TripleO и overcloud CLI.</p>
 <p>В домашней директории /home/stack находится файл <strong>stackrc</strong>.</p>
@@ -307,96 +306,6 @@ b399d357390f  undercloud.ctlplane:13787/asperitos/openstack-keystone:latest   ko
 </pre></div>
 </div>
 <p>Обратите внимание, что некоторые сервисы запускаются через папку <code class="docutils literal notranslate"><span class="pre">/var/lib/config-data/</span></code>, например, <em>barbican</em>, но это редкий случай.</p>
-</section>
-<section id="id2">
-<h2>Сеть<a class="headerlink" href="#id2" title="Ссылка на этот заголовок">¶</a></h2>
-<p>Введите в консоли команду</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>ovs-vsctl<span class="w"> </span>show<span class="w"> </span>
-</pre></div>
-</div>
-<p>Результат выполнения будет выглядеть следующим образом</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">59</span><span class="n">a6160b</span><span class="o">-</span><span class="mi">9679</span><span class="o">-</span><span class="mi">46</span><span class="n">ba</span><span class="o">-</span><span class="n">a583</span><span class="o">-</span><span class="mi">63</span><span class="n">a64d0c7f4d</span>
-    <span class="n">Manager</span> <span class="s2">&quot;ptcp:6640:127.0.0.1&quot;</span>
-        <span class="n">is_connected</span><span class="p">:</span> <span class="n">true</span>
-    <span class="n">Bridge</span> <span class="n">br</span><span class="o">-</span><span class="n">ctlplane</span>
-        <span class="n">Controller</span> <span class="s2">&quot;tcp:127.0.0.1:6633&quot;</span>
-            <span class="n">is_connected</span><span class="p">:</span> <span class="n">true</span>
-        <span class="n">fail_mode</span><span class="p">:</span> <span class="n">secure</span>
-        <span class="n">datapath_type</span><span class="p">:</span> <span class="n">system</span>
-        <span class="n">Port</span> <span class="s2">&quot;enp1s0&quot;</span>
-            <span class="n">Interface</span> <span class="s2">&quot;enp1s0&quot;</span>
-        <span class="n">Port</span> <span class="n">phy</span><span class="o">-</span><span class="n">br</span><span class="o">-</span><span class="n">ctlplane</span>
-            <span class="n">Interface</span> <span class="n">phy</span><span class="o">-</span><span class="n">br</span><span class="o">-</span><span class="n">ctlplane</span>
-                <span class="nb">type</span><span class="p">:</span> <span class="n">patch</span>
-                <span class="n">options</span><span class="p">:</span> <span class="p">{</span><span class="n">peer</span><span class="o">=</span><span class="nb">int</span><span class="o">-</span><span class="n">br</span><span class="o">-</span><span class="n">ctlplane</span><span class="p">}</span>
-        <span class="n">Port</span> <span class="n">br</span><span class="o">-</span><span class="n">ctlplane</span>
-            <span class="n">Interface</span> <span class="n">br</span><span class="o">-</span><span class="n">ctlplane</span>
-                <span class="nb">type</span><span class="p">:</span> <span class="n">internal</span>
-    <span class="n">Bridge</span> <span class="n">br</span><span class="o">-</span><span class="nb">int</span>
-        <span class="n">Controller</span> <span class="s2">&quot;tcp:127.0.0.1:6633&quot;</span>
-            <span class="n">is_connected</span><span class="p">:</span> <span class="n">true</span>
-        <span class="n">fail_mode</span><span class="p">:</span> <span class="n">secure</span>
-        <span class="n">datapath_type</span><span class="p">:</span> <span class="n">system</span>
-        <span class="n">Port</span> <span class="nb">int</span><span class="o">-</span><span class="n">br</span><span class="o">-</span><span class="n">ctlplane</span>
-            <span class="n">Interface</span> <span class="nb">int</span><span class="o">-</span><span class="n">br</span><span class="o">-</span><span class="n">ctlplane</span>
-                <span class="nb">type</span><span class="p">:</span> <span class="n">patch</span>
-                <span class="n">options</span><span class="p">:</span> <span class="p">{</span><span class="n">peer</span><span class="o">=</span><span class="n">phy</span><span class="o">-</span><span class="n">br</span><span class="o">-</span><span class="n">ctlplane</span><span class="p">}</span>
-        <span class="n">Port</span> <span class="s2">&quot;tapde8cbd01-25&quot;</span>
-            <span class="n">tag</span><span class="p">:</span> <span class="mi">1</span>
-            <span class="n">Interface</span> <span class="s2">&quot;tapde8cbd01-25&quot;</span>
-                <span class="nb">type</span><span class="p">:</span> <span class="n">internal</span>
-        <span class="n">Port</span> <span class="n">br</span><span class="o">-</span><span class="nb">int</span>
-            <span class="n">Interface</span> <span class="n">br</span><span class="o">-</span><span class="nb">int</span>
-                <span class="nb">type</span><span class="p">:</span> <span class="n">internal</span>
-    <span class="n">ovs_version</span><span class="p">:</span> <span class="s2">&quot;2.12.0&quot;</span>
-</pre></div>
-</div>
-<p>Вывод указывает, что существует два связанных между собой бриджа OVS: <code class="docutils literal notranslate"><span class="pre">br-ctlplane</span></code> и <code class="docutils literal notranslate"><span class="pre">br-int</span></code>.
-Их также можно увидеть при выводе команды <code class="docutils literal notranslate"><span class="pre">ip</span> <span class="pre">a</span></code>.</p>
-<p>Бридж <code class="docutils literal notranslate"><span class="pre">br-int</span></code> не имеет в своём основании никакого физического интерфейса, зато имеет виртуальный интерфейс <code class="docutils literal notranslate"><span class="pre">tapde8cbd01-25</span></code>.
-Расскажем о нём позднее.</p>
-<p>Бридж <code class="docutils literal notranslate"><span class="pre">br-ctlplane</span></code> имеет физический интерфейс <code class="docutils literal notranslate"><span class="pre">enp1s0</span></code> и связывает через него с внешней сетью бридж <code class="docutils literal notranslate"><span class="pre">br-int</span></code>.</p>
-<p>При выводе <code class="docutils literal notranslate"><span class="pre">ip</span> <span class="pre">a</span></code> не указан никакой интерфейс tap. Попробуем выполнить следующее</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>[stack@undercloud ~]$ sudo ip netns
-qdhcp-a4d98b54-1bc4-402a-92c1-51cbeee94aa3 (id: 0)
-</pre></div>
-</div>
-<p>Значит, что в системе существует выделенное сетевое пространство имён. Подробнее про них можно почитать <a class="reference external" href="https://habr.com/ru/articles/549414/">здесь</a></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>[stack@undercloud ~]$ sudo ip netns exec qdhcp-a4d98b54-1bc4-402a-92c1-51cbeee94aa3 ip a 
-1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
-    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
-    inet 127.0.0.1/8 scope host lo
-       valid_lft forever preferred_lft forever
-    inet6 ::1/128 scope host 
-       valid_lft forever preferred_lft forever
-8: tapde8cbd01-25: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc noqueue state UNKNOWN group default qlen 1000
-    link/ether fa:16:3e:1e:c1:8b brd ff:ff:ff:ff:ff:ff
-    inet 192.168.24.36/24 brd 192.168.24.255 scope global tapde8cbd01-25
-       valid_lft forever preferred_lft forever
-    inet6 fe80::f816:3eff:fe1e:c18b/64 scope link 
-       valid_lft forever preferred_lft forever
-</pre></div>
-</div>
-<p>Мы видим знакомый нам tap интерфейс с адресом 192.168.24.36/24. Назначение этого адреса становится понятно, если поискать этот порт среди портов openstack</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>(undercloud) [stack@undercloud ~]$ openstack port list | grep 192.168.24.36
-| de8cbd01-25f3-4ebd-8965-74c98eca45bd |      | fa:16:3e:1e:c1:8b | ip_address=&#39;192.168.24.36&#39;, subnet_id=&#39;ab41b2bc-f27c-43a6-977e-4bd93d0c1cc7&#39; | ACTIVE |
-(undercloud) [stack@undercloud ~]$ openstack port show de8cbd01-25f3-4ebd-8965-74c98eca45bd -c binding_vif_details -c binding_vif_type -c device_owner
-+---------------------+-------------------------------------------------------------------------------------------------------------+
-| Field               | Value                                                                                                       |
-+---------------------+-------------------------------------------------------------------------------------------------------------+
-| binding_vif_details | bridge_name=&#39;br-int&#39;, connectivity=&#39;l2&#39;, datapath_type=&#39;system&#39;, ovs_hybrid_plug=&#39;True&#39;, port_filter=&#39;True&#39; |
-| binding_vif_type    | ovs                                                                                                         |
-| device_owner        | network:dhcp                                                                                                |
-+---------------------+-------------------------------------------------------------------------------------------------------------+
-</pre></div>
-</div>
-<p>Мы видим, что этот порт является IP адресом DHCP сервера в сети ctlplane, поднятый на узле развёртывания в отдельном сетевом пространстве имён.</p>
-<p>Если использовать имя сетевого пространства имён и выполнить</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>[stack@undercloud ~]$ sudo podman ps | grep  qdhcp-a4d98b54-1bc4-402a-92c1-51cbeee94aa3
-</pre></div>
-</div>
-<p>То вы увидите контейнер, который отвечает за DHCP сервис в сети Ctlplane.</p>
-</section>
 </section>
 
 

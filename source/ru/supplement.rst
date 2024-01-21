@@ -12,4 +12,5 @@
 
    hot-keys
    undercloud-vm
-   undercloud
+   undercloud-tripleo
+   undercloud-network
