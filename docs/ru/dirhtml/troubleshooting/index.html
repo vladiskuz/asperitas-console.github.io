@@ -83,20 +83,21 @@
       aria-labelledby="dLabelLocalToc"><ul>
 <li><a class="reference internal" href="#">Устранение неполадок</a><ul>
 <li><a class="reference internal" href="#enroll">Физический узел в статусе <em>enroll</em></a></li>
+<li><a class="reference internal" href="#id2">Ошибка интроспекции</a></li>
 <li><a class="reference internal" href="#no-valid-json">No valid JSON при создании развёртывания</a></li>
-<li><a class="reference internal" href="#id2">Параметр не определён или определён неправильно в шаблоне</a></li>
-<li><a class="reference internal" href="#id3">Ошибка настройка сети</a></li>
+<li><a class="reference internal" href="#id3">Параметр не определён или определён неправильно в шаблоне</a></li>
+<li><a class="reference internal" href="#id4">Ошибка настройка сети</a></li>
 <li><a class="reference internal" href="#puppet-cache-read-only">Puppet cache read-only файловая система</a></li>
 <li><a class="reference internal" href="#ceph">Неправильные права на директорию при развёртывании с использованием Ceph</a></li>
 <li><a class="reference internal" href="#wait-for-puppet-host-configuration-to-finish">Wait for puppet host configuration to finish</a><ul>
 <li><a class="reference internal" href="#pacemaker">Pacemaker</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#id4">Не найден хост</a><ul>
-<li><a class="reference internal" href="#id5">После обновления развёртывания</a></li>
+<li><a class="reference internal" href="#id5">Не найден хост</a><ul>
+<li><a class="reference internal" href="#id6">После обновления развёртывания</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#id6">Число используемых ресурсов на гипервизорах обнулилось</a></li>
+<li><a class="reference internal" href="#id7">Число используемых ресурсов на гипервизорах обнулилось</a></li>
 <li><a class="reference internal" href="#cinder">Бекенд для cinder недоступен</a></li>
 <li><a class="reference internal" href="#nova-cell">Вычислительный узел не добавлен в nova_cell</a></li>
 <li><a class="reference internal" href="#host-key-verification-failed">Ошибка миграции Host key verification failed</a></li>
@@ -168,6 +169,19 @@
 <p><img alt="" src="../_images/baremetal-node-edit.png" /></p>
 <p>Измените необходимые параметры, а также <strong>снова введите пароль</strong>. Нажмите кнопку <em>Save</em> и ожидайте изменение статуса на manageable.</p>
 </section>
+<section id="id2">
+<h2>Ошибка интроспекции<a class="headerlink" href="#id2" title="Ссылка на этот заголовок">¶</a></h2>
+<p>Ошибка при попытке интроспектировать узел</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">The</span> <span class="n">PXE</span> <span class="nb">filter</span> <span class="n">driver</span> <span class="n">DnsmasqFilter</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="n">uninitialized</span><span class="p">:</span> <span class="n">my</span> <span class="n">fsm</span> <span class="n">encountered</span> <span class="n">an</span> <span class="n">exception</span><span class="p">:</span> <span class="n">Can</span> <span class="ow">not</span> <span class="n">transition</span> <span class="kn">from</span> <span class="nn">state</span> <span class="s1">&#39;uninitialized&#39;</span> <span class="n">on</span> <span class="n">event</span> <span class="s1">&#39;sync&#39;</span> <span class="p">(</span><span class="n">no</span> <span class="n">defined</span> <span class="n">transition</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Описание проблемы есть на сайте <a class="reference external" href="https://access.redhat.com/solutions/6193931">RedHat Solutions</a>
+Причина ошибки: драйвер pxefilter не может инициализировать DNSmasq
+Решение: перезапустить все сервисы Ironic</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="k">for</span><span class="w"> </span>service<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="k">$(</span>sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>tripleo_ironic<span class="w"> </span><span class="p">|</span><span class="w"> </span>cut<span class="w"> </span>-d<span class="w"> </span><span class="s2">&quot; &quot;</span><span class="w"> </span>-f3<span class="k">)</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="k">do</span><span class="w"> </span>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span><span class="nv">$service</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="k">done</span>
+</pre></div>
+</div>
+</section>
 <section id="no-valid-json">
 <h2>No valid JSON при создании развёртывания<a class="headerlink" href="#no-valid-json" title="Ссылка на этот заголовок">¶</a></h2>
 <p>Ошибка при создавнии развёртывания</p>
@@ -188,8 +202,8 @@
 </div>
 <p>И запустите создание заново</p>
 </section>
-<section id="id2">
-<h2>Параметр не определён или определён неправильно в шаблоне<a class="headerlink" href="#id2" title="Ссылка на этот заголовок">¶</a></h2>
+<section id="id3">
+<h2>Параметр не определён или определён неправильно в шаблоне<a class="headerlink" href="#id3" title="Ссылка на этот заголовок">¶</a></h2>
 <p>Если при создании стека не хватает какого-то параметра, но при этом, стек уже начал создаваться.
 Или если результат не соответствует указанному в параметре. То можно использовать следующие команды для дебага</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>openstack<span class="w"> </span>stack<span class="w"> </span>environment<span class="w"> </span>show<span class="w"> </span>asperitas
@@ -197,8 +211,8 @@ openstack<span class="w"> </span>stack<span class="w"> </span>template<span clas
 </pre></div>
 </div>
 </section>
-<section id="id3">
-<h2>Ошибка настройка сети<a class="headerlink" href="#id3" title="Ссылка на этот заголовок">¶</a></h2>
+<section id="id4">
+<h2>Ошибка настройка сети<a class="headerlink" href="#id4" title="Ссылка на этот заголовок">¶</a></h2>
 <p>Если при развёртывании облака вы видете ошибку,</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="s2">&quot;failed_when_result&quot;</span><span class="p">:</span> <span class="n">true</span>
 <span class="p">}</span>
@@ -342,10 +356,10 @@ screen<span class="w"> </span>-x<span class="w"> </span>&lt;deploy_name&gt;
 <p>Запустите повторно puppet на узле, на котором puppet упал изначально. Если puppet выполнит работу без ошибок, то продолжите работу Ansible далее без повторного выполнения задачи Ansible.</p>
 </section>
 </section>
-<section id="id4">
-<h2>Не найден хост<a class="headerlink" href="#id4" title="Ссылка на этот заголовок">¶</a></h2>
 <section id="id5">
-<h3>После обновления развёртывания<a class="headerlink" href="#id5" title="Ссылка на этот заголовок">¶</a></h3>
+<h2>Не найден хост<a class="headerlink" href="#id5" title="Ссылка на этот заголовок">¶</a></h2>
+<section id="id6">
+<h3>После обновления развёртывания<a class="headerlink" href="#id6" title="Ссылка на этот заголовок">¶</a></h3>
 <ol class="arabic simple">
 <li><p>Переведите nova-scheduler в режим debug. Для этого поменяйте параметр <em>debug=False</em> в <em>True</em> в файле <em>/var/lib/config-data/puppet-generated/nova/etc/nova/nova.conf</em>. Затем перезапустите nova-scheduler</p></li>
 </ol>
@@ -369,8 +383,8 @@ sudo<span class="w"> </span>podman<span class="w"> </span><span class="nb">exec<
 </div>
 </section>
 </section>
-<section id="id6">
-<h2>Число используемых ресурсов на гипервизорах обнулилось<a class="headerlink" href="#id6" title="Ссылка на этот заголовок">¶</a></h2>
+<section id="id7">
+<h2>Число используемых ресурсов на гипервизорах обнулилось<a class="headerlink" href="#id7" title="Ссылка на этот заголовок">¶</a></h2>
 <p>Такое может произойти, если вы попытались поменять основной домен для имен хостов. В таком случае вы увидете следующее.</p>
 <p>Например, вы поменяли хостнейм с <em>localdomain</em> на <em>novalocal</em>, тогда</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>openstack<span class="w"> </span>server<span class="w"> </span>list<span class="w"> </span>--all-projects<span class="w"> </span>--host<span class="w"> </span>asperitas-novacomputeiha-12.localdomain<span class="w"> </span>-f<span class="w"> </span>value<span class="w"> </span><span class="p">|</span><span class="w"> </span>wc<span class="w"> </span>-l

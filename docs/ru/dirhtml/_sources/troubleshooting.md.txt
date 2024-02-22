@@ -16,6 +16,21 @@ ping -c 1 2.2.2.3
 
 Измените необходимые параметры, а также **снова введите пароль**. Нажмите кнопку _Save_ и ожидайте изменение статуса на manageable.
 
+## Ошибка интроспекции 
+
+Ошибка при попытке интроспектировать узел 
+~~~
+The PXE filter driver DnsmasqFilter, state=uninitialized: my fsm encountered an exception: Can not transition from state 'uninitialized' on event 'sync' (no defined transition)
+~~~
+
+Описание проблемы есть на сайте [RedHat Solutions](https://access.redhat.com/solutions/6193931)
+Причина ошибки: драйвер pxefilter не может инициализировать DNSmasq
+Решение: перезапустить все сервисы Ironic 
+
+~~~shell
+for service in $(sudo systemctl | grep tripleo_ironic | cut -d " " -f3) ; do sudo systemctl restart $service ; done
+~~~
+
 ## No valid JSON при создании развёртывания 
 
 Ошибка при создавнии развёртывания 
