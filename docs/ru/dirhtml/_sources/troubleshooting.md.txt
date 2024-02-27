@@ -18,6 +18,7 @@ ping -c 1 2.2.2.3
 
 ## Ошибка интроспекции 
 
+### DnsmasqFilter
 Ошибка при попытке интроспектировать узел 
 ~~~
 The PXE filter driver DnsmasqFilter, state=uninitialized: my fsm encountered an exception: Can not transition from state 'uninitialized' on event 'sync' (no defined transition)
@@ -30,6 +31,21 @@ The PXE filter driver DnsmasqFilter, state=uninitialized: my fsm encountered an 
 ~~~shell
 for service in $(sudo systemctl | grep tripleo_ironic | cut -d " " -f3) ; do sudo systemctl restart $service ; done
 ~~~
+
+### Ramdisk error
+
+~~~
+2024-02-26 19:16:12.688 7 ERROR ironic_inspector.utils [-] [node: MAC 00:25:90:bb:0e:d8 BMC 10.100.2.33] Ramdisk repor
+ted error: The following errors were encountered:
+* failed to run hardware-detect utility: [Errno 2] No such file or directory: 'hardware-detect'
+2024-02-26 19:16:12.688 7 ERROR ironic_inspector.process [-] [node: MAC 00:25:90:bb:0e:d8 BMC 10.100.2.33] Hook ramdis
+k_error failed, delaying error report until node look up: Ramdisk reported error: The following errors were encountere
+d:
+* failed to run hardware-detect utility: [Errno 2] No such file or directory: 'hardware-detect': ironic_inspector.util
+s.Error: Ramdisk reported error: The following errors were encountered:
+~~~
+
+Смотреть логи в /var/log/containers/ironic-inspector/ramdisk
 
 ## No valid JSON при создании развёртывания 
 

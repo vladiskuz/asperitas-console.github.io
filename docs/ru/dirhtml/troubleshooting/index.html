@@ -83,7 +83,11 @@
       aria-labelledby="dLabelLocalToc"><ul>
 <li><a class="reference internal" href="#">Устранение неполадок</a><ul>
 <li><a class="reference internal" href="#enroll">Физический узел в статусе <em>enroll</em></a></li>
-<li><a class="reference internal" href="#id2">Ошибка интроспекции</a></li>
+<li><a class="reference internal" href="#id2">Ошибка интроспекции</a><ul>
+<li><a class="reference internal" href="#dnsmasqfilter">DnsmasqFilter</a></li>
+<li><a class="reference internal" href="#ramdisk-error">Ramdisk error</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#no-valid-json">No valid JSON при создании развёртывания</a></li>
 <li><a class="reference internal" href="#id3">Параметр не определён или определён неправильно в шаблоне</a></li>
 <li><a class="reference internal" href="#id4">Ошибка настройка сети</a></li>
@@ -171,6 +175,8 @@
 </section>
 <section id="id2">
 <h2>Ошибка интроспекции<a class="headerlink" href="#id2" title="Ссылка на этот заголовок">¶</a></h2>
+<section id="dnsmasqfilter">
+<h3>DnsmasqFilter<a class="headerlink" href="#dnsmasqfilter" title="Ссылка на этот заголовок">¶</a></h3>
 <p>Ошибка при попытке интроспектировать узел</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">The</span> <span class="n">PXE</span> <span class="nb">filter</span> <span class="n">driver</span> <span class="n">DnsmasqFilter</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="n">uninitialized</span><span class="p">:</span> <span class="n">my</span> <span class="n">fsm</span> <span class="n">encountered</span> <span class="n">an</span> <span class="n">exception</span><span class="p">:</span> <span class="n">Can</span> <span class="ow">not</span> <span class="n">transition</span> <span class="kn">from</span> <span class="nn">state</span> <span class="s1">&#39;uninitialized&#39;</span> <span class="n">on</span> <span class="n">event</span> <span class="s1">&#39;sync&#39;</span> <span class="p">(</span><span class="n">no</span> <span class="n">defined</span> <span class="n">transition</span><span class="p">)</span>
 </pre></div>
@@ -181,6 +187,21 @@
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="k">for</span><span class="w"> </span>service<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="k">$(</span>sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>tripleo_ironic<span class="w"> </span><span class="p">|</span><span class="w"> </span>cut<span class="w"> </span>-d<span class="w"> </span><span class="s2">&quot; &quot;</span><span class="w"> </span>-f3<span class="k">)</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="k">do</span><span class="w"> </span>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span><span class="nv">$service</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="k">done</span>
 </pre></div>
 </div>
+</section>
+<section id="ramdisk-error">
+<h3>Ramdisk error<a class="headerlink" href="#ramdisk-error" title="Ссылка на этот заголовок">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">2024</span><span class="o">-</span><span class="mi">02</span><span class="o">-</span><span class="mi">26</span> <span class="mi">19</span><span class="p">:</span><span class="mi">16</span><span class="p">:</span><span class="mf">12.688</span> <span class="mi">7</span> <span class="n">ERROR</span> <span class="n">ironic_inspector</span><span class="o">.</span><span class="n">utils</span> <span class="p">[</span><span class="o">-</span><span class="p">]</span> <span class="p">[</span><span class="n">node</span><span class="p">:</span> <span class="n">MAC</span> <span class="mi">00</span><span class="p">:</span><span class="mi">25</span><span class="p">:</span><span class="mi">90</span><span class="p">:</span><span class="n">bb</span><span class="p">:</span><span class="mi">0</span><span class="n">e</span><span class="p">:</span><span class="n">d8</span> <span class="n">BMC</span> <span class="mf">10.100.2.33</span><span class="p">]</span> <span class="n">Ramdisk</span> <span class="n">repor</span>
+<span class="n">ted</span> <span class="n">error</span><span class="p">:</span> <span class="n">The</span> <span class="n">following</span> <span class="n">errors</span> <span class="n">were</span> <span class="n">encountered</span><span class="p">:</span>
+<span class="o">*</span> <span class="n">failed</span> <span class="n">to</span> <span class="n">run</span> <span class="n">hardware</span><span class="o">-</span><span class="n">detect</span> <span class="n">utility</span><span class="p">:</span> <span class="p">[</span><span class="n">Errno</span> <span class="mi">2</span><span class="p">]</span> <span class="n">No</span> <span class="n">such</span> <span class="n">file</span> <span class="ow">or</span> <span class="n">directory</span><span class="p">:</span> <span class="s1">&#39;hardware-detect&#39;</span>
+<span class="mi">2024</span><span class="o">-</span><span class="mi">02</span><span class="o">-</span><span class="mi">26</span> <span class="mi">19</span><span class="p">:</span><span class="mi">16</span><span class="p">:</span><span class="mf">12.688</span> <span class="mi">7</span> <span class="n">ERROR</span> <span class="n">ironic_inspector</span><span class="o">.</span><span class="n">process</span> <span class="p">[</span><span class="o">-</span><span class="p">]</span> <span class="p">[</span><span class="n">node</span><span class="p">:</span> <span class="n">MAC</span> <span class="mi">00</span><span class="p">:</span><span class="mi">25</span><span class="p">:</span><span class="mi">90</span><span class="p">:</span><span class="n">bb</span><span class="p">:</span><span class="mi">0</span><span class="n">e</span><span class="p">:</span><span class="n">d8</span> <span class="n">BMC</span> <span class="mf">10.100.2.33</span><span class="p">]</span> <span class="n">Hook</span> <span class="n">ramdis</span>
+<span class="n">k_error</span> <span class="n">failed</span><span class="p">,</span> <span class="n">delaying</span> <span class="n">error</span> <span class="n">report</span> <span class="n">until</span> <span class="n">node</span> <span class="n">look</span> <span class="n">up</span><span class="p">:</span> <span class="n">Ramdisk</span> <span class="n">reported</span> <span class="n">error</span><span class="p">:</span> <span class="n">The</span> <span class="n">following</span> <span class="n">errors</span> <span class="n">were</span> <span class="n">encountere</span>
+<span class="n">d</span><span class="p">:</span>
+<span class="o">*</span> <span class="n">failed</span> <span class="n">to</span> <span class="n">run</span> <span class="n">hardware</span><span class="o">-</span><span class="n">detect</span> <span class="n">utility</span><span class="p">:</span> <span class="p">[</span><span class="n">Errno</span> <span class="mi">2</span><span class="p">]</span> <span class="n">No</span> <span class="n">such</span> <span class="n">file</span> <span class="ow">or</span> <span class="n">directory</span><span class="p">:</span> <span class="s1">&#39;hardware-detect&#39;</span><span class="p">:</span> <span class="n">ironic_inspector</span><span class="o">.</span><span class="n">util</span>
+<span class="n">s</span><span class="o">.</span><span class="n">Error</span><span class="p">:</span> <span class="n">Ramdisk</span> <span class="n">reported</span> <span class="n">error</span><span class="p">:</span> <span class="n">The</span> <span class="n">following</span> <span class="n">errors</span> <span class="n">were</span> <span class="n">encountered</span><span class="p">:</span>
+</pre></div>
+</div>
+<p>Смотреть логи в /var/log/containers/ironic-inspector/ramdisk</p>
+</section>
 </section>
 <section id="no-valid-json">
 <h2>No valid JSON при создании развёртывания<a class="headerlink" href="#no-valid-json" title="Ссылка на этот заголовок">¶</a></h2>
