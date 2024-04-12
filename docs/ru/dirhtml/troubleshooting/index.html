@@ -90,18 +90,22 @@
 </li>
 <li><a class="reference internal" href="#no-valid-json">No valid JSON при создании развёртывания</a></li>
 <li><a class="reference internal" href="#id3">Параметр не определён или определён неправильно в шаблоне</a></li>
-<li><a class="reference internal" href="#id4">Ошибка настройка сети</a></li>
+<li><a class="reference internal" href="#config-install">При раскатке конфигурации (config-install) не найден плейбук</a><ul>
+<li><a class="reference internal" href="#id4">Пояснение</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id5">Ошибка настройка сети</a></li>
 <li><a class="reference internal" href="#puppet-cache-read-only">Puppet cache read-only файловая система</a></li>
 <li><a class="reference internal" href="#ceph">Неправильные права на директорию при развёртывании с использованием Ceph</a></li>
 <li><a class="reference internal" href="#wait-for-puppet-host-configuration-to-finish">Wait for puppet host configuration to finish</a><ul>
 <li><a class="reference internal" href="#pacemaker">Pacemaker</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#id5">Не найден хост</a><ul>
-<li><a class="reference internal" href="#id6">После обновления развёртывания</a></li>
+<li><a class="reference internal" href="#id6">Не найден хост</a><ul>
+<li><a class="reference internal" href="#id7">После обновления развёртывания</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#id7">Число используемых ресурсов на гипервизорах обнулилось</a></li>
+<li><a class="reference internal" href="#id8">Число используемых ресурсов на гипервизорах обнулилось</a></li>
 <li><a class="reference internal" href="#cinder">Бекенд для cinder недоступен</a></li>
 <li><a class="reference internal" href="#nova-cell">Вычислительный узел не добавлен в nova_cell</a></li>
 <li><a class="reference internal" href="#host-key-verification-failed">Ошибка миграции Host key verification failed</a></li>
@@ -232,8 +236,34 @@ openstack<span class="w"> </span>stack<span class="w"> </span>template<span clas
 </pre></div>
 </div>
 </section>
+<section id="config-install">
+<h2>При раскатке конфигурации (config-install) не найден плейбук<a class="headerlink" href="#config-install" title="Ссылка на этот заголовок">¶</a></h2>
+<p>Если при развёртывании облака вы видете ошибку,</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="ne">RuntimeError</span><span class="p">:</span> <span class="n">No</span> <span class="n">such</span> <span class="n">playbook</span><span class="p">:</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">stack</span><span class="o">/</span><span class="n">config</span><span class="o">-</span><span class="n">download</span><span class="o">/</span><span class="n">best</span><span class="o">-</span><span class="n">deployment</span><span class="o">-</span><span class="n">ever</span><span class="o">/</span><span class="n">deploy_steps_playbook</span><span class="o">.</span><span class="n">yaml</span>
+</pre></div>
+</div>
+<p>То зайдите в папке <code class="docutils literal notranslate"><span class="pre">/etc/asperitas/templates/deploy</span></code> в последний файл с именем вашего деплоя.
+Далее выполните</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>grep<span class="w"> </span>-RIins<span class="w"> </span>OS::TripleO::PostDeploySteps
+</pre></div>
+</div>
+<p>Если в выводе присутствуют записи вида OS::Heat::None - то удалите их и обновите стек.</p>
 <section id="id4">
-<h2>Ошибка настройка сети<a class="headerlink" href="#id4" title="Ссылка на этот заголовок">¶</a></h2>
+<h3>Пояснение<a class="headerlink" href="#id4" title="Ссылка на этот заголовок">¶</a></h3>
+<p>При операции config download выполняется генерация плейбуков.
+Код находится в библиотеке <code class="docutils literal notranslate"><span class="pre">tripleo_common</span></code> в папке <code class="docutils literal notranslate"><span class="pre">utils/config.py</span></code>.</p>
+<p>Для дебага можно использовать команду</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>openstack<span class="w"> </span>overcloud<span class="w"> </span>config<span class="w"> </span>download<span class="w"> </span>--debug<span class="w"> </span>--name<span class="w"> </span>&lt;deploy_name&gt;
+</pre></div>
+</div>
+<p>Функция отвечающая за непосредственную генерацию файлов называется <code class="docutils literal notranslate"><span class="pre">write_config</span></code>.
+Она использует <code class="docutils literal notranslate"><span class="pre">stack</span> <span class="pre">outputs</span></code> сгенерённые при создании стека.
+А именно для генерации <code class="docutils literal notranslate"><span class="pre">deploy_steps_playbook.yaml</span></code> используется ресурс <code class="docutils literal notranslate"><span class="pre">RoleConfig</span></code>.
+Поэтому если в стеке обнулён ресурс <code class="docutils literal notranslate"><span class="pre">PostDeploySteps</span></code>, то и плейбук не будет сгенерён.</p>
+</section>
+</section>
+<section id="id5">
+<h2>Ошибка настройка сети<a class="headerlink" href="#id5" title="Ссылка на этот заголовок">¶</a></h2>
 <p>Если при развёртывании облака вы видете ошибку,</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="s2">&quot;failed_when_result&quot;</span><span class="p">:</span> <span class="n">true</span>
 <span class="p">}</span>
@@ -377,10 +407,10 @@ screen<span class="w"> </span>-x<span class="w"> </span>&lt;deploy_name&gt;
 <p>Запустите повторно puppet на узле, на котором puppet упал изначально. Если puppet выполнит работу без ошибок, то продолжите работу Ansible далее без повторного выполнения задачи Ansible.</p>
 </section>
 </section>
-<section id="id5">
-<h2>Не найден хост<a class="headerlink" href="#id5" title="Ссылка на этот заголовок">¶</a></h2>
 <section id="id6">
-<h3>После обновления развёртывания<a class="headerlink" href="#id6" title="Ссылка на этот заголовок">¶</a></h3>
+<h2>Не найден хост<a class="headerlink" href="#id6" title="Ссылка на этот заголовок">¶</a></h2>
+<section id="id7">
+<h3>После обновления развёртывания<a class="headerlink" href="#id7" title="Ссылка на этот заголовок">¶</a></h3>
 <ol class="arabic simple">
 <li><p>Переведите nova-scheduler в режим debug. Для этого поменяйте параметр <em>debug=False</em> в <em>True</em> в файле <em>/var/lib/config-data/puppet-generated/nova/etc/nova/nova.conf</em>. Затем перезапустите nova-scheduler</p></li>
 </ol>
@@ -404,8 +434,8 @@ sudo<span class="w"> </span>podman<span class="w"> </span><span class="nb">exec<
 </div>
 </section>
 </section>
-<section id="id7">
-<h2>Число используемых ресурсов на гипервизорах обнулилось<a class="headerlink" href="#id7" title="Ссылка на этот заголовок">¶</a></h2>
+<section id="id8">
+<h2>Число используемых ресурсов на гипервизорах обнулилось<a class="headerlink" href="#id8" title="Ссылка на этот заголовок">¶</a></h2>
 <p>Такое может произойти, если вы попытались поменять основной домен для имен хостов. В таком случае вы увидете следующее.</p>
 <p>Например, вы поменяли хостнейм с <em>localdomain</em> на <em>novalocal</em>, тогда</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>openstack<span class="w"> </span>server<span class="w"> </span>list<span class="w"> </span>--all-projects<span class="w"> </span>--host<span class="w"> </span>asperitas-novacomputeiha-12.localdomain<span class="w"> </span>-f<span class="w"> </span>value<span class="w"> </span><span class="p">|</span><span class="w"> </span>wc<span class="w"> </span>-l

@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Создание и управление сетями (Вкладка «Сеть») &#8212; документация Asperitas 1.0.0</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/bootstrap-sphinx.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/my-styles.css" />
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/translations.js"></script>
+    <link rel="author" title="Об этих документах" href="../../about/" />
+    <link rel="index" title="Алфавитный указатель" href="../../genindex/" />
+    <link rel="search" title="Поиск" href="../../search/" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="../../_static/js/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="../../_static/js/jquery-fix.js"></script>
+<script type="text/javascript" src="../../_static/bootstrap-3.4.1/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../_static/bootstrap-sphinx.js"></script>
+
+  </head><body>
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../../">
+          Asperitas</a>
+        <span class="navbar-text navbar-version pull-left"><b>1.0.0</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../../"> <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../about/">Введение</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../requirements/">Требования к оборудованию и ПО</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install-undercloud/">Установка узла развёртывания</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../full-deployment-init/">Подготовка к развёртываниям с нуля</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../full-deployment-stack/">Подготовка одного развёртывания</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deployment/">Развёртывание облака</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../updates/">Сопровождение развёртывания на базе дистрибутива Asperitas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../management/">Сопровождение облака и управление ресурсами</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../troubleshooting/">Устранение неполадок</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../supplement/">Приложение</a></li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">Создание и управление сетями (Вкладка «Сеть»)</a><ul>
+<li><a class="reference internal" href="#id2">Создание сети</a></li>
+<li><a class="reference internal" href="#id3">Создание маршрутизатора</a></li>
+<li><a class="reference internal" href="#id4">Создание порта</a></li>
+<li><a class="reference internal" href="#ip">Создание плавающего IP</a></li>
+<li><a class="reference internal" href="#id5">Создание группы безопасности</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+              
+            
+            
+            
+            
+              <li class="hidden-sm">
+<div id="sourcelink">
+  <a href="../../_sources/user-guide/networks.md.txt"
+     rel="nofollow">Source</a>
+</div></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../../search/" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="body col-md-12 content" role="main">
+      
+  <section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1>Создание и управление сетями (Вкладка «Сеть»)<a class="headerlink" href="#id1" title="Ссылка на этот заголовок">¶</a></h1>
+<p>Сервис сетевых функций предоставляет систему для управления сетевой связностью в пределах развертывания облака. Он обрабатывает создание и управление виртуальной сетевой инфраструктурой, включая сети, коммутаторы, подсети, маршрутизаторы и виртуальный фаервол.</p>
+<p>Этот раздел предоставляет базовые инструкции по созданию сетей и виртуальных маршрутизаторов. Для подробной информации об управлении сетями обратитесь к <code class="docutils literal notranslate"><span class="pre">Руководству</span> <span class="pre">по</span> <span class="pre">сетям</span> <span class="pre">OpenStack</span> <span class="pre">&lt;https://docs.openstack.org/neutron/latest/admin/&gt;</span></code>.</p>
+<section id="id2">
+<h2>Создание сети<a class="headerlink" href="#id2" title="Ссылка на этот заголовок">¶</a></h2>
+<ol class="arabic">
+<li><p>Войдите в панель управления.</p></li>
+<li><p>Выберите соответствующий проект из меню переключения проекта в верхнем левом углу.</p></li>
+<li><p>На странице «Консоль» откройте вкладку «Сеть» и нажмите на категорию «Сети».</p></li>
+<li><p>Нажмите «Создать сеть».</p></li>
+<li><p>В диалоговом окне «Создать сеть» укажите следующие значения:</p>
+<ul class="simple">
+<li><p>Имя сети: Укажите имя для идентификации сети.</p></li>
+<li><p>Описание.</p></li>
+<li><p>Общий доступ: Поделитесь сетью с другими проектами. Пользователям у которых не прав администратора не разрешено устанавливать опцию общего доступа.</p></li>
+<li><p>Зона доступности: Выберите зону доступности для сети.</p></li>
+<li><p>Включение безопасности портов: Выберите статус безопасности портов сети. Во включенном состоянии происходит контроль состояния сетевых портов (соответствие IP-адресов MAC-адресам; функции фаервола). В выключенном состоянии сетевой порт никак не контролируется облачной средой.</p></li>
+<li><p>Создать подсеть: Отметьте этот флажок, чтобы создать подсеть.</p></li>
+</ul>
+<p>Если вы не укажете подсеть при создании сети, то сеть не сможет быть присоединена к инстансу, поскольку для присоединения нужен будет конкретный адрес из подсети. Нет подсетей =&gt; нет адресов.</p>
+<ul class="simple">
+<li><p>Имя подсети: Укажите имя для подсети.</p></li>
+<li><p>CIDR: Укажите IP-адрес для подсети.</p></li>
+<li><p>Версия IP: Выберите IPv4 или IPv6.</p></li>
+<li><p>IP-адрес шлюза: Укажите IP-адрес для конкретного шлюза. Этот параметр необязательный.</p></li>
+<li><p>Отключить шлюз: Отметьте этот флажок, чтобы отключить IP-адрес шлюза.</p></li>
+<li><p>DHCP: Отметьте этот флажок, чтобы включить DHCP.</p></li>
+<li><p>Пулы выделения: Укажите пулы IP-адресов.</p></li>
+<li><p>DNS: Укажите сервер DNS.</p></li>
+<li><p>Маршруты хоста: Укажите IP-адрес маршрутов хоста.</p></li>
+</ul>
+</li>
+<li><p>Нажмите «OK».</p>
+<p>Панель управления покажет сеть на вкладке «Сети».</p>
+</li>
+</ol>
+</section>
+<section id="id3">
+<h2>Создание маршрутизатора<a class="headerlink" href="#id3" title="Ссылка на этот заголовок">¶</a></h2>
+<ol class="arabic">
+<li><p>Войдите в панель управления.</p></li>
+<li><p>Выберите соответствующий проект из меню переключения проекта в верхнем левом углу.</p></li>
+<li><p>На странице «Консоль» откройте вкладку «Сеть» и нажмите на категорию «Маршрутизаторы».</p></li>
+<li><p>Нажмите «Создать маршрутизатор».</p></li>
+<li><p>В диалоговом окне «Создать маршрутизатор» укажите следующие значения:</p>
+<ul class="simple">
+<li><p>Имя: Укажите имя для идентификации маршрутизатора.</p></li>
+<li><p>Открыть внешний шлюз: Отметьте этот флажок, чтобы указать внешний шлюз.</p></li>
+<li><p>Внешний шлюз: Укажите внешний шлюз для маршрутизатора.</p></li>
+</ul>
+<p>Нажмите «OK», и новый маршрутизатор теперь отображается на вкладке «Маршрутизаторы».</p>
+</li>
+<li><p>Чтобы подключить частную сеть к только что созданному маршрутизатору, выполните следующие шаги:</p>
+<p>A) На вкладке «Маршрутизаторы» выберите «Дополнительно» для маршрутизатора, нажмите «подключить подсеть».</p>
+<p>C) В диалоговом окне «Подключить подсеть» выберите «Сеть» и «Подсеть».</p>
+</li>
+<li><p>Нажмите «OK».</p>
+<p>Вы успешно создали маршрутизатор. Вы можете просмотреть новую топологию на вкладке «Топология».</p>
+</li>
+</ol>
+</section>
+<section id="id4">
+<h2>Создание порта<a class="headerlink" href="#id4" title="Ссылка на этот заголовок">¶</a></h2>
+<p>Иногда нужно создавать сетевые порты вручную (например, если в этой сети уже есть DHCP-сервер, и нужно создать набор заранее известных адресов для виртуальных машин в облаке)</p>
+<ol class="arabic">
+<li><p>Войдите в панель управления.</p></li>
+<li><p>Выберите соответствующий проект из меню переключения проекта в верхнем левом углу.</p></li>
+<li><p>На странице «Консоль» откройте вкладку «Сеть» и нажмите на категорию «Порты».</p></li>
+<li><p>Нажмите «Создать виртуальный адаптер».</p></li>
+<li><p>В диалоговом окне «Создать виртуальный адаптер» укажите следующие значения:</p>
+<ul class="simple">
+<li><p>Имя: Укажите имя для идентификации порта.</p></li>
+<li><p>Собственная сеть: Выберите сеть, присоединенную к порту.</p></li>
+<li><p>Собственная подсеть: Выберите подсеть, присоединенную к порту.</p></li>
+</ul>
+<p>Если вы укажете и ID подсети, и IP-адрес, OpenStack попытается выделить этот IP-адрес на указанной подсети для порта.</p>
+<p>Если вы укажете только ID подсети, OpenStack выделит доступный IP из этой подсети для порта.</p>
+<ul class="simple">
+<li><p>Безопасность порта: Отметьте этот флажок, чтобы указать группу безопасности.</p></li>
+<li><p>Группа безопасности: Выберите группы безопасности, применяемые к порту.</p></li>
+</ul>
+</li>
+<li><p>Нажмите «OK».</p>
+<p>Новый порт теперь отображается в списке «Порты».</p>
+</li>
+</ol>
+</section>
+<section id="ip">
+<h2>Создание плавающего IP<a class="headerlink" href="#ip" title="Ссылка на этот заголовок">¶</a></h2>
+<p>Плавающим IP называется сетевой порт, выполняющий функцию трансляции адресов на стороне облака. То есть, если виртуальной машине (а на самом деле порту) назначается плавающий IP, виртуальная машина об этом адресе ничего не знает. Трафик приходит на плавающий IP (который используется для внешнего доступа); при этом у самой виртуальной машины есть 1 или больше сетевых портов, которые ей принадлежат полноправно.</p>
+<ol class="arabic">
+<li><p>Войдите в панель управления.</p></li>
+<li><p>Выберите соответствующий проект из меню переключения проекта в верхнем левом углу.</p></li>
+<li><p>На странице «Консоль» откройте вкладку «Сеть» и нажмите на категорию «Плавающие IP».</p></li>
+<li><p>Нажмите «Выделить IP».</p></li>
+<li><p>В диалоговом окне «Выделить IP» укажите следующие значения:</p>
+<ul class="simple">
+<li><p>Сеть: Укажите сеть, связанную с плавающим IP.</p></li>
+<li><p>Описание: Читаемое описание ресурса.</p></li>
+<li><p>Пакетное выделение: Отметьте этот флажок, чтобы указать количество созданий пакетом.</p></li>
+<li><p>Количество: Укажите количество созданий пакетом.</p></li>
+</ul>
+</li>
+<li><p>Нажмите «OK».</p>
+<p>Панель управления покажет плавающий IP на вкладке «Плавающие IP».</p>
+</li>
+</ol>
+</section>
+<section id="id5">
+<h2>Создание группы безопасности<a class="headerlink" href="#id5" title="Ссылка на этот заголовок">¶</a></h2>
+<p>Группы безопасности представляют собой программно-определяемый фаервол. Каждая группа состоит из набора правил; к каждому порту (или - для простоты - инстансу) можно прикрепить 1 или больше групп безопаснсти. Правила в группах безопасности на данных момент описывают правила доступа к TCP/UPD/ICMP в разрешающем виде (запрещающих правил нет, но вскоре будут).</p>
+<ol class="arabic simple">
+<li><p>Войдите в панель управления.</p></li>
+<li><p>Выберите соответствующий проект из меню переключения проекта в верхнем левом углу.</p></li>
+<li><p>На странице «Консоль» откройте вкладку «Сеть» и нажмите на категорию «Группы безопасности».</p></li>
+<li><p>Нажмите «Создать группу безопасности».</p></li>
+<li><p>В диалоговом окне «Создать группу безопасности» укажите имя и описание, нажмите «OK» и новая группа безопасности теперь отображается в списке «Группы безопасности».</p></li>
+</ol>
+</section>
+</section>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2022, ИСП РАН.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

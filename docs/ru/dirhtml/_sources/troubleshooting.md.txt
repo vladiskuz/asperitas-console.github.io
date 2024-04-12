@@ -80,6 +80,35 @@ openstack stack environment show asperitas
 openstack stack template show asperitas
 ~~~
 
+## При раскатке конфигурации (config-install) не найден плейбук
+
+Если при развёртывании облака вы видете ошибку,
+~~~
+RuntimeError: No such playbook: /home/stack/config-download/best-deployment-ever/deploy_steps_playbook.yaml
+~~~
+
+То зайдите в папке `/etc/asperitas/templates/deploy` в последний файл с именем вашего деплоя. 
+Далее выполните 
+~~~shell
+grep -RIins OS::TripleO::PostDeploySteps
+~~~
+Если в выводе присутствуют записи вида OS::Heat::None - то удалите их и обновите стек.  
+
+### Пояснение
+
+При операции config download выполняется генерация плейбуков. 
+Код находится в библиотеке `tripleo_common` в папке `utils/config.py`.   
+
+Для дебага можно использовать команду
+~~~shell
+openstack overcloud config download --debug --name <deploy_name>
+~~~
+
+Функция отвечающая за непосредственную генерацию файлов называется `write_config`.
+Она использует `stack outputs` сгенерённые при создании стека. 
+А именно для генерации `deploy_steps_playbook.yaml` используется ресурс `RoleConfig`.
+Поэтому если в стеке обнулён ресурс `PostDeploySteps`, то и плейбук не будет сгенерён. 
+
 ## Ошибка настройка сети 
 
 Если при развёртывании облака вы видете ошибку,

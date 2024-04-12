@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Страница консоли &#8212; документация Asperitas 1.0.0</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/bootstrap-sphinx.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/my-styles.css" />
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/translations.js"></script>
+    <link rel="author" title="Об этих документах" href="../../about/" />
+    <link rel="index" title="Алфавитный указатель" href="../../genindex/" />
+    <link rel="search" title="Поиск" href="../../search/" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="../../_static/js/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="../../_static/js/jquery-fix.js"></script>
+<script type="text/javascript" src="../../_static/bootstrap-3.4.1/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../_static/bootstrap-sphinx.js"></script>
+
+  </head><body>
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../../">
+          Asperitas</a>
+        <span class="navbar-text navbar-version pull-left"><b>1.0.0</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../../"> <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../about/">Введение</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../requirements/">Требования к оборудованию и ПО</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install-undercloud/">Установка узла развёртывания</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../full-deployment-init/">Подготовка к развёртываниям с нуля</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../full-deployment-stack/">Подготовка одного развёртывания</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deployment/">Развёртывание облака</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../updates/">Сопровождение развёртывания на базе дистрибутива Asperitas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../management/">Сопровождение облака и управление ресурсами</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../troubleshooting/">Устранение неполадок</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../supplement/">Приложение</a></li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">Страница консоли</a><ul>
+<li><a class="reference internal" href="#id2">Вкладка «Домой»</a></li>
+<li><a class="reference internal" href="#id3">Вкладка «Вычисления»</a></li>
+<li><a class="reference internal" href="#id4">Вкладка «Хранение»</a></li>
+<li><a class="reference internal" href="#id5">Вкладка «Сеть»</a></li>
+<li><a class="reference internal" href="#id6">Вкладка «Оркестрация»</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id7">Страница администратора</a><ul>
+<li><a class="reference internal" href="#id8">Вкладка «Домой»</a></li>
+<li><a class="reference internal" href="#id9">Вкладка «Вычисления»</a></li>
+<li><a class="reference internal" href="#id10">Вкладка «Хранение»</a></li>
+<li><a class="reference internal" href="#id11">Вкладка «Сеть»</a></li>
+<li><a class="reference internal" href="#id12">Вкладка «Идентификация»</a></li>
+<li><a class="reference internal" href="#id13">Вкладка «Центр мониторинга»</a></li>
+<li><a class="reference internal" href="#id14">Вкладка «Глобальные настройки»</a></li>
+<li><a class="reference internal" href="#instance-ha">Вкладка «Instance-HA»</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+              
+            
+            
+            
+            
+              <li class="hidden-sm">
+<div id="sourcelink">
+  <a href="../../_sources/user-guide/dashboard_toc.md.txt"
+     rel="nofollow">Source</a>
+</div></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../../search/" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="body col-md-12 content" role="main">
+      
+  <p>В панели управления облачной средой доступны два режима, которые далее называются «Страница консоли» и «Страница администратора». Если у вас нет административных прав, страница администратора будет недоступна, и вы будете автоматически попадать только в страницу консоли.</p>
+<p>В этом разделе приводится глобальное оглавление этих двух режимов с перечислением основных возможностей, доступных на этих страницах.</p>
+<section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1>Страница консоли<a class="headerlink" href="#id1" title="Ссылка на этот заголовок">¶</a></h1>
+<section id="id2">
+<h2>Вкладка «Домой»<a class="headerlink" href="#id2" title="Ссылка на этот заголовок">¶</a></h2>
+<p>На вкладке «Домой» отображается информация о пользователе и детали квоты по Вычислениям, Хранению, Сети и т.д. Также предоставляется кнопка для быстрого перехода к страницам Экземпляров, Томов, Сетей и Маршрутизаторов.</p>
+</section>
+<section id="id3">
+<h2>Вкладка «Вычисления»<a class="headerlink" href="#id3" title="Ссылка на этот заголовок">¶</a></h2>
+<ul class="simple">
+<li><p>Просмотр, запуск, удаление, создание снимка, прикрепление или открепление интерфейса, прикрепление или открепление тома, присвоение плавающего IP, управление группой безопасности, остановка, пауза, блокировка, шелвинг, приостановка, перезагрузка или мягкая перезагрузка экземпляров, изменение тегов экземпляра, или подключение к ним через VNC.</p></li>
+<li><p>Просмотр, редактирование, удаление снимков экземпляров, запуск экземпляров или создание томов из них.</p></li>
+<li><p>Просмотр конфигураций.</p></li>
+<li><p>Просмотр, создание или удаление групп серверов.</p></li>
+<li><p>Просмотр, создание, редактирование, удаление образов, запуск экземпляров или создание томов из них.</p></li>
+<li><p>Просмотр, создание, редактирование, импорт и удаление пар ключей.</p></li>
+</ul>
+</section>
+<section id="id4">
+<h2>Вкладка «Хранение»<a class="headerlink" href="#id4" title="Ссылка на этот заголовок">¶</a></h2>
+<ul class="simple">
+<li><p>Просмотр, создание, редактирование и удаление томов. Создание снимка тома, создание резервной копии тома, клонирование тома, расширение тома или изменение типа тома, прикрепление или открепление их от экземпляра.</p></li>
+<li><p>Просмотр, создание, редактирование и удаление резервных копий томов. Также создание томов из них и восстановление резервной копии.</p></li>
+<li><p>Просмотр, создание, редактирование, удаление снимков томов. И создание томов из них.</p></li>
+</ul>
+</section>
+<section id="id5">
+<h2>Вкладка «Сеть»<a class="headerlink" href="#id5" title="Ссылка на этот заголовок">¶</a></h2>
+<ul class="simple">
+<li><p>Просмотр, создание, редактирование и удаление сетей.</p></li>
+<li><p>Просмотр, создание, редактирование, удаление портов и управление группой безопасности для портов.</p></li>
+<li><p>Просмотр, создание, редактирование, удаление и управление маршрутизаторами.</p></li>
+<li><p>Выделение IP-адресов или их освобождение.</p></li>
+<li><p>Просмотр сетевой топологии.</p></li>
+<li><p>Просмотр, создание, редактирование и удаление групп безопасности и правил групп безопасности.</p></li>
+</ul>
+</section>
+<section id="id6">
+<h2>Вкладка «Оркестрация»<a class="headerlink" href="#id6" title="Ссылка на этот заголовок">¶</a></h2>
+<p>В данный момент не представляет особого интереса. Может быть полезна только в случае, если вы знакомы с системой Openstack Heat.</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="id7">
+<h1>Страница администратора<a class="headerlink" href="#id7" title="Ссылка на этот заголовок">¶</a></h1>
+<section id="id8">
+<h2>Вкладка «Домой»<a class="headerlink" href="#id8" title="Ссылка на этот заголовок">¶</a></h2>
+<p>На вкладке «Домой» отображается базовая информация о платформе (число проектов, пользователей, узлов), использование виртуальных ресурсов (использование CPU, использование памяти), статус вычислительных и сетевых услуг.</p>
+</section>
+<section id="id9">
+<h2>Вкладка «Вычисления»<a class="headerlink" href="#id9" title="Ссылка на этот заголовок">¶</a></h2>
+<ul class="simple">
+<li><p>Просмотр, остановка, приостановка, холодная или живая миграция, мягкая или жесткая перезагрузка и удаление экземпляров, принадлежащих всем проектам. Также просмотр журнала для экземпляра или доступ к экземпляру через VNC.</p></li>
+<li><p>Просмотр, редактирование, удаление снимков экземпляров.</p></li>
+<li><p>Просмотр, создание, редактирование, управление метаданными и удаление конфигураций.</p></li>
+<li><p>Просмотр, создание или удаление групп серверов.</p></li>
+<li><p>Просмотр, создание, редактирование, управление метаданными и удаление образов.</p></li>
+<li><p>Просмотр сводки гипервизора. Также просмотр и управление вычислительными узлами.</p></li>
+<li><p>Просмотр, создание, управление метаданными, редактирование и удаление агрегатов хостов. Просмотр списка зон доступности.</p></li>
+</ul>
+</section>
+<section id="id10">
+<h2>Вкладка «Хранение»<a class="headerlink" href="#id10" title="Ссылка на этот заголовок">¶</a></h2>
+<ul class="simple">
+<li><p>Просмотр, обновление статуса, миграция и удаление томов.</p></li>
+<li><p>Просмотр и удаление резервных копий томов.</p></li>
+<li><p>Просмотр и удаление снимков томов.</p></li>
+<li><p>Просмотр, создание, редактирование, шифрование, управление доступом и удаление типов томов.</p></li>
+<li><p>Просмотр хранилищ.</p></li>
+</ul>
+</section>
+<section id="id11">
+<h2>Вкладка «Сеть»<a class="headerlink" href="#id11" title="Ссылка на этот заголовок">¶</a></h2>
+<ul class="simple">
+<li><p>Просмотр, создание и удаление сетей.</p></li>
+<li><p>Просмотр и удаление портов.</p></li>
+<li><p>Просмотр и удаление маршрутизаторов.</p></li>
+<li><p>Выделение IP-адресов или их освобождение.</p></li>
+<li><p>Просмотр и удаление групп безопасности.</p></li>
+</ul>
+</section>
+<section id="id12">
+<h2>Вкладка «Идентификация»<a class="headerlink" href="#id12" title="Ссылка на этот заголовок">¶</a></h2>
+<ul class="simple">
+<li><p>Просмотр, создание, редактирование, включение, отключение и удаление доменов.</p></li>
+<li><p>Просмотр, создание, редактирование, включение, отключение и удаление проектов. Также управление пользователями или группами пользователей проектов, изменение тегов для них.</p></li>
+<li><p>Просмотр, создание, редактирование, включение, отключение, удаление пользователей. И редактирование системного разрешения пользователей, обновление пароля пользователя.</p></li>
+<li><p>Просмотр, создание, редактирование и удаление групп пользователей.</p></li>
+<li><p>Просмотр, создание, редактирование и удаление ролей.</p></li>
+</ul>
+</section>
+<section id="id13">
+<h2>Вкладка «Центр мониторинга»<a class="headerlink" href="#id13" title="Ссылка на этот заголовок">¶</a></h2>
+<p>В данном разделе сосредоточены упрощённые панели отображения метрик, собираемых мониторингом Асперитас/Acloud.</p>
+</section>
+<section id="id14">
+<h2>Вкладка «Глобальные настройки»<a class="headerlink" href="#id14" title="Ссылка на этот заголовок">¶</a></h2>
+<ul class="simple">
+<li><p>Используйте следующие вкладки для просмотра информации об услугах:</p>
+<ul>
+<li><p>Просмотр списка услуг.</p></li>
+<li><p>Просмотр списка всех вычислительных услуг и включение или отключение их.</p></li>
+<li><p>Просмотр сетевых агентов и включение или отключение их.</p></li>
+<li><p>Просмотр списка всех услуг блочного хранения и включение или отключение их.</p></li>
+<li><p>Просмотр списка всех оркестровочных услуг.</p></li>
+</ul>
+</li>
+<li><p>Просмотр, редактирование и сброс системной конфигурации.</p></li>
+<li><p>Просмотр, редактирование и удаление системных метаданных.</p></li>
+</ul>
+</section>
+<section id="instance-ha">
+<h2>Вкладка «Instance-HA»<a class="headerlink" href="#instance-ha" title="Ссылка на этот заголовок">¶</a></h2>
+<p>На данный момент не представляет интереса</p>
+</section>
+</section>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2022, ИСП РАН.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>
