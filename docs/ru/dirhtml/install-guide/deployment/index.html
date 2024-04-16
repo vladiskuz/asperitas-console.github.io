@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Развёртывание облака &#8212; документация Asperitas 1.0.0</title>
+    <title>Развёртывание облака &#8212; документация Asperitas 23.0.1</title>
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/bootstrap-sphinx.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/my-styles.css" />
@@ -41,7 +41,7 @@
         </button>
         <a class="navbar-brand" href="../../">
           Asperitas</a>
-        <span class="navbar-text navbar-version pull-left"><b>1.0.0</b></span>
+        <span class="navbar-text navbar-version pull-left"><b>23.0.1</b></span>
       </div>
 
         <div class="collapse navbar-collapse nav-collapse">
@@ -60,6 +60,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../about/">Введение</a></li>
 </ul>
 <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../requirements/">Требования к оборудованию и ПО</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../install-undercloud/">Установка узла развёртывания</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../full-deployment-init/">Подготовка к развёртываниям с нуля</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../full-deployment-stack/">Подготовка одного развёртывания</a></li>
@@ -155,7 +156,7 @@
 </pre></div>
 </div>
 <p>Перейдите в <em>Меню развёртывания</em>, затем во вкладку <em>Deployment</em>.</p>
-<p><img alt="" src="images/deployment.png" /></p>
+<p><img alt="" src="../../_images/deployment.png" /></p>
 <p>Сверху отображается статус развёртывания. Развёртывание состоит из нескольких стадий:</p>
 <ul class="simple">
 <li><p><em><strong>Create/Update Plan Deployment (Install OS)</strong></em>, или <em>Создание стека</em> (термин OpenStack Heat) - при этом фиксируются и сохраняются все ваши настройки.
@@ -174,8 +175,8 @@
 Для каждого физического узла может быть создан только один сервер.</p>
 <p>После создания сервера статус физического узла меняется с <em>available</em> на <em>active</em> в списке физических серверов.
 Посмотреть список серверов можно из <em>Главного меню</em> или <em>Меню развёртывания</em> в окне <strong>Deployed Servers</strong> или <strong>Servers list</strong> соответственно.</p>
-<p><img alt="" src="images/all-servers.png" />
-<img alt="" src="images/stack-servers.png" /></p>
+<p><img alt="" src="../../_images/all-servers.png" />
+<img alt="" src="../../_images/stack-servers.png" /></p>
 <section id="id2">
 <h2>Нулевое развёртывание<a class="headerlink" href="#id2" title="Ссылка на этот заголовок">¶</a></h2>
 <p><strong>Нулевое развёртывание</strong> означает, что <em>Stack status</em> для данного развёртывания отображает пустые значения для всех параметров.</p>
@@ -237,7 +238,7 @@
 <section id="id7">
 <h2>Частичное развёртывание<a class="headerlink" href="#id7" title="Ссылка на этот заголовок">¶</a></h2>
 <p>На стадии <strong>Run Cloud Service Deployment</strong> обновляется окно выбора c опциями <em>Limit to</em>:</p>
-<p><img alt="" src="images/update-host-choice.png" /></p>
+<p><img alt="" src="../../_images/update-host-choice.png" /></p>
 </section>
 </section>
 
@@ -253,7 +254,7 @@
       
     </p>
     <p>
-        &copy; Copyright 2022, ИСП РАН.<br/>
+        &copy; Copyright 2019-2024, ИСП РАН.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br/>
     </p>
   </div>

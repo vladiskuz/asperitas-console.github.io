@@ -31,11 +31,11 @@ html_theme = 'bootstrap'
 html_theme_path = sphinx_bootstrap_theme.get_html_theme_path()
 
 project = 'Asperitas'
-copyright = '2022, ИСП РАН'
+copyright = '2019-2024, ИСП РАН'
 author = 'ИСП РАН'
 
 # The short X.Y version
-version = '1.0.0'
+version = '23.0.1'
 # The full version, including alpha/beta/rc tags
 release = version
 

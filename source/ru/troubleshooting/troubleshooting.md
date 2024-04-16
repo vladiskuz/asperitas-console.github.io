@@ -12,7 +12,7 @@ ping -c 1 2.2.2.3
 Чтобы изменить параметры узла, можно удалить узел и создать его заново или изменить параметры текущего узла. 
 Для этого выберите узел в списке физических узлов и нажмите _Enter_ или дважды кликните мышкой:
 
-![](/images/baremetal-node-edit.png)
+![](../../../images/baremetal-node-edit.png)
 
 Измените необходимые параметры, а также **снова введите пароль**. Нажмите кнопку _Save_ и ожидайте изменение статуса на manageable.
 
@@ -314,7 +314,7 @@ openstack hypervisor show asperitas-novacomputeiha-12.novalocal -c service_host 
 ~~~shell
 sudo podman ps | grep galera 
 
-ab09fec32c4b  undercloud.ctlplane:13787/image/docker/images/ispras/minos/openstack-mariadb:pcmklatest                 /bin/bash /usr/lo...  9 days ago    Up 8 days ago                                       galera-bundle-podman-0
+ab09fec32c4b  undercloud.ctlplane:13787/image/docker../../../images/ispras/minos/openstack-mariadb:pcmklatest                 /bin/bash /usr/lo...  9 days ago    Up 8 days ago                                       galera-bundle-podman-0
 
 sudo podman exec -ti -u root galera-bundle-podman-0 mysql
 > use nova_api

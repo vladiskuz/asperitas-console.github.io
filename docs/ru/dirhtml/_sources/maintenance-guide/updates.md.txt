@@ -5,7 +5,7 @@
 
 Перейдите во вкладку _Deployed servers_. 
 
-![](/images/all-servers.png)
+![](../../../images/all-servers.png)
 
 При чистом старте это окно будет пустым. Так как в системе ещё не было создано ни одного сервера.
 
@@ -14,7 +14,7 @@
 
 Перейдите во вкладку _Servers list_. 
 
-![](/images/stack-servers.png)
+![](../../../images/stack-servers.png)
 
 ## Обновление узлов 
 

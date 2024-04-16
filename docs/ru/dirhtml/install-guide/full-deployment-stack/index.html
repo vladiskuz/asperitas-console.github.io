@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Подготовка одного развёртывания &#8212; документация Asperitas 1.0.0</title>
+    <title>Подготовка одного развёртывания &#8212; документация Asperitas 23.0.1</title>
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/bootstrap-sphinx.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/my-styles.css" />
@@ -41,7 +41,7 @@
         </button>
         <a class="navbar-brand" href="../../">
           Asperitas</a>
-        <span class="navbar-text navbar-version pull-left"><b>1.0.0</b></span>
+        <span class="navbar-text navbar-version pull-left"><b>23.0.1</b></span>
       </div>
 
         <div class="collapse navbar-collapse nav-collapse">
@@ -153,12 +153,12 @@
 Обязатель пройдите подготовку к развёртываниям в разделе <a class="reference internal" href="../full-deployment-init/"><span class="doc std std-doc">Подготовка к развёртываниям</span></a>.</p>
 <p>При деплое OpenStack с Ceph необходимо сначала развернуть Ceph!</p>
 <p>Выберите одно из развёртываний в секции <em>Deployments</em>.</p>
-<p><img alt="" src="images/stack-menu.png" /></p>
+<p><img alt="" src="../../_images/stack-menu.png" /></p>
 <p>На экране отображается <strong>Меню развёртывания</strong>, в котором все настройки влияют только на выбранное развёртывание.</p>
 <section id="id2">
 <h2>Роли, Сервисы и Сети ролей<a class="headerlink" href="#id2" title="Ссылка на этот заголовок">¶</a></h2>
 <p>Перейдите во вкладку <em>Roles Services and Networks</em>.</p>
-<p><img alt="" src="images/roles-networks.png" /></p>
+<p><img alt="" src="../../_images/roles-networks.png" /></p>
 <p>Сверху отображается сводная таблица настроек для каждой из ролей, участвующих в развёртывании.</p>
 <p>Развёртывание типа <em>OpenStack</em> требует обязательные роли:</p>
 <ul class="simple">
@@ -175,12 +175,12 @@
 </ul>
 <p>Ниже необходимо определить множество сетей для каждой роли. Сети соответствуют тем, что были созданы ранее.
 В секции <em>Set default network for each role</em> выберите сеть, чей IP-адрес шлюза которая будет использоваться как основной шлюз для сети на узле.</p>
-<p><img alt="" src="images/roles-networks-2.png" /></p>
+<p><img alt="" src="../../_images/roles-networks-2.png" /></p>
 </section>
 <section id="id3">
 <h2>Сетевые планы<a class="headerlink" href="#id3" title="Ссылка на этот заголовок">¶</a></h2>
 <p>Перейдите во вкладку <em>Network plans</em>.</p>
-<p><img alt="" src="images/network-plans.png" /></p>
+<p><img alt="" src="../../_images/network-plans.png" /></p>
 <p>Определите IP-адреса NTP и DNS серверов. Несколько адресов можно указать через запятую.</p>
 <p>На данном этапе необходимо быть максимально <strong>внимательным!</strong></p>
 <p>Сетевые планы фиксируют число используемых интерфейсов, настройки адресов или DHCP для каждого из интерфейсов, VLAN’ы и на каких интерфейсах настраиваются VLAN’ы.
@@ -208,7 +208,7 @@
 <section id="id4">
 <h2>Пароли<a class="headerlink" href="#id4" title="Ссылка на этот заголовок">¶</a></h2>
 <p>Перейдите во вкладку <em>Passwords</em>.</p>
-<p><img alt="" src="images/passwords.png" /></p>
+<p><img alt="" src="../../_images/passwords.png" /></p>
 <p>Это окно имеет смысл только для развёртываний типа OpenStack. При развёртывании Ceph этот этап можно пропустить.</p>
 <p>Здесь обратите внимание на поля:</p>
 <ul class="simple">
@@ -220,14 +220,14 @@
 <section id="ip">
 <h2>Фиксированные IP-адреса<a class="headerlink" href="#ip" title="Ссылка на этот заголовок">¶</a></h2>
 <p>Перейдите во вкладку <em>Fixed IPs</em>.</p>
-<p><img alt="" src="images/fixed-ips.png" /></p>
+<p><img alt="" src="../../_images/fixed-ips.png" /></p>
 <p>IP-адреса можно зафиксировать для развёртываемых серверов. Также актуально фиксировать виртуальные IP-адреса для API развёртываемого обалка.</p>
 <p>Этот этап опционален.</p>
 </section>
 <section id="id5">
 <h2>Настройки сервисов облака<a class="headerlink" href="#id5" title="Ссылка на этот заголовок">¶</a></h2>
 <p>Перейдите во вкладку <em>Service settings</em>.</p>
-<p><img alt="" src="images/service-settings.png" /></p>
+<p><img alt="" src="../../_images/service-settings.png" /></p>
 <p>Необходимо внимательно пройти по всем пунктам в этом окне, указать только используемые опции.
 Те опции, что используются, необходимо обязательно настроить внутри своими параметрами!</p>
 <p>Все опции, кроме Bonding, имеют смысл только при развёртывании типа <em>OpenStack</em>!
@@ -266,7 +266,7 @@
       
     </p>
     <p>
-        &copy; Copyright 2022, ИСП РАН.<br/>
+        &copy; Copyright 2019-2024, ИСП РАН.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br/>
     </p>
   </div>

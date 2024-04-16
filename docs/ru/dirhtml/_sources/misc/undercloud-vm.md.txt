@@ -53,7 +53,7 @@ sudo brctl show
 
 Для запуска ВМ выполните
 ~~~shell
-virt-install --virt-type=kvm --name undercloud-base --ram 32768 --vcpus=16 --os-variant=centos8 --cdrom=/var/lib/libvirt/boot/undercloud.iso --network=bridge=br-eno1 --network=bridge=br-eno2 --disk path=/var/lib/libvirt/images/undercloud-base.qcow2,size=150,format=qcow2
+virt-install --virt-type=kvm --name undercloud-base --ram 32768 --vcpus=16 --os-variant=centos8 --cdrom=/var/lib/libvirt/boot/undercloud.iso --network=bridge=br-eno1 --network=bridge=br-eno2 --disk path=/var/lib/libvirt../../../images/undercloud-base.qcow2,size=150,format=qcow2
 ~~~
 
 KVM создаст виртуальные интерфейсы vnet0 и vnet1 в составе бриджей, если бридж падает, то интерфейсы из него исчезают. Чтобы добавить снова их в бридж можно выполнить
