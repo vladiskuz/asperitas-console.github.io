@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Подготовка к развёртываниям с нуля &#8212; документация Asperitas 1.0.0</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/bootstrap-sphinx.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/my-styles.css" />
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/translations.js"></script>
+    <link rel="author" title="Об этих документах" href="../../about/" />
+    <link rel="index" title="Алфавитный указатель" href="../../genindex/" />
+    <link rel="search" title="Поиск" href="../../search/" />
+    <link rel="next" title="Подготовка одного развёртывания" href="../full-deployment-stack/" />
+    <link rel="prev" title="Установка узла развёртывания" href="../install-undercloud/" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="../../_static/js/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="../../_static/js/jquery-fix.js"></script>
+<script type="text/javascript" src="../../_static/bootstrap-3.4.1/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../_static/bootstrap-sphinx.js"></script>
+
+  </head><body>
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../../">
+          Asperitas</a>
+        <span class="navbar-text navbar-version pull-left"><b>1.0.0</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../../"> <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul>
+<li class="toctree-l1"><a class="reference internal" href="../../about/">Введение</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../requirements/">Требования к оборудованию и ПО</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install-undercloud/">Установка узла развёртывания</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Подготовка к развёртываниям с нуля</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../full-deployment-stack/">Подготовка одного развёртывания</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment/">Развёртывание облака</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../maintenance-guide/updates/">Сопровождение развёртывания на базе дистрибутива Asperitas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../maintenance-guide/management/">Сопровождение облака и управление ресурсами</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../troubleshooting/troubleshooting/">Устранение неполадок</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../user-guide/dashboard_toc/">Доступные разделы веб-интерфейса</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../user-guide/compute/">Запуск и управление инстансами (вкладка Вычисления)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../user-guide/networks/">Создание и управление сетями (Вкладка «Сеть»)</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../misc/supplement/">Приложение</a></li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">Подготовка к развёртываниям с нуля</a><ul>
+<li><a class="reference internal" href="#id2">Физические узлы</a></li>
+<li><a class="reference internal" href="#id3">Интроспекция</a></li>
+<li><a class="reference internal" href="#id4">Порядок физических интерфейсов</a></li>
+<li><a class="reference internal" href="#id5">Диск операционной системы</a></li>
+<li><a class="reference internal" href="#id6">Физические порты</a></li>
+<li><a class="reference internal" href="#id7">Сети</a></li>
+<li><a class="reference internal" href="#id8">Шаблоны развёртывания</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+  <li>
+    <a href="../install-undercloud/" title="Previous Chapter: Установка узла развёртывания"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Установка узл...</span>
+    </a>
+  </li>
+  <li>
+    <a href="../full-deployment-stack/" title="Next Chapter: Подготовка одного развёртывания"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Подготовка од... &raquo;</span>
+    </a>
+  </li>
+              
+            
+            
+            
+            
+              <li class="hidden-sm">
+<div id="sourcelink">
+  <a href="../../_sources/install-guide/full-deployment-init.md.txt"
+     rel="nofollow">Source</a>
+</div></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../../search/" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="body col-md-12 content" role="main">
+      
+  <section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1>Подготовка к развёртываниям с нуля<a class="headerlink" href="#id1" title="Ссылка на этот заголовок">¶</a></h1>
+<p>При первоначальном развёртывании строго советуется пройти каждый пункт!
+Asperitas Console не предполагает быстрого старта или прототипного развёртывания!</p>
+<p>Для запуска консоли введите команду в консоли узла развёртывания</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>asperitas
+</pre></div>
+</div>
+<p>Для запуска консоли в режиме <strong>debug</strong> используйте команду</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>asperitas<span class="w"> </span>--debug
+</pre></div>
+</div>
+<p>После выполнения команды появляется <strong>Главное окно</strong> asperitas консоли
+<img alt="Главное меню" src="../images/main-menu.png" /></p>
+<section id="id2">
+<h2>Физические узлы<a class="headerlink" href="#id2" title="Ссылка на этот заголовок">¶</a></h2>
+<p>Перейдите во вкладку <em>Baremetal nodes</em>.
+Нажмите кнопку <em>Add</em>, чтобы добавить новый физический узел для добавления в развёртываемое облако.</p>
+<p><img alt="" src="../images/baremetal-node-add.png" /></p>
+<p>Красным цветом выделены поля обязательные для заполнения.</p>
+<ul class="simple">
+<li><p><em>Name</em> -  имя физического узла. Используется лишь для удобства, не влияет на hostname узла;</p></li>
+<li><p><em>BMC type</em> - тип BMC, поддерживаемые значения: <em>IPMI</em>, <em>iDRAC</em>;</p></li>
+<li><p><em>BMC address</em> - IP-адрес BMC, пример: <em>2.3.4.5</em> ;</p></li>
+<li><p><em>BMC login</em> - логин для управления физическим узлом через BMC;</p></li>
+<li><p><em>BMC password</em> - пароль для управления физическим узлом через BMC;</p></li>
+<li><p><em>Profile</em> - роль физического узла в развёртываемом облаке;</p></li>
+<li><p><em>UEFI boot mode</em> - установите галочку, если узел загружается в режиме UEFI;</p></li>
+<li><p><em>PXE port mac_address</em> - мак адрес физического порта узла, через который происходит загрузке по PXE.</p></li>
+</ul>
+<p>Поля необязательные для заполнения (используются, если интроспекция узла нежелательна):</p>
+<ul class="simple">
+<li><p><em>Disk capacity</em> - размер физического диска для установки операционной системы;</p></li>
+<li><p><em>Cpu number</em> - число процессорных ядер узла;</p></li>
+<li><p><em>Architecture</em> - архитектура процессора (поддерживается только x86_64);</p></li>
+<li><p><em>Memory capacity</em> - размер оперативной памяти узла.</p></li>
+</ul>
+<p>Нажмите кнопку <em>Save</em>. Физический узел добавится в список физических узлов.
+При добавлении физического узла узел не включается и вводится в развёртываемое облако.</p>
+<p>Дождитесь изменения статуса узла на <em>manageable/available</em>.
+Если узел остаётся в статусе enroll, перейдите в раздел «Исправление проблем».</p>
+<p>Статус <em>manageable</em> позволяет включать и выключать узел из системы на узле развёртывания.
+Статус <em>available</em> позволяет ввести машину в развёртываемое облако.
+Система автоматически переводит узел в состояние <em>available</em>, если известны параметры <em>Disk capacity</em>, <em>Cpu number</em>, <em>Architecure</em> и <em>Memory capacity</em>.</p>
+</section>
+<section id="id3">
+<h2>Интроспекция<a class="headerlink" href="#id3" title="Ссылка на этот заголовок">¶</a></h2>
+<p>Перейдите во вкладку <em>Introspection</em> Главного меню.</p>
+<p><img alt="" src="../images/introspection-list.png" /></p>
+<p>На экране отобразится список физических машин, добавленных в предыдущем пункте.</p>
+<p>Отметьте весь список машин и нажмите кнопку <em>Start</em>. Начнётся интроспекция физических узлов. Статус отображается в правой половине экрана.</p>
+<p>После успешного окончания интроспекции напротив поле <em>state</em> будет равно значению <em>finished</em>, а напротив имени узла появится галочка.</p>
+<p>Статус отображается только для одного узла. Чтобы посмотреть статус для другого узла, нажмите на имя узла.</p>
+<p>После успешной интроспекции можно посмотреть собранные данные дважды нажав мышкой на имя узла. Если мышки нет, то при помощи кнопок наведитесь на имя узла и нажмите <em>Enter</em></p>
+<p><img alt="" src="../images/introspection-data.png" /></p>
+</section>
+<section id="id4">
+<h2>Порядок физических интерфейсов<a class="headerlink" href="#id4" title="Ссылка на этот заголовок">¶</a></h2>
+<p><em>! Опция доступна только после успешной интроспекции</em></p>
+<p>Перейдите во вкладку <em>Network interfaces order</em>.</p>
+<p><img alt="" src="../images/nics-order.png" /></p>
+<p>На экране отобразится список узлов и их интерфейсов. Порядок интерфейсов важен, так как далее сетевые планы строятся только по номерами интерфейсов, а не их именам. Поэтому определите порядок так, чтобы интерфейсы всех узлов с одним порядковым номером были настроены одинаково на физических коммутаторах в вашей серверной.</p>
+</section>
+<section id="id5">
+<h2>Диск операционной системы<a class="headerlink" href="#id5" title="Ссылка на этот заголовок">¶</a></h2>
+<p><em>! Опция доступна только после успешной интроспекции</em></p>
+<p>Перейдите во вкладку <em>Server root disk</em>.</p>
+<p><img alt="" src="../images/root-device.png" /></p>
+<p>Если у какого-либо физического узла несколько дисков, то необходимо указать правильный диск для установки операционной системы.
+Иначе система выберет физический диск случайным образом.</p>
+</section>
+<section id="id6">
+<h2>Физические порты<a class="headerlink" href="#id6" title="Ссылка на этот заголовок">¶</a></h2>
+<p>Перейдите во вкладку <em>Baremetal ports</em>.</p>
+<p><img alt="" src="../images/baremetal-ports.png" /></p>
+<p>Здесь отображаются все физические порты известные системе для загрузки по PXE.
+Первоначально создаётся порт указанный при создании физической машины. Затем после интроспекции добавляется порт, по которому произошла загрузка по PXE,
+<strong>если этот порт не совпал с указанным вами при создании</strong>.</p>
+<p>Если это произошло, то необходимо оставить один порт в системе и удалить ненужный! Иначе при развёртывании порт для загрузки будет выбран случайным образом из этих двух.</p>
+</section>
+<section id="id7">
+<h2>Сети<a class="headerlink" href="#id7" title="Ссылка на этот заголовок">¶</a></h2>
+<p>Перейдите во вкладку <em>Networks</em>.</p>
+<p><img alt="" src="../images/networks.png" /></p>
+<p>В системе Asperitas используется принцип разделения сетей на роли.
+Набор заранее заданных сетей, который обязан присутствовать в системе:</p>
+<ul class="simple">
+<li><p><em>Ctlplane</em> - сеть администрирования физических узлов в развёртываемом облаке.
+Это единственная сеть, по которой разрешён SSH доступ к физическим узлам облака.</p></li>
+<li><p><em>External</em> - сеть для доступа к публичному API развёртываемого облака.
+Сеть должна быть доступна для всех пользователей облака.</p></li>
+<li><p><em>InternalApi</em> - сеть для доступа к приватному API развёртываемого облака.
+Используется сервисами облака для общения друг с другом.
+Не должна быть доступна даже с узла развёртывания.</p></li>
+<li><p><em>Storage</em> - сеть для доступа сервисов облака к хранилищу: Ceph или Nfs.</p></li>
+</ul>
+<p>Набор заранее заданных опциональных сетей, их можно удалить из системы за ненадобностью:</p>
+<ul class="simple">
+<li><p><em>InternalCeph</em> - внутренняя сеть для узлов хранения Ceph.</p></li>
+<li><p><em>IronicProvisioning</em> - сеть для захвата физических узлов сервисом Ironic развёртываемого облака.
+Если сервис не используется, то сеть не нужна.</p></li>
+</ul>
+<p>Можно изменить параметры сети, нажав на сеть в списке сетей двумя кликами мыши или кнопной <em>Enter</em>.</p>
+<p><img alt="" src="../images/network-edit.png" /></p>
+<p>Если необходима дополнительная сеть, то можно добавить новую, нажав кнопку <em>Add</em>.</p>
+<p>Если в поле <em>Exists</em> стоит галочка, то сеть уже создана в системе и её нельзя удалить из списка сетей.</p>
+<p>Сеть создаётся при развёртывании в дальнейшем и удаляется, если удаляется развёртывание.</p>
+</section>
+<section id="id8">
+<h2>Шаблоны развёртывания<a class="headerlink" href="#id8" title="Ссылка на этот заголовок">¶</a></h2>
+<p>Перейдите во вкладку <em>Deployment templates</em>.</p>
+<p><img alt="" src="../images/templates.png" /></p>
+<p>При чистом старте - таблица будет пустая. Нажмите кнопку <em>Add</em>, чтобы добавить новое развёртывание.</p>
+<p>В появившемся окне вы можете выбрать один из заранее заданных типов развёртывания: <em>OpenStack</em> или <em>Ceph</em>, или выбрать <em>No</em>.</p>
+<p>Если OpenStack планируется развернуть <strong>без Ceph</strong>, то создайте единственное развёртывание типа <em>OpenStack</em>.</p>
+<p>Если OpenStack планируется развернуть <strong>с Ceph</strong>, то создайте сначала развёртывание <em>Ceph</em>, затем <em>OpenStack</em></p>
+<p><img alt="" src="../images/templates-add-2.png" /></p>
+<p>Заполните имя развёртывания в поле <em>Name</em>. Имя будет использоваться как часть hostname физических узлов.</p>
+<p>В поле <em>Images Path</em> из выпадающего списке выберите образ операционной системы, используемой для развёртывания.
+Как правило для типа <em>Ceph</em> используются образы <em>images-ceph</em>, а для типа <em>OpenStack</em> используются образы <em>images-asperitas</em>.
+Если ваш путь к образам отличается от тех, что даются на выбор, то поставьте галочку в поле <em>set if custom image is used</em> и укажите путь к образам в поле ниже.</p>
+<p>На данном этапе при создании развёртывания создаются только шаблоны для настройки развёртываемого облака.
+Никаких изменений с физическими машинами не происходит.</p>
+<p>На главном экране asperitas консоли в секции <em>Deployments</em> появятся ваши созданные развёртывания для настройки.</p>
+</section>
+</section>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2022, ИСП РАН.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

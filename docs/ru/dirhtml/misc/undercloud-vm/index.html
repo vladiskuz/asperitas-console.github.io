@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Установка узла развёртывания в виртуальной машине (Centos 7,8) &#8212; документация Asperitas 1.0.0</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/bootstrap-sphinx.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/my-styles.css" />
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/translations.js"></script>
+    <link rel="author" title="Об этих документах" href="../../about/" />
+    <link rel="index" title="Алфавитный указатель" href="../../genindex/" />
+    <link rel="search" title="Поиск" href="../../search/" />
+    <link rel="next" title="Описание узла развёртывания - TripleO" href="../undercloud-tripleo/" />
+    <link rel="prev" title="Горячие клавиши" href="../hot-keys/" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="../../_static/js/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="../../_static/js/jquery-fix.js"></script>
+<script type="text/javascript" src="../../_static/bootstrap-3.4.1/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../_static/bootstrap-sphinx.js"></script>
+
+  </head><body>
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../../">
+          Asperitas</a>
+        <span class="navbar-text navbar-version pull-left"><b>1.0.0</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../../"> <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul>
+<li class="toctree-l1"><a class="reference internal" href="../../about/">Введение</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../maintenance-guide/updates/">Сопровождение развёртывания на базе дистрибутива Asperitas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../maintenance-guide/management/">Сопровождение облака и управление ресурсами</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../troubleshooting/troubleshooting/">Устранение неполадок</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../user-guide/dashboard_toc/">Страница консоли</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../user-guide/dashboard_toc/#id7">Страница администратора</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../supplement/">Приложение</a></li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">Установка узла развёртывания в виртуальной машине (Centos 7,8)</a></li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+  <li>
+    <a href="../hot-keys/" title="Previous Chapter: Горячие клавиши"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Горячие клавиши</span>
+    </a>
+  </li>
+  <li>
+    <a href="../undercloud-tripleo/" title="Next Chapter: Описание узла развёртывания - TripleO"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Описание узла... &raquo;</span>
+    </a>
+  </li>
+              
+            
+            
+            
+            
+              <li class="hidden-sm">
+<div id="sourcelink">
+  <a href="../../_sources/misc/undercloud-vm.md.txt"
+     rel="nofollow">Source</a>
+</div></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../../search/" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="body col-md-12 content" role="main">
+      
+  <section class="tex2jax_ignore mathjax_ignore" id="centos-7-8">
+<h1>Установка узла развёртывания в виртуальной машине (Centos 7,8)<a class="headerlink" href="#centos-7-8" title="Ссылка на этот заголовок">¶</a></h1>
+<p>Установите необходимые пакеты на узел</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>bridge-utils<span class="w"> </span>qemu-kvm<span class="w"> </span>qemu-img<span class="w"> </span>virt-manager<span class="w"> </span>virt-viewer<span class="w"> </span>python3-libvirt<span class="w"> </span>libvirt<span class="w"> </span>libvirt-client<span class="w"> </span>libguestfs<span class="w"> </span>libguestfs-tools<span class="w"> </span>virt-install<span class="w"> </span>libgcrypt<span class="w"> </span>libxcrypt
+</pre></div>
+</div>
+<p>Для виртуальной машины узла развёртывания необходимо создать два бриджа и указать их при создании виртуальной машины KVM.
+Внутри ВМ они будут светиться как два интерфейса: один используется для внутренней сети настройки облачной платформы, а второй используется для доступа к узлу развёртывания.</p>
+<p>Создать мост для интерфейса, на котором планируется запустить KVM VM при помощи <em>network-scripts</em></p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>nano<span class="w"> </span>/etc/sysconfig/network-scripts/ifcfg-eno1
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">DEVICE</span><span class="o">=</span><span class="n">eno1</span>
+<span class="n">ONBOOT</span><span class="o">=</span><span class="n">yes</span>
+<span class="n">HOTPLUG</span><span class="o">=</span><span class="n">no</span>
+<span class="n">NM_CONTROLLED</span><span class="o">=</span><span class="n">no</span>
+<span class="n">MTU</span><span class="o">=</span><span class="mi">1500</span>
+<span class="n">BOOTPROTO</span><span class="o">=</span><span class="n">none</span>
+<span class="n">BRIDGE</span><span class="o">=</span><span class="n">br</span><span class="o">-</span><span class="n">eno1</span>
+<span class="n">TYPE</span><span class="o">=</span><span class="n">Ethernet</span>
+</pre></div>
+</div>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>nano<span class="w"> </span>/etc/sysconfig/network-scripts/ifcfg-br-eno1
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">DEVICE</span><span class="o">=</span><span class="n">br</span><span class="o">-</span><span class="n">eno1</span>
+<span class="n">ONBOOT</span><span class="o">=</span><span class="n">yes</span>
+<span class="n">TYPE</span><span class="o">=</span><span class="n">Bridge</span>
+<span class="n">DELAY</span><span class="o">=</span><span class="mi">0</span>
+<span class="n">BOOTPROTO</span><span class="o">=</span><span class="n">static</span>
+<span class="n">IPADDR</span><span class="o">=</span><span class="mf">192.168.24.64</span>
+<span class="n">NETMASK</span><span class="o">=</span><span class="mf">255.255.255.0</span>
+<span class="n">NM_CONTROLLED</span><span class="o">=</span><span class="n">no</span>
+<span class="n">DEFROUTE</span><span class="o">=</span><span class="n">no</span>
+</pre></div>
+</div>
+<p>Или создайте мост при помощи Linux утилиты <em>ip</em></p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ip<span class="w"> </span>link<span class="w"> </span>add<span class="w"> </span>link<span class="w"> </span>eno1<span class="w"> </span>name<span class="w"> </span>eno1.100<span class="w"> </span><span class="nb">type</span><span class="w"> </span>vlan<span class="w"> </span>id<span class="w"> </span><span class="m">100</span>
+ip<span class="w"> </span>link<span class="w"> </span><span class="nb">set</span><span class="w"> </span>eno1.100<span class="w"> </span>up
+ip<span class="w"> </span>link<span class="w"> </span>add<span class="w"> </span>br100<span class="w"> </span><span class="nb">type</span><span class="w"> </span>bridge<span class="w"> </span>
+ip<span class="w"> </span>link<span class="w"> </span><span class="nb">set</span><span class="w"> </span>eno1.100<span class="w"> </span>master<span class="w"> </span>br100
+ip<span class="w"> </span>link<span class="w"> </span><span class="nb">set</span><span class="w"> </span>br100<span class="w"> </span>up
+</pre></div>
+</div>
+<p>Для проверки настроек можно использовать</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>brctl<span class="w"> </span>show
+</pre></div>
+</div>
+<p>Для запуска ВМ выполните</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>virt-install<span class="w"> </span>--virt-type<span class="o">=</span>kvm<span class="w"> </span>--name<span class="w"> </span>undercloud-base<span class="w"> </span>--ram<span class="w"> </span><span class="m">32768</span><span class="w"> </span>--vcpus<span class="o">=</span><span class="m">16</span><span class="w"> </span>--os-variant<span class="o">=</span>centos8<span class="w"> </span>--cdrom<span class="o">=</span>/var/lib/libvirt/boot/undercloud.iso<span class="w"> </span>--network<span class="o">=</span><span class="nv">bridge</span><span class="o">=</span>br-eno1<span class="w"> </span>--network<span class="o">=</span><span class="nv">bridge</span><span class="o">=</span>br-eno2<span class="w"> </span>--disk<span class="w"> </span><span class="nv">path</span><span class="o">=</span>/var/lib/libvirt/images/undercloud-base.qcow2,size<span class="o">=</span><span class="m">150</span>,format<span class="o">=</span>qcow2
+</pre></div>
+</div>
+<p>KVM создаст виртуальные интерфейсы vnet0 и vnet1 в составе бриджей, если бридж падает, то интерфейсы из него исчезают. Чтобы добавить снова их в бридж можно выполнить</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ip<span class="w"> </span>link<span class="w"> </span><span class="nb">set</span><span class="w"> </span>vnet1<span class="w"> </span>master<span class="w"> </span>br-eno2
+</pre></div>
+</div>
+</section>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2022, ИСП РАН.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

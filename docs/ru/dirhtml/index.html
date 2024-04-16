@@ -55,18 +55,30 @@
      href="#"> <b class="caret"></b></a>
   <ul class="dropdown-menu globaltoc"
       role="menu"
-      aria-labelledby="dLabelGlobalToc"><p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul>
+      aria-labelledby="dLabelGlobalToc"><ul>
 <li class="toctree-l1"><a class="reference internal" href="about/">Введение</a></li>
-<li class="toctree-l1"><a class="reference internal" href="requirements/">Требования к оборудованию и ПО</a></li>
-<li class="toctree-l1"><a class="reference internal" href="install-undercloud/">Установка узла развёртывания</a></li>
-<li class="toctree-l1"><a class="reference internal" href="full-deployment-init/">Подготовка к развёртываниям с нуля</a></li>
-<li class="toctree-l1"><a class="reference internal" href="full-deployment-stack/">Подготовка одного развёртывания</a></li>
-<li class="toctree-l1"><a class="reference internal" href="deployment/">Развёртывание облака</a></li>
-<li class="toctree-l1"><a class="reference internal" href="updates/">Сопровождение развёртывания на базе дистрибутива Asperitas</a></li>
-<li class="toctree-l1"><a class="reference internal" href="management/">Сопровождение облака и управление ресурсами</a></li>
-<li class="toctree-l1"><a class="reference internal" href="troubleshooting/">Устранение неполадок</a></li>
-<li class="toctree-l1"><a class="reference internal" href="supplement/">Приложение</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="install-guide/requirements/">Требования к оборудованию и ПО</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install-guide/install-undercloud/">Установка узла развёртывания</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install-guide/full-deployment-init/">Подготовка к развёртываниям с нуля</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install-guide/full-deployment-stack/">Подготовка одного развёртывания</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install-guide/deployment/">Развёртывание облака</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="maintenance-guide/updates/">Сопровождение развёртывания на базе дистрибутива Asperitas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="maintenance-guide/management/">Сопровождение облака и управление ресурсами</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting/troubleshooting/">Устранение неполадок</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="user-guide/dashboard_toc/">Доступные разделы веб-интерфейса</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user-guide/compute/">Запуск и управление инстансами (вкладка Вычисления)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user-guide/networks/">Создание и управление сетями (Вкладка «Сеть»)</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="misc/supplement/">Приложение</a></li>
 </ul>
 </ul>
 </li>
@@ -80,7 +92,15 @@
   <ul class="dropdown-menu localtoc"
       role="menu"
       aria-labelledby="dLabelLocalToc"><ul>
-<li><a class="reference internal" href="#">Добро пожаловать в документацию Asperitas!</a></li>
+<li><a class="reference internal" href="#">Добро пожаловать в документацию Asperitas!</a><ul>
+<li><a class="reference internal" href="#id1">Строго необходимая информация</a></li>
+<li><a class="reference internal" href="#id2">Руководство по установке</a></li>
+<li><a class="reference internal" href="#id3">Руководство по сопровождению</a></li>
+<li><a class="reference internal" href="#id4">Руководство по устранению неполадок</a></li>
+<li><a class="reference internal" href="#id5">Руководство оператора</a></li>
+<li><a class="reference internal" href="#id6">Полезные советы</a></li>
+</ul>
+</li>
 </ul>
 </ul>
 </li>
@@ -126,101 +146,140 @@
       
   <section id="asperitas">
 <h1>Добро пожаловать в документацию Asperitas!<a class="headerlink" href="#asperitas" title="Ссылка на этот заголовок">¶</a></h1>
+<section id="id1">
+<h2>Строго необходимая информация<a class="headerlink" href="#id1" title="Ссылка на этот заголовок">¶</a></h2>
 <div class="toctree-wrapper compound">
-<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="about/">Введение</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="about/#id2">Основные термины и компоненты</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="requirements/">Требования к оборудованию и ПО</a></li>
-<li class="toctree-l1"><a class="reference internal" href="install-undercloud/">Установка узла развёртывания</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="install-undercloud/#id2">Подготовка к установке</a></li>
-<li class="toctree-l2"><a class="reference internal" href="install-undercloud/#id3">Процесс установки</a></li>
+</ul>
+</div>
+</section>
+<section id="id2">
+<h2>Руководство по установке<a class="headerlink" href="#id2" title="Ссылка на этот заголовок">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="install-guide/requirements/">Требования к оборудованию и ПО</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install-guide/install-undercloud/">Установка узла развёртывания</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="install-guide/install-undercloud/#id2">Подготовка к установке</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install-guide/install-undercloud/#id3">Процесс установки</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="full-deployment-init/">Подготовка к развёртываниям с нуля</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="full-deployment-init/#id2">Физические узлы</a></li>
-<li class="toctree-l2"><a class="reference internal" href="full-deployment-init/#id3">Интроспекция</a></li>
-<li class="toctree-l2"><a class="reference internal" href="full-deployment-init/#id4">Порядок физических интерфейсов</a></li>
-<li class="toctree-l2"><a class="reference internal" href="full-deployment-init/#id5">Диск операционной системы</a></li>
-<li class="toctree-l2"><a class="reference internal" href="full-deployment-init/#id6">Физические порты</a></li>
-<li class="toctree-l2"><a class="reference internal" href="full-deployment-init/#id7">Сети</a></li>
-<li class="toctree-l2"><a class="reference internal" href="full-deployment-init/#id8">Шаблоны развёртывания</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install-guide/full-deployment-init/">Подготовка к развёртываниям с нуля</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="install-guide/full-deployment-init/#id2">Физические узлы</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install-guide/full-deployment-init/#id3">Интроспекция</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install-guide/full-deployment-init/#id4">Порядок физических интерфейсов</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install-guide/full-deployment-init/#id5">Диск операционной системы</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install-guide/full-deployment-init/#id6">Физические порты</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install-guide/full-deployment-init/#id7">Сети</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install-guide/full-deployment-init/#id8">Шаблоны развёртывания</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="full-deployment-stack/">Подготовка одного развёртывания</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="full-deployment-stack/#id2">Роли, Сервисы и Сети ролей</a></li>
-<li class="toctree-l2"><a class="reference internal" href="full-deployment-stack/#id3">Сетевые планы</a></li>
-<li class="toctree-l2"><a class="reference internal" href="full-deployment-stack/#id4">Пароли</a></li>
-<li class="toctree-l2"><a class="reference internal" href="full-deployment-stack/#ip">Фиксированные IP-адреса</a></li>
-<li class="toctree-l2"><a class="reference internal" href="full-deployment-stack/#id5">Настройки сервисов облака</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install-guide/full-deployment-stack/">Подготовка одного развёртывания</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="install-guide/full-deployment-stack/#id2">Роли, Сервисы и Сети ролей</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install-guide/full-deployment-stack/#id3">Сетевые планы</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install-guide/full-deployment-stack/#id4">Пароли</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install-guide/full-deployment-stack/#ip">Фиксированные IP-адреса</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install-guide/full-deployment-stack/#id5">Настройки сервисов облака</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="deployment/">Развёртывание облака</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="deployment/#id2">Нулевое развёртывание</a></li>
-<li class="toctree-l2"><a class="reference internal" href="deployment/#id3">Обновление параметров развёртывания</a></li>
-<li class="toctree-l2"><a class="reference internal" href="deployment/#id4">Добавление узлов в облако</a></li>
-<li class="toctree-l2"><a class="reference internal" href="deployment/#id5">Удаление развёрнутых узлов из облака</a></li>
-<li class="toctree-l2"><a class="reference internal" href="deployment/#id6">Замена развёрнутых узлов в облаке</a></li>
-<li class="toctree-l2"><a class="reference internal" href="deployment/#id7">Частичное развёртывание</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="updates/">Сопровождение развёртывания на базе дистрибутива Asperitas</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="updates/#id1">Развёрнутые сервера (общий список)</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="updates/#id2">Развёрнутые сервера (список одного развёртывания)</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="updates/#id3">Обновление узлов</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="updates/#id4">Обновление системы узла развёртывания</a></li>
-<li class="toctree-l3"><a class="reference internal" href="updates/#id5">Обновление узлов вычисления</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="management/">Сопровождение облака и управление ресурсами</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="management/#id2">Флейворы</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="troubleshooting/">Устранение неполадок</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="troubleshooting/#enroll">Физический узел в статусе <em>enroll</em></a></li>
-<li class="toctree-l2"><a class="reference internal" href="troubleshooting/#id2">Ошибка интроспекции</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="troubleshooting/#dnsmasqfilter">DnsmasqFilter</a></li>
-<li class="toctree-l3"><a class="reference internal" href="troubleshooting/#ramdisk-error">Ramdisk error</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="troubleshooting/#no-valid-json">No valid JSON при создании развёртывания</a></li>
-<li class="toctree-l2"><a class="reference internal" href="troubleshooting/#id3">Параметр не определён или определён неправильно в шаблоне</a></li>
-<li class="toctree-l2"><a class="reference internal" href="troubleshooting/#config-install">При раскатке конфигурации (config-install) не найден плейбук</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="troubleshooting/#id4">Пояснение</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="troubleshooting/#id5">Ошибка настройка сети</a></li>
-<li class="toctree-l2"><a class="reference internal" href="troubleshooting/#puppet-cache-read-only">Puppet cache read-only файловая система</a></li>
-<li class="toctree-l2"><a class="reference internal" href="troubleshooting/#ceph">Неправильные права на директорию при развёртывании с использованием Ceph</a></li>
-<li class="toctree-l2"><a class="reference internal" href="troubleshooting/#wait-for-puppet-host-configuration-to-finish">Wait for puppet host configuration to finish</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="troubleshooting/#pacemaker">Pacemaker</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="troubleshooting/#id6">Не найден хост</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="troubleshooting/#id7">После обновления развёртывания</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="troubleshooting/#id8">Число используемых ресурсов на гипервизорах обнулилось</a></li>
-<li class="toctree-l2"><a class="reference internal" href="troubleshooting/#cinder">Бекенд для cinder недоступен</a></li>
-<li class="toctree-l2"><a class="reference internal" href="troubleshooting/#nova-cell">Вычислительный узел не добавлен в nova_cell</a></li>
-<li class="toctree-l2"><a class="reference internal" href="troubleshooting/#host-key-verification-failed">Ошибка миграции Host key verification failed</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="supplement/">Приложение</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="hot-keys/">Горячие клавиши</a></li>
-<li class="toctree-l2"><a class="reference internal" href="undercloud-vm/">Установка узла развёртывания в виртуальной машине (Centos 7,8)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="undercloud-tripleo/">Описание узла развёртывания - TripleO</a></li>
-<li class="toctree-l2"><a class="reference internal" href="undercloud-network/">Сети узла развёртывания</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install-guide/deployment/">Развёртывание облака</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="install-guide/deployment/#id2">Нулевое развёртывание</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install-guide/deployment/#id3">Обновление параметров развёртывания</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install-guide/deployment/#id4">Добавление узлов в облако</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install-guide/deployment/#id5">Удаление развёрнутых узлов из облака</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install-guide/deployment/#id6">Замена развёрнутых узлов в облаке</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install-guide/deployment/#id7">Частичное развёртывание</a></li>
 </ul>
 </li>
 </ul>
 </div>
+</section>
+<section id="id3">
+<h2>Руководство по сопровождению<a class="headerlink" href="#id3" title="Ссылка на этот заголовок">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="maintenance-guide/updates/">Сопровождение развёртывания на базе дистрибутива Asperitas</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="maintenance-guide/updates/#id1">Развёрнутые сервера (общий список)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="maintenance-guide/updates/#id3">Обновление узлов</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="maintenance-guide/management/">Сопровождение облака и управление ресурсами</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="maintenance-guide/management/#id2">Флейворы</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="id4">
+<h2>Руководство по устранению неполадок<a class="headerlink" href="#id4" title="Ссылка на этот заголовок">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting/troubleshooting/">Устранение неполадок</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="troubleshooting/troubleshooting/#enroll">Физический узел в статусе <em>enroll</em></a></li>
+<li class="toctree-l2"><a class="reference internal" href="troubleshooting/troubleshooting/#id2">Ошибка интроспекции</a></li>
+<li class="toctree-l2"><a class="reference internal" href="troubleshooting/troubleshooting/#no-valid-json">No valid JSON при создании развёртывания</a></li>
+<li class="toctree-l2"><a class="reference internal" href="troubleshooting/troubleshooting/#id3">Параметр не определён или определён неправильно в шаблоне</a></li>
+<li class="toctree-l2"><a class="reference internal" href="troubleshooting/troubleshooting/#config-install">При раскатке конфигурации (config-install) не найден плейбук</a></li>
+<li class="toctree-l2"><a class="reference internal" href="troubleshooting/troubleshooting/#id5">Ошибка настройка сети</a></li>
+<li class="toctree-l2"><a class="reference internal" href="troubleshooting/troubleshooting/#puppet-cache-read-only">Puppet cache read-only файловая система</a></li>
+<li class="toctree-l2"><a class="reference internal" href="troubleshooting/troubleshooting/#ceph">Неправильные права на директорию при развёртывании с использованием Ceph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="troubleshooting/troubleshooting/#wait-for-puppet-host-configuration-to-finish">Wait for puppet host configuration to finish</a></li>
+<li class="toctree-l2"><a class="reference internal" href="troubleshooting/troubleshooting/#id6">Не найден хост</a></li>
+<li class="toctree-l2"><a class="reference internal" href="troubleshooting/troubleshooting/#id8">Число используемых ресурсов на гипервизорах обнулилось</a></li>
+<li class="toctree-l2"><a class="reference internal" href="troubleshooting/troubleshooting/#cinder">Бекенд для cinder недоступен</a></li>
+<li class="toctree-l2"><a class="reference internal" href="troubleshooting/troubleshooting/#nova-cell">Вычислительный узел не добавлен в nova_cell</a></li>
+<li class="toctree-l2"><a class="reference internal" href="troubleshooting/troubleshooting/#host-key-verification-failed">Ошибка миграции Host key verification failed</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="id5">
+<h2>Руководство оператора<a class="headerlink" href="#id5" title="Ссылка на этот заголовок">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="user-guide/dashboard_toc/">Доступные разделы веб-интерфейса</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="user-guide/dashboard_toc/#id2">Страница консоли</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user-guide/dashboard_toc/#id8">Страница администратора</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="user-guide/compute/">Запуск и управление инстансами (вкладка Вычисления)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="user-guide/compute/#id2">Создание пары ключей</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user-guide/compute/#id3">Запуск инстанса</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user-guide/compute/#id4">Создание снимка инстанса</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user-guide/compute/#id5">Управление состоянием инстанса</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user-guide/compute/#ip">Назначение плавающего IP-адреса инстансу</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user-guide/compute/#id6">Загрузка образа</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="user-guide/networks/">Создание и управление сетями (Вкладка «Сеть»)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="user-guide/networks/#id2">Создание сети</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user-guide/networks/#id3">Создание маршрутизатора</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user-guide/networks/#id4">Создание порта</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user-guide/networks/#ip">Создание плавающего IP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user-guide/networks/#id5">Создание группы безопасности</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="id6">
+<h2>Полезные советы<a class="headerlink" href="#id6" title="Ссылка на этот заголовок">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="misc/supplement/">Приложение</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="misc/hot-keys/">Горячие клавиши</a></li>
+<li class="toctree-l2"><a class="reference internal" href="misc/undercloud-vm/">Установка узла развёртывания в виртуальной машине (Centos 7,8)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="misc/undercloud-tripleo/">Описание узла развёртывания - TripleO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="misc/undercloud-network/">Сети узла развёртывания</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
 </section>
 
 

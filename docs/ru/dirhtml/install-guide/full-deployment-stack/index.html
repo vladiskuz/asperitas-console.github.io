@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Подготовка одного развёртывания &#8212; документация Asperitas 1.0.0</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/bootstrap-sphinx.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/my-styles.css" />
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/translations.js"></script>
+    <link rel="author" title="Об этих документах" href="../../about/" />
+    <link rel="index" title="Алфавитный указатель" href="../../genindex/" />
+    <link rel="search" title="Поиск" href="../../search/" />
+    <link rel="next" title="Развёртывание облака" href="../deployment/" />
+    <link rel="prev" title="Подготовка к развёртываниям с нуля" href="../full-deployment-init/" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="../../_static/js/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="../../_static/js/jquery-fix.js"></script>
+<script type="text/javascript" src="../../_static/bootstrap-3.4.1/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../_static/bootstrap-sphinx.js"></script>
+
+  </head><body>
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../../">
+          Asperitas</a>
+        <span class="navbar-text navbar-version pull-left"><b>1.0.0</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../../"> <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul>
+<li class="toctree-l1"><a class="reference internal" href="../../about/">Введение</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../requirements/">Требования к оборудованию и ПО</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install-undercloud/">Установка узла развёртывания</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../full-deployment-init/">Подготовка к развёртываниям с нуля</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Подготовка одного развёртывания</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../deployment/">Развёртывание облака</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../maintenance-guide/updates/">Сопровождение развёртывания на базе дистрибутива Asperitas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../maintenance-guide/management/">Сопровождение облака и управление ресурсами</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../troubleshooting/troubleshooting/">Устранение неполадок</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../user-guide/dashboard_toc/">Доступные разделы веб-интерфейса</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../user-guide/compute/">Запуск и управление инстансами (вкладка Вычисления)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../user-guide/networks/">Создание и управление сетями (Вкладка «Сеть»)</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../misc/supplement/">Приложение</a></li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">Подготовка одного развёртывания</a><ul>
+<li><a class="reference internal" href="#id2">Роли, Сервисы и Сети ролей</a></li>
+<li><a class="reference internal" href="#id3">Сетевые планы</a></li>
+<li><a class="reference internal" href="#id4">Пароли</a></li>
+<li><a class="reference internal" href="#ip">Фиксированные IP-адреса</a></li>
+<li><a class="reference internal" href="#id5">Настройки сервисов облака</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+  <li>
+    <a href="../full-deployment-init/" title="Previous Chapter: Подготовка к развёртываниям с нуля"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Подготовка к ...</span>
+    </a>
+  </li>
+  <li>
+    <a href="../deployment/" title="Next Chapter: Развёртывание облака"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Развёртывание облака &raquo;</span>
+    </a>
+  </li>
+              
+            
+            
+            
+            
+              <li class="hidden-sm">
+<div id="sourcelink">
+  <a href="../../_sources/install-guide/full-deployment-stack.md.txt"
+     rel="nofollow">Source</a>
+</div></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../../search/" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="body col-md-12 content" role="main">
+      
+  <section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1>Подготовка одного развёртывания<a class="headerlink" href="#id1" title="Ссылка на этот заголовок">¶</a></h1>
+<p>В этом разделе описана подготовка одного развёртывания с нуля.
+Обязатель пройдите подготовку к развёртываниям в разделе <a class="reference internal" href="../full-deployment-init/"><span class="doc std std-doc">Подготовка к развёртываниям</span></a>.</p>
+<p>При деплое OpenStack с Ceph необходимо сначала развернуть Ceph!</p>
+<p>Выберите одно из развёртываний в секции <em>Deployments</em>.</p>
+<p><img alt="" src="../images/stack-menu.png" /></p>
+<p>На экране отображается <strong>Меню развёртывания</strong>, в котором все настройки влияют только на выбранное развёртывание.</p>
+<section id="id2">
+<h2>Роли, Сервисы и Сети ролей<a class="headerlink" href="#id2" title="Ссылка на этот заголовок">¶</a></h2>
+<p>Перейдите во вкладку <em>Roles Services and Networks</em>.</p>
+<p><img alt="" src="../images/roles-networks.png" /></p>
+<p>Сверху отображается сводная таблица настроек для каждой из ролей, участвующих в развёртывании.</p>
+<p>Развёртывание типа <em>OpenStack</em> требует обязательные роли:</p>
+<ul class="simple">
+<li><p><strong>Controller</strong> - узлы контроллеры</p></li>
+<li><p><strong>ComputeInstanceHA</strong> - узлы виртуализации</p></li>
+</ul>
+<p>Развёртывание типа <em>Ceph</em> требует только роль <strong>Bare</strong>, в которой нет сервисов.
+Так как само развёртывание Ceph системы происходит за пределами консоли при помощи инструмента <strong>ceph-ansible</strong>.</p>
+<p>Ниже можно настроить каждую из ролей отдельно:</p>
+<ul class="simple">
+<li><p><em>Description</em> - описание, ни на что не влияет, кроме удобства использования;</p></li>
+<li><p><em>Count</em> - число узлов данной роли;</p></li>
+<li><p><em>Hostname</em> - hostname узлов данной роли;</p></li>
+</ul>
+<p>Ниже необходимо определить множество сетей для каждой роли. Сети соответствуют тем, что были созданы ранее.
+В секции <em>Set default network for each role</em> выберите сеть, чей IP-адрес шлюза которая будет использоваться как основной шлюз для сети на узле.</p>
+<p><img alt="" src="../images/roles-networks-2.png" /></p>
+</section>
+<section id="id3">
+<h2>Сетевые планы<a class="headerlink" href="#id3" title="Ссылка на этот заголовок">¶</a></h2>
+<p>Перейдите во вкладку <em>Network plans</em>.</p>
+<p><img alt="" src="../images/network-plans.png" /></p>
+<p>Определите IP-адреса NTP и DNS серверов. Несколько адресов можно указать через запятую.</p>
+<p>На данном этапе необходимо быть максимально <strong>внимательным!</strong></p>
+<p>Сетевые планы фиксируют число используемых интерфейсов, настройки адресов или DHCP для каждого из интерфейсов, VLAN’ы и на каких интерфейсах настраиваются VLAN’ы.
+Необходимо предварительно определить схему настройки сети для всех узлов одной роли, используя знания о количестве интерфейсов на каждом узле одной роли.</p>
+<p>Схема сети определяется через условные обозначения интерфейсов как <em>nic1</em>, <em>nic2</em> и т.д.
+Порядок интерфейсов для каждого из узлов задавался ранее в разделе <em>Network interfaces order</em>.</p>
+<p>Если сетей для роли больше чем число используемых интерфейсов, зафиксированное для данной роли, то использование VLAN неизбежно.
+В этом случае для настройки VLAN в развёртываниях типа Ceph используются VLAN ядра Linux, в развёртываниях типа OpenStack используется OVS бридж.</p>
+<p>После определения сетевого плана - выйдете из консоли и зайдите в папку шаблонов вашего развёртывания.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>/etc/asperitas/templates/&lt;deployment-name&gt;-heat-templates/
+</pre></div>
+</div>
+<p>Исследуйте заранее спроектированные планы, которые лежат в папках <em>ispras-extra/network/config/</em> и <em>network/config</em>.
+Указанные в шаблонах планы являются настройками инструмента <a class="reference external" href="https://docs.openstack.org/os-net-config/">os-net-config</a>.
+Для детального понимания используйте <a class="reference external" href="https://docs.openstack.org/os-net-config/latest/config.html">документацию инструмента</a></p>
+<p>Выберите один из заданных сетевых планов или создайте новый в папке</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>/etc/asperitas/templates/&lt;deployment-name&gt;-heat-templates/ispras-extra/network/config
+</pre></div>
+</div>
+<p>Звтем вернитесь в asperitas консоль в окно <em>Network plans</em> и выберете для каждой роли свой сетефой план.</p>
+<p>Виртуальные IP-адреса используются в <em>OpenStack</em> для балансировки нагрузки на узлы управления в облаке.
+Если развёртывание типа <strong>Ceph</strong>, то оставьте все галочки пустыми в секции с виртуальными адресами.
+Если развёртывание типа <strong>OpenStack</strong>, то поставьте галочки для сетей <em>External</em>, <em>InternalApi</em> и опционально для других сетей.</p>
+</section>
+<section id="id4">
+<h2>Пароли<a class="headerlink" href="#id4" title="Ссылка на этот заголовок">¶</a></h2>
+<p>Перейдите во вкладку <em>Passwords</em>.</p>
+<p><img alt="" src="../images/passwords.png" /></p>
+<p>Это окно имеет смысл только для развёртываний типа OpenStack. При развёртывании Ceph этот этап можно пропустить.</p>
+<p>Здесь обратите внимание на поля:</p>
+<ul class="simple">
+<li><p><em>AdminPassword</em> - это пароль для пользователя <em>admin</em> в развёртываемом облаке</p></li>
+<li><p><em>CephClientKey</em>, <em>CephClusterFSID</em> - значения обязательные для связи сервисов OpenStack с Ceph.</p></li>
+</ul>
+<p>Остальные пароли можно сгенерить случайным образом.</p>
+</section>
+<section id="ip">
+<h2>Фиксированные IP-адреса<a class="headerlink" href="#ip" title="Ссылка на этот заголовок">¶</a></h2>
+<p>Перейдите во вкладку <em>Fixed IPs</em>.</p>
+<p><img alt="" src="../images/fixed-ips.png" /></p>
+<p>IP-адреса можно зафиксировать для развёртываемых серверов. Также актуально фиксировать виртуальные IP-адреса для API развёртываемого обалка.</p>
+<p>Этот этап опционален.</p>
+</section>
+<section id="id5">
+<h2>Настройки сервисов облака<a class="headerlink" href="#id5" title="Ссылка на этот заголовок">¶</a></h2>
+<p>Перейдите во вкладку <em>Service settings</em>.</p>
+<p><img alt="" src="../images/service-settings.png" /></p>
+<p>Необходимо внимательно пройти по всем пунктам в этом окне, указать только используемые опции.
+Те опции, что используются, необходимо обязательно настроить внутри своими параметрами!</p>
+<p>Все опции, кроме Bonding, имеют смысл только при развёртывании типа <em>OpenStack</em>!
+Если вы на этапе развёртывания типа <em>Ceph</em>, прочтите ниже описание <em>Bonding</em> и используйте его в случае необходимости. Остальные галочки оставьте пустыми.</p>
+<ul class="simple">
+<li><p><em>CephAnsibleExternal</em> - обязателен при использовании Ceph, необходимо настроить все параметры внутри и <a class="reference external" href="https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/16.2/html/integrating_an_overcloud_with_an_existing_red_hat_ceph_storage_cluster/assembly-preparing-overcloud-nodes_existing-ceph#proc-configuring-the-existing-ceph-storage-cluster_preparing-overcloud-nodes">подготовить</a> Ceph;</p></li>
+<li><p><em>SwiftExternal</em> - использовать Ceph Rgw как бекенд для сервиса <a class="reference external" href="https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/16.2/html/storage_guide/assembly_configuring-the-object-storage-service_osp-storage-guide">Swift</a></p></li>
+<li><p><em>CinderCephBackend</em> - использовать Ceph как бекенд для сервиса <a class="reference external" href="https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/16.2/html/storage_guide/assembly-configuring-the-block-storage-service_osp-storage-guide">Cinder</a></p></li>
+<li><p><em>CinderIscsiBackend</em> - использовать Iscsi как бекенд для сервиса <a class="reference external" href="https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/16.2/html/storage_guide/assembly-configuring-the-block-storage-service_osp-storage-guide">Cinder</a></p></li>
+<li><p><em>CinderNfsBackend</em> - использовать Nfs как бекенд для сервиса <a class="reference external" href="https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/16.2/html/storage_guide/assembly-configuring-the-block-storage-service_osp-storage-guide">Cinder</a></p></li>
+<li><p><em>CustomDomain</em> - назначить имя домена для API развёртываемого облака</p></li>
+<li><p><em>IronicOvercloud</em>, <em>IronicInspector</em> - добавить в развёртываемое облако сервис <a class="reference external" href="https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/16.2/html-single/bare_metal_provisioning/">Ironic</a></p></li>
+<li><p><em>KeysoneDomainSpecificLdapBackend</em>, <em>HorizonDomains</em> - использовать готовый LDAP сервер для сервиса <a class="reference external" href="https://docs.openstack.org/keystone/latest/admin/configuration.html#integrate-identity-with-ldap">Keysone</a>.
+Для этого вам также понадобится использовать несколько доменов для авторизации в сервисе Horizon.</p></li>
+<li><p><em>NovaNfsBackend</em> - использовать Nfs сервер как бекенд для сервиса <a class="reference external" href="https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/16.1/html/configuring_the_compute_service_for_instance_creation/assembly_configuring-compute-service-storage_compute-performance">Nova</a></p></li>
+<li><p><em>GlanceNfsBackend</em> - использовать Nfs сервер как бекенд для сервиса <a class="reference external" href="https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/16.2/html/advanced_overcloud_customization/assembly_configuring-the-image-import-method-and-shared-staging-area">Glance</a></p></li>
+<li><p><em>GlanceCephBackend</em> - использовать Ceph сервер как бекенд для сервиса <a class="reference external" href="https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/16.0/html/overcloud_parameters/image-storage-glance-parameters">Glance</a></p></li>
+<li><p><em>ComputeInstanceHA</em>, <em>PacemakerEnabled</em> - обязательны для развёртывания типа OpenStack с 3-мя и более контроллерами;</p></li>
+<li><p><em>Bonding</em> - указывается, если использовать агрегацию интерфейсов при развёртывании.
+В развёртываниях типа Ceph значение параметра <em>BondInterfaceOvsOptions</em> должно быть равно <em>mode=active-backup</em>, типа OpenStack - <em>bond_mode=active-backup</em>.
+Так как в Ceph используется агрегация ядра Linux, в OpenStack - агрегация Ovs.</p></li>
+</ul>
+<p>При определении бекендов сервисов необходимо учитывать, что для Glance и Nova может быть выбран только один. Для сервиса Cinder может использоваться несколько разных бекендов.</p>
+</section>
+</section>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2022, ИСП РАН.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

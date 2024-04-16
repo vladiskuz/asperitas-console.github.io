@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Устранение неполадок &#8212; документация Asperitas 1.0.0</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/bootstrap-sphinx.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/my-styles.css" />
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/translations.js"></script>
+    <link rel="author" title="Об этих документах" href="../../about/" />
+    <link rel="index" title="Алфавитный указатель" href="../../genindex/" />
+    <link rel="search" title="Поиск" href="../../search/" />
+    <link rel="next" title="Доступные разделы веб-интерфейса" href="../../user-guide/dashboard_toc/" />
+    <link rel="prev" title="Сопровождение облака и управление ресурсами" href="../../maintenance-guide/management/" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="../../_static/js/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="../../_static/js/jquery-fix.js"></script>
+<script type="text/javascript" src="../../_static/bootstrap-3.4.1/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../_static/bootstrap-sphinx.js"></script>
+
+  </head><body>
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../../">
+          Asperitas</a>
+        <span class="navbar-text navbar-version pull-left"><b>1.0.0</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../../"> <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul>
+<li class="toctree-l1"><a class="reference internal" href="../../about/">Введение</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../install-guide/requirements/">Требования к оборудованию и ПО</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install-guide/install-undercloud/">Установка узла развёртывания</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install-guide/full-deployment-init/">Подготовка к развёртываниям с нуля</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install-guide/full-deployment-stack/">Подготовка одного развёртывания</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install-guide/deployment/">Развёртывание облака</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../maintenance-guide/updates/">Сопровождение развёртывания на базе дистрибутива Asperitas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../maintenance-guide/management/">Сопровождение облака и управление ресурсами</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Устранение неполадок</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../user-guide/dashboard_toc/">Доступные разделы веб-интерфейса</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../user-guide/compute/">Запуск и управление инстансами (вкладка Вычисления)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../user-guide/networks/">Создание и управление сетями (Вкладка «Сеть»)</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../misc/supplement/">Приложение</a></li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">Устранение неполадок</a><ul>
+<li><a class="reference internal" href="#enroll">Физический узел в статусе <em>enroll</em></a></li>
+<li><a class="reference internal" href="#id2">Ошибка интроспекции</a><ul>
+<li><a class="reference internal" href="#dnsmasqfilter">DnsmasqFilter</a></li>
+<li><a class="reference internal" href="#ramdisk-error">Ramdisk error</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#no-valid-json">No valid JSON при создании развёртывания</a></li>
+<li><a class="reference internal" href="#id3">Параметр не определён или определён неправильно в шаблоне</a></li>
+<li><a class="reference internal" href="#config-install">При раскатке конфигурации (config-install) не найден плейбук</a><ul>
+<li><a class="reference internal" href="#id4">Пояснение</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id5">Ошибка настройка сети</a></li>
+<li><a class="reference internal" href="#puppet-cache-read-only">Puppet cache read-only файловая система</a></li>
+<li><a class="reference internal" href="#ceph">Неправильные права на директорию при развёртывании с использованием Ceph</a></li>
+<li><a class="reference internal" href="#wait-for-puppet-host-configuration-to-finish">Wait for puppet host configuration to finish</a><ul>
+<li><a class="reference internal" href="#pacemaker">Pacemaker</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id6">Не найден хост</a><ul>
+<li><a class="reference internal" href="#id7">После обновления развёртывания</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id8">Число используемых ресурсов на гипервизорах обнулилось</a></li>
+<li><a class="reference internal" href="#cinder">Бекенд для cinder недоступен</a></li>
+<li><a class="reference internal" href="#nova-cell">Вычислительный узел не добавлен в nova_cell</a></li>
+<li><a class="reference internal" href="#host-key-verification-failed">Ошибка миграции Host key verification failed</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+  <li>
+    <a href="../../maintenance-guide/management/" title="Previous Chapter: Сопровождение облака и управление ресурсами"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Сопровождение...</span>
+    </a>
+  </li>
+  <li>
+    <a href="../../user-guide/dashboard_toc/" title="Next Chapter: Доступные разделы веб-интерфейса"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Доступные раз... &raquo;</span>
+    </a>
+  </li>
+              
+            
+            
+            
+            
+              <li class="hidden-sm">
+<div id="sourcelink">
+  <a href="../../_sources/troubleshooting/troubleshooting.md.txt"
+     rel="nofollow">Source</a>
+</div></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../../search/" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="body col-md-12 content" role="main">
+      
+  <section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1>Устранение неполадок<a class="headerlink" href="#id1" title="Ссылка на этот заголовок">¶</a></h1>
+<section id="enroll">
+<h2>Физический узел в статусе <em>enroll</em><a class="headerlink" href="#enroll" title="Ссылка на этот заголовок">¶</a></h2>
+<p>Если после добавления физического узла его статус изменился на <em>enroll</em>, то возможны следующие варианты:</p>
+<ul class="simple">
+<li><p>Указанный IP-адрес недоступен с узла развёртывания. Проверьте доступность адреса с узла развёртывания: надо выйти из asperitas консоли и попробовать команду</p></li>
+</ul>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ping<span class="w"> </span>-c<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">2</span>.2.2.3
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Логин/пароль от BMC неверные</p></li>
+</ul>
+<p>Чтобы изменить параметры узла, можно удалить узел и создать его заново или изменить параметры текущего узла.
+Для этого выберите узел в списке физических узлов и нажмите <em>Enter</em> или дважды кликните мышкой:</p>
+<p><img alt="" src="../images/baremetal-node-edit.png" /></p>
+<p>Измените необходимые параметры, а также <strong>снова введите пароль</strong>. Нажмите кнопку <em>Save</em> и ожидайте изменение статуса на manageable.</p>
+</section>
+<section id="id2">
+<h2>Ошибка интроспекции<a class="headerlink" href="#id2" title="Ссылка на этот заголовок">¶</a></h2>
+<section id="dnsmasqfilter">
+<h3>DnsmasqFilter<a class="headerlink" href="#dnsmasqfilter" title="Ссылка на этот заголовок">¶</a></h3>
+<p>Ошибка при попытке интроспектировать узел</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">The</span> <span class="n">PXE</span> <span class="nb">filter</span> <span class="n">driver</span> <span class="n">DnsmasqFilter</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="n">uninitialized</span><span class="p">:</span> <span class="n">my</span> <span class="n">fsm</span> <span class="n">encountered</span> <span class="n">an</span> <span class="n">exception</span><span class="p">:</span> <span class="n">Can</span> <span class="ow">not</span> <span class="n">transition</span> <span class="kn">from</span> <span class="nn">state</span> <span class="s1">&#39;uninitialized&#39;</span> <span class="n">on</span> <span class="n">event</span> <span class="s1">&#39;sync&#39;</span> <span class="p">(</span><span class="n">no</span> <span class="n">defined</span> <span class="n">transition</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Описание проблемы есть на сайте <a class="reference external" href="https://access.redhat.com/solutions/6193931">RedHat Solutions</a>
+Причина ошибки: драйвер pxefilter не может инициализировать DNSmasq
+Решение: перезапустить все сервисы Ironic</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="k">for</span><span class="w"> </span>service<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="k">$(</span>sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>tripleo_ironic<span class="w"> </span><span class="p">|</span><span class="w"> </span>cut<span class="w"> </span>-d<span class="w"> </span><span class="s2">&quot; &quot;</span><span class="w"> </span>-f3<span class="k">)</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="k">do</span><span class="w"> </span>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span><span class="nv">$service</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="k">done</span>
+</pre></div>
+</div>
+</section>
+<section id="ramdisk-error">
+<h3>Ramdisk error<a class="headerlink" href="#ramdisk-error" title="Ссылка на этот заголовок">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">2024</span><span class="o">-</span><span class="mi">02</span><span class="o">-</span><span class="mi">26</span> <span class="mi">19</span><span class="p">:</span><span class="mi">16</span><span class="p">:</span><span class="mf">12.688</span> <span class="mi">7</span> <span class="n">ERROR</span> <span class="n">ironic_inspector</span><span class="o">.</span><span class="n">utils</span> <span class="p">[</span><span class="o">-</span><span class="p">]</span> <span class="p">[</span><span class="n">node</span><span class="p">:</span> <span class="n">MAC</span> <span class="mi">00</span><span class="p">:</span><span class="mi">25</span><span class="p">:</span><span class="mi">90</span><span class="p">:</span><span class="n">bb</span><span class="p">:</span><span class="mi">0</span><span class="n">e</span><span class="p">:</span><span class="n">d8</span> <span class="n">BMC</span> <span class="mf">10.100.2.33</span><span class="p">]</span> <span class="n">Ramdisk</span> <span class="n">repor</span>
+<span class="n">ted</span> <span class="n">error</span><span class="p">:</span> <span class="n">The</span> <span class="n">following</span> <span class="n">errors</span> <span class="n">were</span> <span class="n">encountered</span><span class="p">:</span>
+<span class="o">*</span> <span class="n">failed</span> <span class="n">to</span> <span class="n">run</span> <span class="n">hardware</span><span class="o">-</span><span class="n">detect</span> <span class="n">utility</span><span class="p">:</span> <span class="p">[</span><span class="n">Errno</span> <span class="mi">2</span><span class="p">]</span> <span class="n">No</span> <span class="n">such</span> <span class="n">file</span> <span class="ow">or</span> <span class="n">directory</span><span class="p">:</span> <span class="s1">&#39;hardware-detect&#39;</span>
+<span class="mi">2024</span><span class="o">-</span><span class="mi">02</span><span class="o">-</span><span class="mi">26</span> <span class="mi">19</span><span class="p">:</span><span class="mi">16</span><span class="p">:</span><span class="mf">12.688</span> <span class="mi">7</span> <span class="n">ERROR</span> <span class="n">ironic_inspector</span><span class="o">.</span><span class="n">process</span> <span class="p">[</span><span class="o">-</span><span class="p">]</span> <span class="p">[</span><span class="n">node</span><span class="p">:</span> <span class="n">MAC</span> <span class="mi">00</span><span class="p">:</span><span class="mi">25</span><span class="p">:</span><span class="mi">90</span><span class="p">:</span><span class="n">bb</span><span class="p">:</span><span class="mi">0</span><span class="n">e</span><span class="p">:</span><span class="n">d8</span> <span class="n">BMC</span> <span class="mf">10.100.2.33</span><span class="p">]</span> <span class="n">Hook</span> <span class="n">ramdis</span>
+<span class="n">k_error</span> <span class="n">failed</span><span class="p">,</span> <span class="n">delaying</span> <span class="n">error</span> <span class="n">report</span> <span class="n">until</span> <span class="n">node</span> <span class="n">look</span> <span class="n">up</span><span class="p">:</span> <span class="n">Ramdisk</span> <span class="n">reported</span> <span class="n">error</span><span class="p">:</span> <span class="n">The</span> <span class="n">following</span> <span class="n">errors</span> <span class="n">were</span> <span class="n">encountere</span>
+<span class="n">d</span><span class="p">:</span>
+<span class="o">*</span> <span class="n">failed</span> <span class="n">to</span> <span class="n">run</span> <span class="n">hardware</span><span class="o">-</span><span class="n">detect</span> <span class="n">utility</span><span class="p">:</span> <span class="p">[</span><span class="n">Errno</span> <span class="mi">2</span><span class="p">]</span> <span class="n">No</span> <span class="n">such</span> <span class="n">file</span> <span class="ow">or</span> <span class="n">directory</span><span class="p">:</span> <span class="s1">&#39;hardware-detect&#39;</span><span class="p">:</span> <span class="n">ironic_inspector</span><span class="o">.</span><span class="n">util</span>
+<span class="n">s</span><span class="o">.</span><span class="n">Error</span><span class="p">:</span> <span class="n">Ramdisk</span> <span class="n">reported</span> <span class="n">error</span><span class="p">:</span> <span class="n">The</span> <span class="n">following</span> <span class="n">errors</span> <span class="n">were</span> <span class="n">encountered</span><span class="p">:</span>
+</pre></div>
+</div>
+<p>Смотреть логи в /var/log/containers/ironic-inspector/ramdisk</p>
+</section>
+</section>
+<section id="no-valid-json">
+<h2>No valid JSON при создании развёртывания<a class="headerlink" href="#no-valid-json" title="Ссылка на этот заголовок">¶</a></h2>
+<p>Ошибка при создавнии развёртывания</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="ne">ValueError</span><span class="p">:</span> <span class="n">Value</span> <span class="n">must</span> <span class="n">be</span> <span class="n">valid</span> <span class="n">JSON</span><span class="p">:</span> <span class="n">Expecting</span> <span class="n">value</span><span class="p">:</span> <span class="n">line</span> <span class="mi">1</span> <span class="n">column</span> <span class="mi">1</span> <span class="p">(</span><span class="n">char</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>На узле развёртывания выполните</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>podman<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-ti<span class="w"> </span>-u<span class="w"> </span>root<span class="w"> </span>heat_engine<span class="w"> </span>vi<span class="w"> </span>/usr/lib/python3.6/site-packages/heat/engine/parameters.py
+</pre></div>
+</div>
+<p>Найдите класс <em>JsonParam</em> и исправьте функцию <em>parse</em>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">message</span> <span class="o">=</span> <span class="n">_</span><span class="p">(</span><span class="s1">&#39;Value </span><span class="si">%s</span><span class="s1"> must be valid JSON: </span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">)</span> <span class="o">%</span> <span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">err</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Затем перезапустите контейнер</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>tripleo_heat_engine
+</pre></div>
+</div>
+<p>И запустите создание заново</p>
+</section>
+<section id="id3">
+<h2>Параметр не определён или определён неправильно в шаблоне<a class="headerlink" href="#id3" title="Ссылка на этот заголовок">¶</a></h2>
+<p>Если при создании стека не хватает какого-то параметра, но при этом, стек уже начал создаваться.
+Или если результат не соответствует указанному в параметре. То можно использовать следующие команды для дебага</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>openstack<span class="w"> </span>stack<span class="w"> </span>environment<span class="w"> </span>show<span class="w"> </span>asperitas
+openstack<span class="w"> </span>stack<span class="w"> </span>template<span class="w"> </span>show<span class="w"> </span>asperitas
+</pre></div>
+</div>
+</section>
+<section id="config-install">
+<h2>При раскатке конфигурации (config-install) не найден плейбук<a class="headerlink" href="#config-install" title="Ссылка на этот заголовок">¶</a></h2>
+<p>Если при развёртывании облака вы видете ошибку,</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="ne">RuntimeError</span><span class="p">:</span> <span class="n">No</span> <span class="n">such</span> <span class="n">playbook</span><span class="p">:</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">stack</span><span class="o">/</span><span class="n">config</span><span class="o">-</span><span class="n">download</span><span class="o">/</span><span class="n">best</span><span class="o">-</span><span class="n">deployment</span><span class="o">-</span><span class="n">ever</span><span class="o">/</span><span class="n">deploy_steps_playbook</span><span class="o">.</span><span class="n">yaml</span>
+</pre></div>
+</div>
+<p>То зайдите в папке <code class="docutils literal notranslate"><span class="pre">/etc/asperitas/templates/deploy</span></code> в последний файл с именем вашего деплоя.
+Далее выполните</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>grep<span class="w"> </span>-RIins<span class="w"> </span>OS::TripleO::PostDeploySteps
+</pre></div>
+</div>
+<p>Если в выводе присутствуют записи вида OS::Heat::None - то удалите их и обновите стек.</p>
+<section id="id4">
+<h3>Пояснение<a class="headerlink" href="#id4" title="Ссылка на этот заголовок">¶</a></h3>
+<p>При операции config download выполняется генерация плейбуков.
+Код находится в библиотеке <code class="docutils literal notranslate"><span class="pre">tripleo_common</span></code> в папке <code class="docutils literal notranslate"><span class="pre">utils/config.py</span></code>.</p>
+<p>Для дебага можно использовать команду</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>openstack<span class="w"> </span>overcloud<span class="w"> </span>config<span class="w"> </span>download<span class="w"> </span>--debug<span class="w"> </span>--name<span class="w"> </span>&lt;deploy_name&gt;
+</pre></div>
+</div>
+<p>Функция отвечающая за непосредственную генерацию файлов называется <code class="docutils literal notranslate"><span class="pre">write_config</span></code>.
+Она использует <code class="docutils literal notranslate"><span class="pre">stack</span> <span class="pre">outputs</span></code> сгенерённые при создании стека.
+А именно для генерации <code class="docutils literal notranslate"><span class="pre">deploy_steps_playbook.yaml</span></code> используется ресурс <code class="docutils literal notranslate"><span class="pre">RoleConfig</span></code>.
+Поэтому если в стеке обнулён ресурс <code class="docutils literal notranslate"><span class="pre">PostDeploySteps</span></code>, то и плейбук не будет сгенерён.</p>
+</section>
+</section>
+<section id="id5">
+<h2>Ошибка настройка сети<a class="headerlink" href="#id5" title="Ссылка на этот заголовок">¶</a></h2>
+<p>Если при развёртывании облака вы видете ошибку,</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="s2">&quot;failed_when_result&quot;</span><span class="p">:</span> <span class="n">true</span>
+<span class="p">}</span>
+<span class="mi">2023</span><span class="o">-</span><span class="mi">03</span><span class="o">-</span><span class="mi">02</span> <span class="mi">17</span><span class="p">:</span><span class="mi">02</span><span class="p">:</span><span class="mf">49.089226</span> <span class="o">|</span> <span class="mi">08002710</span><span class="o">-</span><span class="n">c16f</span><span class="o">-</span><span class="mi">44</span><span class="n">d5</span><span class="o">-</span><span class="mi">9117</span><span class="o">-</span><span class="mi">00000000029</span><span class="n">d</span> <span class="o">|</span>     <span class="n">TIMING</span> <span class="o">|</span> <span class="n">NetworkConfig</span> <span class="n">stdout</span> <span class="o">|</span> <span class="n">monitoring</span><span class="o">-</span><span class="n">ceph</span><span class="o">-</span><span class="mi">0</span> <span class="o">|</span> <span class="mi">0</span><span class="p">:</span><span class="mi">05</span><span class="p">:</span><span class="mf">58.946554</span> <span class="o">|</span> <span class="mf">0.06</span><span class="n">s</span>
+</pre></div>
+</div>
+<p>зайдите на упавший хост по ssh и выполните</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>cat<span class="w"> </span>/etc/os-net-config/config.json
+</pre></div>
+</div>
+<p>В выводе будет сгенерённый для вашего узла сетевой план.
+Проверьте, что план соответствует ожидаемым настройкам .
+Если план не соответствует, то перейдите к настройке сетевого плана снова и запустите обновление развёртывания.</p>
+<p>Если план соответствует ожидаемому, то выполните</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>os-net-config<span class="w"> </span>-c<span class="w"> </span>/etc/os-net-config/config.json<span class="w"> </span>--verbose
+</pre></div>
+</div>
+<p>И посмотрите на вывод команды и ошибки, которые команда выведет.
+Дальнейшая работа с проблемой зависит от ошибок в выводе команды.</p>
+<p>После исправления всех ошибок, с узла развёртывания выполните</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>screen<span class="w"> </span>-x<span class="w"> </span>&lt;deploy_name&gt;
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">INTERACTIVE</span> <span class="n">MODE</span>
+<span class="n">Enter</span> <span class="n">command</span><span class="p">:</span> <span class="n">c</span>
+</pre></div>
+</div>
+<p>Развёртывание продолжится дальше</p>
+</section>
+<section id="puppet-cache-read-only">
+<h2>Puppet cache read-only файловая система<a class="headerlink" href="#puppet-cache-read-only" title="Ссылка на этот заголовок">¶</a></h2>
+<p>Если при развёртывании падают контейнеры вида container-puppet-<service>.
+То необходимо проверить логи контейнера после старта</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>less<span class="w"> </span>/var/log/containers/stdouts/container-puppet-&lt;service&gt;.log
+</pre></div>
+</div>
+<p>Если видны ошибки вида</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">boost</span><span class="p">::</span><span class="n">filesystem</span><span class="p">::</span><span class="n">remove</span><span class="p">:</span> <span class="n">Read</span><span class="o">-</span><span class="n">only</span> <span class="n">file</span> <span class="n">system</span><span class="p">:</span> <span class="s2">&quot;/opt/puppetlabs/facter/cache/cached_facts/kernel&quot;</span>
+</pre></div>
+</div>
+<p>то проблема скорее всего в том, что развёртывание было начато некоторое время назад и кеш успел измениться.
+Необходимо пересоздать один из упавших контейнеров container-puppet-<service> с разрешением на запись для container-volume=/var/lib/container-puppet/</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>podman<span class="w"> </span>ps<span class="w"> </span>-a<span class="w"> </span>
+<span class="c1">#использовать вывод для пересоздания контейнера</span>
+sudo<span class="w"> </span>podman<span class="w"> </span>inspect<span class="w"> </span>container-puppet-&lt;service&gt;<span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span>.<span class="o">[</span><span class="m">0</span><span class="o">]</span>.Config.CreateCommand
+sudo<span class="w"> </span>podman<span class="w"> </span>rm<span class="w"> </span>container-puppet-&lt;service&gt;<span class="w"> </span>
+sudo<span class="w"> </span>podman<span class="w"> </span>container<span class="w"> </span>run<span class="w"> </span>&lt;...&gt;<span class="w"> </span>--volume<span class="w"> </span>/var/lib/container-puppet/puppetlabs:/opt/puppetlabs:rw<span class="w"> </span>&lt;...&gt;
+</pre></div>
+</div>
+<p>Остальные упавшие контейнеры вида container-puppet-<service> можно просто перезапустить</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>podman<span class="w"> </span>restart<span class="w"> </span>container-puppet-&lt;service&gt;
+</pre></div>
+</div>
+</section>
+<section id="ceph">
+<h2>Неправильные права на директорию при развёртывании с использованием Ceph<a class="headerlink" href="#ceph" title="Ссылка на этот заголовок">¶</a></h2>
+<p>Ошибка выглядит следующим образом</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">2023</span><span class="o">-</span><span class="mi">03</span><span class="o">-</span><span class="mi">27</span> <span class="mi">20</span><span class="p">:</span><span class="mi">34</span><span class="p">:</span><span class="mf">52.505694</span> <span class="o">|</span> <span class="mi">52540064</span><span class="o">-</span><span class="mi">5093</span><span class="o">-</span><span class="mi">800</span><span class="n">d</span><span class="o">-</span><span class="mi">24</span><span class="n">d6</span><span class="o">-</span><span class="mi">00000001</span><span class="n">f15c</span> <span class="o">|</span>       <span class="n">TASK</span> <span class="o">|</span> <span class="n">symbolic</span> <span class="n">link</span> <span class="n">to</span> <span class="n">tripleo</span> <span class="n">inventory</span> <span class="kn">from</span> <span class="nn">ceph</span><span class="o">-</span><span class="n">ansible</span> <span class="n">work</span> <span class="n">directory</span>
+<span class="mi">2023</span><span class="o">-</span><span class="mi">03</span><span class="o">-</span><span class="mi">27</span> <span class="mi">20</span><span class="p">:</span><span class="mi">34</span><span class="p">:</span><span class="mf">52.764361</span> <span class="o">|</span> <span class="mi">52540064</span><span class="o">-</span><span class="mi">5093</span><span class="o">-</span><span class="mi">800</span><span class="n">d</span><span class="o">-</span><span class="mi">24</span><span class="n">d6</span><span class="o">-</span><span class="mi">00000001</span><span class="n">f15c</span> <span class="o">|</span>    <span class="n">IGNORED</span> <span class="o">|</span> <span class="n">symbolic</span> <span class="n">link</span> <span class="n">to</span> <span class="n">tripleo</span> <span class="n">inventory</span> <span class="kn">from</span> <span class="nn">ceph</span><span class="o">-</span><span class="n">ansible</span> <span class="n">work</span> <span class="n">directory</span> <span class="o">|</span> <span class="n">undercloud</span> <span class="o">|</span> <span class="n">error</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;changed&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span> <span class="s2">&quot;msg&quot;</span><span class="p">:</span> <span class="s2">&quot;Error while linking: [Errno 13] Permission denied: b&#39;/home/stack/config-download/asperitas/tripleo-ansible-inventory.yaml&#39; -&gt; b&#39;/home/stack/config-download/asperitas/ceph-ansible/inventory.yml&#39;&quot;</span><span class="p">,</span> <span class="s2">&quot;path&quot;</span><span class="p">:</span> <span class="s2">&quot;/home/stack/config-download/asperitas/ceph-ansible/inventory.yml&quot;</span><span class="p">}</span>
+<span class="mi">2023</span><span class="o">-</span><span class="mi">03</span><span class="o">-</span><span class="mi">27</span> <span class="mi">20</span><span class="p">:</span><span class="mi">34</span><span class="p">:</span><span class="mf">52.765518</span> <span class="o">|</span> <span class="mi">52540064</span><span class="o">-</span><span class="mi">5093</span><span class="o">-</span><span class="mi">800</span><span class="n">d</span><span class="o">-</span><span class="mi">24</span><span class="n">d6</span><span class="o">-</span><span class="mi">00000001</span><span class="n">f15c</span> <span class="o">|</span>     <span class="n">TIMING</span> <span class="o">|</span> <span class="n">tripleo_ceph_work_dir</span> <span class="p">:</span> <span class="n">symbolic</span> <span class="n">link</span> <span class="n">to</span> <span class="n">tripleo</span> <span class="n">inventory</span> <span class="kn">from</span> <span class="nn">ceph</span><span class="o">-</span><span class="n">ansible</span> <span class="n">work</span> <span class="n">directory</span> <span class="o">|</span> <span class="n">undercloud</span> <span class="o">|</span> <span class="mi">3</span> <span class="n">days</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span><span class="mi">22</span><span class="p">:</span><span class="mf">28.851303</span> <span class="o">|</span> <span class="mf">0.26</span><span class="n">s</span>
+</pre></div>
+</div>
+<p>С узла развёртывания выполните</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>chown<span class="w"> </span>-R<span class="w"> </span>stack:stack<span class="w"> </span>config-download/config-download-latest/ceph-ansible
+screen<span class="w"> </span>-x<span class="w"> </span>&lt;deploy_name&gt;
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">INTERACTIVE</span> <span class="n">MODE</span>
+<span class="n">Enter</span> <span class="n">command</span><span class="p">:</span> <span class="n">re</span>
+</pre></div>
+</div>
+</section>
+<section id="wait-for-puppet-host-configuration-to-finish">
+<h2>Wait for puppet host configuration to finish<a class="headerlink" href="#wait-for-puppet-host-configuration-to-finish" title="Ссылка на этот заголовок">¶</a></h2>
+<p>Если при развёртывании сервисов Ansible падает на задаче <em>Wait for puppet host configuration to finish</em>, то сначала необходимо определить узел, на котором произошла ошибка</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">YYYY</span><span class="o">-</span><span class="n">MM</span><span class="o">-</span><span class="n">DD</span> <span class="n">HH</span><span class="p">:</span><span class="n">MM</span><span class="p">:</span><span class="n">SS</span> <span class="o">|</span> <span class="mi">00000000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">000000000000</span> <span class="o">|</span> <span class="n">WAITING</span> <span class="o">|</span> <span class="n">Wait</span> <span class="k">for</span> <span class="n">puppet</span> <span class="n">host</span> <span class="n">configuration</span> <span class="n">to</span> <span class="n">finish</span> <span class="o">|</span> <span class="n">asperitas</span><span class="o">-</span><span class="n">controller</span><span class="o">-</span><span class="mi">0</span>
+</pre></div>
+</div>
+<p>В примере выше ошибка произошла на узле <em>asperitas-controller-0</em>.
+Для поиска причины ошибки необходимо зайти по ssh на этот узел и запустить puppet самостоятельно</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>puppet<span class="w"> </span>apply<span class="w"> </span>--modulepath<span class="o">=</span>/etc/puppet/modules:/opt/stack/puppet-modules:/usr/share/openstack-puppet/modules<span class="w"> </span>--detailed-exitcodes<span class="w"> </span>--summarize<span class="w"> </span>--color<span class="o">=</span><span class="nb">true</span><span class="w"> </span>--verbose<span class="w"> </span>/var/lib/tripleo-config/puppet_step_config.pp<span class="w"> </span>
+</pre></div>
+</div>
+<p>Дальнейший поиск проблемы зависит от вывода команды.<br />
+Если вывод команды долгий или недостаточно информативный, то добавьте флаг <code class="docutils literal notranslate"><span class="pre">--debug</span></code></p>
+<section id="pacemaker">
+<h3>Pacemaker<a class="headerlink" href="#pacemaker" title="Ссылка на этот заголовок">¶</a></h3>
+<p>Ошибка выглядит следующим образом:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Error</span><span class="p">:</span> <span class="s1">&#39;pcs status | grep -q -e &quot;asperitas-novacomputeiha-30[[:blank:]].*Started&quot;&#39;</span> <span class="n">returned</span> <span class="mi">1</span> <span class="n">instead</span> <span class="n">of</span> <span class="n">one</span> <span class="n">of</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Это значит, что pacemaker не смог запустить ресурс <em>asperitas-novacomputeiha-30</em>.</p>
+<p>С любого из контроллеров выполните:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>pcs<span class="w"> </span>status
+</pre></div>
+</div>
+<p>Вы увидите статус <em>FAILED</em> для ресурса <em>asperitas-novacomputeiha-30</em>. Проверьте правильность его настройки:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>pcs<span class="w"> </span>resource<span class="w"> </span>config<span class="w"> </span>asperitas-novacomputeiha-30
+</pre></div>
+</div>
+<p>В выводе будет указан адрес ресурса в поле <em>Attributes</em>.</p>
+<ol class="arabic simple">
+<li><p>Проверьте доступность адреса с узла контроллера, на котором вы сейчас находитесь.</p></li>
+</ol>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ping<span class="w"> </span>-c<span class="w"> </span><span class="m">1</span><span class="w"> </span>&lt;ip&gt;
+</pre></div>
+</div>
+<ol class="arabic simple">
+<li><p>Проверьте, что на этот адрес ходят большие пакеты</p></li>
+</ol>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ping<span class="w"> </span>-c<span class="w"> </span><span class="m">1</span><span class="w"> </span>-s<span class="w"> </span><span class="m">10000</span><span class="w"> </span>&lt;ip&gt;
+</pre></div>
+</div>
+<ol class="arabic simple">
+<li><p>Проверьте, что доступен порт 3121. Запрос не должен виснуть и не должен выводить ошибку <em>Failed to connect</em></p></li>
+</ol>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>curl<span class="w"> </span>&lt;ip&gt;:3121<span class="w"> </span>
+</pre></div>
+</div>
+<p>Если порт не доступен, то зайдите на проблемный узел по ssh и проверьте статус сервиса <em>pacemaker_remote</em></p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>systemctl<span class="w"> </span>status<span class="w"> </span>pacemaker_remote
+</pre></div>
+</div>
+<p>Этот сервис должен быть активен только на узлах виртуализации. На узлах контроллерах должен быть активен сервис <em>pacemaker</em>.</p>
+<p>Если сервис активен, но имеет ошибки вида</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">error</span><span class="p">:</span> <span class="n">TLS</span> <span class="n">handshake</span> <span class="k">with</span> <span class="n">remote</span> <span class="n">client</span> <span class="n">failed</span><span class="p">:</span> <span class="n">An</span> <span class="n">illegal</span> <span class="n">parameter</span> <span class="n">has</span> <span class="n">been</span> <span class="n">received</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>то скопируйте файл <em>/etc/pacemaker/auth</em> с рабочего узла. Команды с узла развёртывания</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ssh</span> <span class="n">heat</span><span class="o">-</span><span class="n">admin</span><span class="o">@&lt;</span><span class="n">working</span><span class="o">-</span><span class="n">host</span><span class="o">&gt;.</span><span class="n">ctlplane</span> <span class="s1">&#39;sudo cp /etc/pacemaker/auth ./&#39;</span>
+<span class="n">rsync</span> <span class="o">-</span><span class="n">azP</span> <span class="n">heat</span><span class="o">-</span><span class="n">admin</span><span class="o">@&lt;</span><span class="n">working</span><span class="o">-</span><span class="n">host</span><span class="o">&gt;.</span><span class="n">ctlplane</span><span class="p">:</span><span class="n">authkey</span> <span class="o">./</span>
+<span class="n">rsync</span> <span class="o">-</span><span class="n">azP</span> <span class="n">authkey</span> <span class="n">heat</span><span class="o">-</span><span class="n">admin</span><span class="o">@&lt;</span><span class="n">failed</span><span class="o">-</span><span class="n">host</span><span class="o">&gt;.</span><span class="n">ctlplane</span><span class="p">:</span>
+<span class="n">ssh</span> <span class="n">heat</span><span class="o">-</span><span class="n">admin</span><span class="o">@&lt;</span><span class="n">failed</span><span class="o">-</span><span class="n">host</span><span class="o">&gt;.</span><span class="n">ctlplane</span> <span class="s1">&#39;sudo cp authkey /etc/pacemaker/&#39;</span>
+</pre></div>
+</div>
+<p>После решения проблем зайдите на любой из контроллеров и выполните</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>pcs<span class="w"> </span>resouce<span class="w"> </span>refresh<span class="w"> </span>&lt;failed-host&gt;
+</pre></div>
+</div>
+<p>В указанном выше примере <em>failed-host</em> == <em>asperitas-novacomputeiha-30</em>.</p>
+<p>Запустите повторно puppet на узле, на котором puppet упал изначально. Если puppet выполнит работу без ошибок, то продолжите работу Ansible далее без повторного выполнения задачи Ansible.</p>
+</section>
+</section>
+<section id="id6">
+<h2>Не найден хост<a class="headerlink" href="#id6" title="Ссылка на этот заголовок">¶</a></h2>
+<section id="id7">
+<h3>После обновления развёртывания<a class="headerlink" href="#id7" title="Ссылка на этот заголовок">¶</a></h3>
+<ol class="arabic simple">
+<li><p>Переведите nova-scheduler в режим debug. Для этого поменяйте параметр <em>debug=False</em> в <em>True</em> в файле <em>/var/lib/config-data/puppet-generated/nova/etc/nova/nova.conf</em>. Затем перезапустите nova-scheduler</p></li>
+</ol>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>tripleo_nova_scheduler
+</pre></div>
+</div>
+<ol class="arabic simple">
+<li><p>Попробуйте создать виртуальную машину и проверьте в логах ошибку</p></li>
+</ol>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>less<span class="w"> </span>/var/log/containers/nova/nova-scheduler.log
+</pre></div>
+</div>
+<p>Если ошибка выглядит следующим образом,</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Filter</span> <span class="n">AllHostsFilter</span> <span class="n">returned</span> <span class="mi">0</span> <span class="n">host</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>то зайдите на любой контроллер (только один!) и выполните</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>podman<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-ti<span class="w"> </span>-u<span class="w"> </span>root<span class="w"> </span>nova_compute<span class="w"> </span>nova-manage<span class="w"> </span>placement<span class="w"> </span>heal_allocations
+sudo<span class="w"> </span>podman<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-ti<span class="w"> </span>-u<span class="w"> </span>root<span class="w"> </span>nova_compute<span class="w"> </span>nova-manage<span class="w"> </span>placement<span class="w"> </span>sync_aggregates
+</pre></div>
+</div>
+</section>
+</section>
+<section id="id8">
+<h2>Число используемых ресурсов на гипервизорах обнулилось<a class="headerlink" href="#id8" title="Ссылка на этот заголовок">¶</a></h2>
+<p>Такое может произойти, если вы попытались поменять основной домен для имен хостов. В таком случае вы увидете следующее.</p>
+<p>Например, вы поменяли хостнейм с <em>localdomain</em> на <em>novalocal</em>, тогда</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>openstack<span class="w"> </span>server<span class="w"> </span>list<span class="w"> </span>--all-projects<span class="w"> </span>--host<span class="w"> </span>asperitas-novacomputeiha-12.localdomain<span class="w"> </span>-f<span class="w"> </span>value<span class="w"> </span><span class="p">|</span><span class="w"> </span>wc<span class="w"> </span>-l
+<span class="m">20</span>
+
+openstack<span class="w"> </span>hypervisor<span class="w"> </span>show<span class="w"> </span>asperitas-novacomputeiha-12.novalocal<span class="w"> </span>-c<span class="w"> </span>service_host<span class="w"> </span>-c<span class="w"> </span>running_vms
+
++--------------+-----------------------------------------+
+<span class="p">|</span><span class="w"> </span>Field<span class="w">        </span><span class="p">|</span><span class="w"> </span>Value<span class="w">                                   </span><span class="p">|</span>
++--------------+-----------------------------------------+
+<span class="p">|</span><span class="w"> </span>running_vms<span class="w">  </span><span class="p">|</span><span class="w"> </span><span class="m">0</span><span class="w">                                       </span><span class="p">|</span>
+<span class="p">|</span><span class="w"> </span>service_host<span class="w"> </span><span class="p">|</span><span class="w"> </span>asperitas-novacomputeiha-12.localdomain<span class="w"> </span><span class="p">|</span>
++--------------+-----------------------------------------+
+</pre></div>
+</div>
+<p>Причина проблемы в том, что у виртуалок запущенных на хосте <em>asperitas-novacomputeiha-12.localdomain</em> есть параметр гипервизора, который остался в значении <em>asperitas-novacomputeiha-12.localdomain</em>.</p>
+<p>Чтобы решить проблему, необходимо на любом из контроллеров зайти в базу данных Mariadb и поменять значение для виртуалки</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>podman<span class="w"> </span>ps<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>galera<span class="w"> </span>
+
+ab09fec32c4b<span class="w">  </span>undercloud.ctlplane:13787/image/docker/images/ispras/minos/openstack-mariadb:pcmklatest<span class="w">                 </span>/bin/bash<span class="w"> </span>/usr/lo...<span class="w">  </span><span class="m">9</span><span class="w"> </span>days<span class="w"> </span>ago<span class="w">    </span>Up<span class="w"> </span><span class="m">8</span><span class="w"> </span>days<span class="w"> </span>ago<span class="w">                                       </span>galera-bundle-podman-0
+
+sudo<span class="w"> </span>podman<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-ti<span class="w"> </span>-u<span class="w"> </span>root<span class="w"> </span>galera-bundle-podman-0<span class="w"> </span>mysql
+&gt;<span class="w"> </span>use<span class="w"> </span>nova_api
+&gt;<span class="w"> </span><span class="k">select</span><span class="w"> </span>display_name<span class="w"> </span>from<span class="w"> </span>instances<span class="w"> </span>where<span class="w"> </span><span class="nv">node</span><span class="o">=</span><span class="s1">&#39;asperitas-novacomputeiha-12.localdomain&#39;</span><span class="w"> </span>and<span class="w"> </span>deleted_at<span class="w"> </span>is<span class="w"> </span>null<span class="p">;</span>
+&gt;<span class="w"> </span>begin<span class="p">;</span>
+&gt;<span class="w"> </span>update<span class="w"> </span>instances<span class="w"> </span><span class="nb">set</span><span class="w"> </span><span class="nv">node</span><span class="o">=</span><span class="s1">&#39;asperitas-novacomputeiha-12.novalocal&#39;</span><span class="w"> </span>where<span class="w"> </span><span class="nv">node</span><span class="o">=</span><span class="s1">&#39;asperitas-novacomputeiha-12.localdomain&#39;</span><span class="w"> </span>and<span class="w"> </span>deleted_at<span class="w"> </span>is<span class="w"> </span>null<span class="p">;</span>
+&gt;<span class="w"> </span>commit<span class="w"> </span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="cinder">
+<h2>Бекенд для cinder недоступен<a class="headerlink" href="#cinder" title="Ссылка на этот заголовок">¶</a></h2>
+<p>Если  бекенд находится в статусе down при выполнении команды</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>openstack<span class="w"> </span>volume<span class="w"> </span>service<span class="w"> </span>list<span class="w"> </span>
+</pre></div>
+</div>
+<p>Сначала проверить доступность бекенда с узлов, пароли, МТУ сети. Затем</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>openstack<span class="w"> </span>volume<span class="w"> </span>service<span class="w"> </span><span class="nb">set</span><span class="w"> </span>--disable<span class="w"> </span>hostgroup@tripleo_ceph_reliable<span class="w"> </span>cinder-volume<span class="w"> </span>-vv
+pcs<span class="w"> </span>resource<span class="w"> </span>restart<span class="w"> </span>openstack-cinder-volume
+openstack<span class="w"> </span>volume<span class="w"> </span>service<span class="w"> </span><span class="nb">set</span><span class="w"> </span>--enable<span class="w"> </span>hostgroup@tripleo_ceph_reliable<span class="w"> </span>cinder-volume<span class="w"> </span>-vv
+</pre></div>
+</div>
+</section>
+<section id="nova-cell">
+<h2>Вычислительный узел не добавлен в nova_cell<a class="headerlink" href="#nova-cell" title="Ссылка на этот заголовок">¶</a></h2>
+<p>Если на вычислительном узле в логах /var/log/containers/nova/nova-compute.log ошибка выглядит следующим образом:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ERROR</span> <span class="n">nova</span><span class="o">.</span><span class="n">cmd</span><span class="o">.</span><span class="n">common</span> <span class="p">[</span><span class="n">req</span><span class="o">-</span><span class="mi">4431</span><span class="n">a4a0</span><span class="o">-</span><span class="mi">6789</span><span class="o">-</span><span class="mi">466</span><span class="n">f</span><span class="o">-</span><span class="mi">9</span><span class="n">ed1</span><span class="o">-</span><span class="n">b518a05b5771</span> <span class="o">-</span> <span class="o">-</span> <span class="o">-</span> <span class="o">-</span> <span class="o">-</span><span class="p">]</span> <span class="n">No</span> <span class="n">db</span> <span class="n">access</span> <span class="n">allo</span>
+<span class="n">wed</span> <span class="ow">in</span> <span class="n">nova</span><span class="o">-</span><span class="n">compute</span><span class="p">:</span>   <span class="n">File</span> <span class="s2">&quot;/usr/bin/nova-compute&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">10</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>То скорее всего вычислительный узел был развёрнут без undercloud узла в консоли - нужно развернуть с ним вместе.</p>
+</section>
+<section id="host-key-verification-failed">
+<h2>Ошибка миграции Host key verification failed<a class="headerlink" href="#host-key-verification-failed" title="Ссылка на этот заголовок">¶</a></h2>
+<p>Быстрый метод решения проблемы</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>su
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;StrictHostKeyChecking no&#39;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>/var/lib/config-data/puppet-generated/nova_libvirt/var/lib/nova/.ssh/config
+systemctl<span class="w"> </span>restart<span class="w"> </span>tripleo_nova_compute
+</pre></div>
+</div>
+</section>
+</section>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2022, ИСП РАН.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>
