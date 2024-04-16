@@ -2,3 +2,4 @@ setuptools==58.0.0
 Sphinx==4.5.0
 sphinx_bootstrap_theme==0.8.1
 myst-parser==0.16.1
+attrs==23.2.0
