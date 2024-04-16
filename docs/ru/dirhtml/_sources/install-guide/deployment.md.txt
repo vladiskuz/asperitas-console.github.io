@@ -7,7 +7,7 @@ asperitas
 
 Перейдите в _Меню развёртывания_, затем во вкладку _Deployment_.
 
-![](../../images/deployment.png)
+![](../../../../images/deployment.png)
 
 Сверху отображается статус развёртывания. Развёртывание состоит из нескольких стадий:
 * _**Create/Update Plan Deployment (Install OS)**_, или _Создание стека_ (термин OpenStack Heat) - при этом фиксируются и сохраняются все ваши настройки. 
@@ -28,8 +28,8 @@ asperitas
 После создания сервера статус физического узла меняется с _available_ на _active_ в списке физических серверов.
 Посмотреть список серверов можно из _Главного меню_ или _Меню развёртывания_ в окне **Deployed Servers** или **Servers list** соответственно.  
 
-![](../../images/all-servers.png)
-![](../../images/stack-servers.png)
+![](../../../../images/all-servers.png)
+![](../../../../images/stack-servers.png)
 
 ## Нулевое развёртывание
 
@@ -105,5 +105,5 @@ asperitas
 
 На стадии **Run Cloud Service Deployment** обновляется окно выбора c опциями _Limit to_:
 
-![](../../images/update-host-choice.png)
+![](../../../../images/update-host-choice.png)
 
