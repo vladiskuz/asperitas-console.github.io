@@ -103,7 +103,6 @@
 <li><a class="reference internal" href="#id5">Обновление узлов вычисления</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#ssl-tls-api">Добавление SSL/TLS для публичных сервисов API</a></li>
 </ul>
 </li>
 </ul>
@@ -188,19 +187,6 @@ docker://localhost:13787/asperitos/<span class="o">{}</span>:latest
 <p>Так как при обновлении все контейнеры пересоздаются - то будет пересоздан и контейнер <em>nova_libvirt</em>, отвечающий за создание виртуальных машин.
 При этом все виртуальные машины останавливаются.</p>
 </section>
-</section>
-<section id="ssl-tls-api">
-<h2>Добавление SSL/TLS для публичных сервисов API<a class="headerlink" href="#ssl-tls-api" title="Ссылка на этот заголовок">¶</a></h2>
-<ol class="arabic simple">
-<li><p>В настройках для развёртывания зайти во вкладку <code class="docutils literal notranslate"><span class="pre">Endpoint</span> <span class="pre">Data</span></code>.</p></li>
-<li><p>Под заголовком <code class="docutils literal notranslate"><span class="pre">TLS</span></code> нажать кнопку <code class="docutils literal notranslate"><span class="pre">&lt;</span> <span class="pre">use</span> <span class="pre">&gt;</span></code>.</p></li>
-<li><p>Далее нажать кнопку <code class="docutils literal notranslate"><span class="pre">&lt;</span> <span class="pre">Generate</span> <span class="pre">Map/Ctrl+A</span> <span class="pre">&gt;</span></code>.</p></li>
-<li><p>Далее зайти во вкладку <code class="docutils literal notranslate"><span class="pre">Service</span> <span class="pre">Settings</span></code>.</p></li>
-<li><p>Добавить свойство <code class="docutils literal notranslate"><span class="pre">EnableTls</span></code></p></li>
-<li><p>Заполнить значения для сертификата и ключа.</p></li>
-<li><p>Если сертификат планируется самоподписанный, то добавить свойство <code class="docutils literal notranslate"><span class="pre">InjectTrustAnchor</span></code> и заполнить root сертификат.</p></li>
-<li><p>Запустить апдейт стека и сервисов</p></li>
-</ol>
 </section>
 </section>
 

@@ -99,6 +99,7 @@
 <li><a class="reference internal" href="#id4">Пароли</a></li>
 <li><a class="reference internal" href="#ip">Фиксированные IP-адреса</a></li>
 <li><a class="reference internal" href="#id5">Настройки сервисов облака</a></li>
+<li><a class="reference internal" href="#ssl-tls-api">Добавление SSL/TLS для публичных сервисов API</a></li>
 </ul>
 </li>
 </ul>
@@ -252,6 +253,19 @@
 Так как в Ceph используется агрегация ядра Linux, в OpenStack - агрегация Ovs.</p></li>
 </ul>
 <p>При определении бекендов сервисов необходимо учитывать, что для Glance и Nova может быть выбран только один. Для сервиса Cinder может использоваться несколько разных бекендов.</p>
+</section>
+<section id="ssl-tls-api">
+<h2>Добавление SSL/TLS для публичных сервисов API<a class="headerlink" href="#ssl-tls-api" title="Ссылка на этот заголовок">¶</a></h2>
+<ol class="arabic simple">
+<li><p>В настройках для развёртывания зайти во вкладку <code class="docutils literal notranslate"><span class="pre">Endpoint</span> <span class="pre">Data</span></code>.</p></li>
+<li><p>Под заголовком <code class="docutils literal notranslate"><span class="pre">TLS</span></code> нажать кнопку <code class="docutils literal notranslate"><span class="pre">&lt;</span> <span class="pre">use</span> <span class="pre">&gt;</span></code>.</p></li>
+<li><p>Далее нажать кнопку <code class="docutils literal notranslate"><span class="pre">&lt;</span> <span class="pre">Generate</span> <span class="pre">Map/Ctrl+A</span> <span class="pre">&gt;</span></code>.</p></li>
+<li><p>Далее зайти во вкладку <code class="docutils literal notranslate"><span class="pre">Service</span> <span class="pre">Settings</span></code>.</p></li>
+<li><p>Добавить свойство <code class="docutils literal notranslate"><span class="pre">EnableTls</span></code></p></li>
+<li><p>Заполнить значения для сертификата и ключа.</p></li>
+<li><p>Если сертификат планируется самоподписанный, то добавить свойство <code class="docutils literal notranslate"><span class="pre">InjectTrustAnchor</span></code> и заполнить root сертификат.</p></li>
+</ol>
+<p><a class="reference external" href="https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/13/html/advanced_overcloud_customization/sect-enabling_ssltls_on_the_overcloud">Инструкция по добавлению SSL/TLS</a></p>
 </section>
 </section>
 
