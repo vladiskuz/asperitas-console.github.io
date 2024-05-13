@@ -11,7 +11,7 @@
 **Облачный дистрибутив** - это заранее подготовленный набор сервисов и всех необходимых для установки OpenStack пакетов.
 **Облачный дистрибутив Asperitas** распространяется в виде диска, содержащего множество программных пакетов, используемых для установки облачной платформы, сценарии для систем оркестрации, а также пакеты и сценарии развертывания [Michman](https://michman.ispras.ru/ru/) – инструмента оркестрации сервисов. Набор пакетов для установки программ является полным и не требует подключения к сети Интернет.
 
-Дистрибутив построен на базе проекта [TripleO](https://docs.openstack.org/project-deploy-guide/tripleo-docs/latest/), который позволяет автоматизировать процесс развертывания облачной платформы на базе [OpenStack Ussuri](https://docs.openstack.org/ussuri/).
+Дистрибутив построен на базе проекта [TripleO](https://docs.openstack.org/project-deploy-guide/tripleo-docs/latest/) (аббревиатура "OpenStack-On-OpenStack"), который позволяет автоматизировать процесс развертывания облачной платформы на базе [OpenStack Ussuri](https://docs.openstack.org/ussuri/). TripleO использует два главных концепта -- [Undercloud и Overcloud](https://www.techplayon.com/open-stack-undercloud-and-overcloud/). Undercloud устанавливает и настраивает Overcloud.
 
 Программный комплекс на базе дистрибутива состоит из следующих компонентов: 
 

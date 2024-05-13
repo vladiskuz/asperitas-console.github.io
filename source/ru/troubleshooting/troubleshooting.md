@@ -201,7 +201,7 @@ YYYY-MM-DD HH:MM:SS | 00000000-0000-0000-0000-000000000000 | WAITING | Wait for 
 ~~~
 
 В примере выше ошибка произошла на узле _asperitas-controller-0_. 
-Для поиска причины ошибки необходимо зайти по ssh на этот узел и запустить puppet самостоятельно 
+Для поиска причины ошибки необходимо [зайти по ssh](https://docs.openstack.org/tripleo-quickstart/latest/accessing-overcloud.html#logging-in-to-overcloud-hosts) на этот узел и запустить puppet самостоятельно
 ~~~shell
 sudo puppet apply --modulepath=/etc/puppet/modules:/opt/stack/puppet-modules:/usr/share/openstack-puppet/modules --detailed-exitcodes --summarize --color=true --verbose /var/lib/tripleo-config/puppet_step_config.pp 
 ~~~
