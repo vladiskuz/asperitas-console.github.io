@@ -16,6 +16,224 @@ asperitas --debug
 После выполнения команды появляется **Главное окно** asperitas консоли
 ![Главное меню](../../../images/main-menu.png)
 
+## Эмулирование физических узлов
+
+Может сложиться ситуация, когда ресурсов для развертния физическийх узлов недостаточно.
+Если физических узлов достаточно, то этот шаг можно пропустить.
+
+Для эмулирования физических узлов используется инструмент [Virtual BMC](https://docs.openstack.org/virtualbmc/latest/).
+Инструмент VirtualBMC имитирует [Baseboard Management Controller (BMC)](https://en.wikipedia.org/wiki/Intelligent_Platform_Management_Interface#Baseboard_management_controller), предоставляя [IPMI](https://en.wikipedia.org/wiki/Intelligent_Platform_Management_Interface) доступ к сети и взаимодействуя с libvirt на хосте, на котором работает vBMC.
+Virtual BMC управляeт виртуальными машинами, которые притворяются железными (bare metal) серверами.
+
+
+### Установка операционной системы на железный (bare metal) сервер
+
+Первым шагом необходимо подготовить железный сервер и установить на него операционную систему.
+Для этих целей подойдет [admin-point.qcow2](http://10.100.112.30:82/image/devel/admin-point.x86_64.qcow2).
+
+
+### Подготовка сетевых интерфейсов
+
+Для манипуляций с виртуальными машинами через Virtual BMC необходимо выполнить подготовку сетей на железном сервере.
+Понадобится, как минимум, 2 физических интерфейса (см. рис.), каждый из которых подключен к линукс бриджу(linux bridge).
+Так же необходимо настроить виртуальный интерфейс с 3мя IP адресами (для 3х compute nodes). Этот интерфейс должен быть
+в том же VLAN, что и ctlplane сеть на undercloud'e.
+
+![](../../../images/vbmc-network-interfaces.png)
+
+Все дальнейшие манипуляции с сетевыми интерфейсами и линукс бриджами производятся с помощью network-scripts.
+Ниже приведены конфигурационные файлы всех необходимых интерфейсов и линукс бриджей.
+
+`cat /etc/sysconfig/network-scripts/ifcfg-eno1`
+```
+TYPE=ethernet
+BOOTPROTO=none
+NAME=eno1
+DEVICE=eno1
+ONBOOT=yes
+BRIDGE=br1
+DELAY=0
+NM_CONTROLLED=0
+```
+
+`cat /etc/sysconfig/network-scripts/ifcfg-eno1.73`
+```
+DEVICE=eno1.73
+BOOTPROTO=none
+ONBOOT=yes
+IPADDR0=192.178.1.1
+NETMASK0=255.255.255.0
+IPADDR1=192.178.1.2
+NETMASK1=255.255.255.0
+IPADDR2=192.178.1.3
+NETMASK2=255.255.255.0
+VLAN=yes
+VLAN_ID=10
+PHYSDEV=eno1
+```
+
+`cat /etc/sysconfig/network-scripts/ifcfg-eno2`
+```
+TYPE=ethernet
+BOOTPROTO=none
+NAME=eno2
+DEVICE=eno2
+ONBOOT=yes
+BRIDGE=br2
+DELAY=0
+NM_CONTROLLED=0
+```
+
+`cat /etc/sysconfig/network-scripts/ifcfg-br1`
+```
+DEVICE=br1
+TYPE=Bridge
+BOOTPROTO=none
+IPADDR=192.168.24.236
+GATEWAY=192.168.24.1
+NETMASK=255.255.255.0
+ONBOOT=yes
+DELAY=0
+NM_CONTROLLED=0
+```
+
+`cat /etc/sysconfig/network-scripts/ifcfg-br2`
+```
+DEVICE=br2
+TYPE=Bridge
+BOOTPROTO=none
+IPADDR=10.100.113.2
+GATEWAY=10.100.115.254
+NETMASK=255.255.252.0
+ONBOOT=yes
+DELAY=0
+NM_CONTROLLED=0
+```
+
+Далее нужно отключить NetworkManager
+
+`sudo systemctl stop NetworkManager`
+`sudo systemctl disable NetworkManager`
+
+И перезагрузить службу сетей
+
+`systemctl restart network`
+
+После завершения конфигурирования сетевых интерфейсов они должны выглядеть подобным образом:
+`ip a`
+```
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host
+       valid_lft forever preferred_lft forever
+2: eno1: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc mq master br1 state UP group default qlen 1000
+    link/ether 00:25:90:bb:0e:52 brd ff:ff:ff:ff:ff:ff
+    inet6 fe80::225:90ff:febb:e52/64 scope link
+       valid_lft forever preferred_lft forever
+3: eno2: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc mq master br2 state UP group default qlen 1000
+    link/ether 00:25:90:bb:0e:53 brd ff:ff:ff:ff:ff:ff
+    inet6 fe80::225:90ff:febb:e53/64 scope link
+       valid_lft forever preferred_lft forever
+4: br1: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000
+    link/ether 00:25:90:bb:0e:52 brd ff:ff:ff:ff:ff:ff
+    inet 192.168.24.236/24 brd 192.168.24.255 scope global br1
+       valid_lft forever preferred_lft forever
+    inet6 fe80::225:90ff:febb:e52/64 scope link
+       valid_lft forever preferred_lft forever
+5: br2: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000
+    link/ether 00:25:90:bb:0e:53 brd ff:ff:ff:ff:ff:ff
+    inet 10.100.113.2/22 brd 10.100.115.255 scope global br2
+       valid_lft forever preferred_lft forever
+    inet6 fe80::225:90ff:febb:e53/64 scope link
+       valid_lft forever preferred_lft forever
+12: eno1.73@eno1: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000
+    link/ether 00:25:90:bb:0e:52 brd ff:ff:ff:ff:ff:ff
+    inet 192.178.1.1/24 brd 192.178.1.255 scope global eno1.73
+       valid_lft forever preferred_lft forever
+    inet 192.178.1.2/24 brd 192.178.1.255 scope global secondary eno1.73
+       valid_lft forever preferred_lft forever
+    inet 192.178.1.3/24 brd 192.178.1.255 scope global secondary eno1.73
+       valid_lft forever preferred_lft forever
+    inet6 fe80::225:90ff:febb:e52/64 scope link
+       valid_lft forever preferred_lft forever
+```
+
+### Настройка интерфейса на Undercloud для работы с vBMC
+
+На Undercloud'е необходимо настроить интерфейс в том же VLAN и задать ему IP адрес из тоже же подсети,
+которая предназначена для vBMC.
+
+`cat /etc/sysconfig/network-scripts/ifcfg-enp1s0.73`
+```
+DEVICE=enp1s0.73
+BOOTPROTO=none
+ONBOOT=yes
+IPADDR=192.178.1.4
+NETMASK=255.255.255.0
+VLAN=yes
+VLAN_ID=10
+```
+
+После этого необходимо удостовериться, что интерфейсы на switch'e подключены к тому же VLAN и ping проходит до виртуального
+интерфейса на железном сервере.
+
+### Загрузка виртуальных машин для эмуляции
+
+После всех манипуляций необходимо загруить 3 виртуальные машины на железном сервере, который был подготовлен ранее.
+Для каждой виртуальной машины необходимо изменить параметр `--name` и `--disk`, чтобы имена не повторялись. В дальнейшем
+это поможет в случае отладки.
+
+```
+virt-install \
+        --virt-type=kvm --name virt-ctl-1 \
+        --ram 12288 --vcpus=4 \
+        --os-variant=centos-stream8  \
+        --network=bridge=br1 --network=bridge=br2  \
+        --disk path=/var/lib/libvirt/images/virt-ctl-1.qcow2,size=200,format=qcow2 \
+        --autostart --pxe --noautoconsole
+```
+
+Параметр `--pxe` позволяет использовать протокол загрузки PXE для загрузки исходного виртуального диска и ядра для 
+запуска процесса установки на виртуальной машине.
+
+Посмотреть созданные виртуальные машины можно с помощью команды `virsh list --all`.
+
+
+### Подготовка Virtual BMC
+
+Если Virtual BMC не установлена на железном сервере, установите ее следуя [инструкции](https://docs.openstack.org/virtualbmc/latest/install/index.html).
+
+Virtual BMC должен быть запущен от пользователя `root`.
+Иногда возникается проблема, когда невозможно запустить `vbmcd` от имени пользователя `root`:
+```
+ERROR VirtualBMC [-] server PID #0 still running 
+```
+Это решается удалением файла ~/.vbmc/master.pid
+
+
+### Добавление виртуальных машин в Virtual BMC
+
+Ранее созданные виртуальные машины должны быть добавлены vbmc. 
+Пример для одной виртуальной машины:
+```
+vbmc add virt-ctl-0 --address 192.178.1.1 --username admin --password admin
+```
+IP адрес задается из ранее созданного виртуального интерфейса.
+
+После добавления виртуальных машин в vbmc их неоходимо запустить:
+```
+vbmc start virt-ctl-0
+```
+С помощью команды `vbmc list` можно проверить статус добаленных виртуальных машин.
+
+Далее можно переходить к следующему пункту и добавлять виртуальные машины как физические узлы.
+В качестве IP адреса необходимо указывать IP адрес заданный при добавлении виртуальной машины в vbmc.
+Логин и пароль задается такой же как при добавлении виртуальной машины в vbmc,
+mac адрес можно получить из следующей команды `virsh domiflist virt-ctl-0 | grep br1 | sed 's/  */ /g' | cut -d' ' -f 6`
+
+
 ## Физические узлы 
 
 Перейдите во вкладку _Baremetal nodes_. 
